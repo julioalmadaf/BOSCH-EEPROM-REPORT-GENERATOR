@@ -1,9 +1,8 @@
-1 Functional requirements
+﻿1 Functional requirements
 1.1	The software should read a .cnt file as an input
 1.2	The previous report (EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_BBNumber.xlsx) could be loaded for comparison, this should be optional while running the tool.  
 1.3	The BBNumber and the Baseline (BSS) should be read from the container filename (.cnt). E.g. EEPROM_Container_BB95650_BSS2007_V3_IPBCSWNonXCP.cnt
-1.4	A new excel file should be created with the name :
-EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_BBNumber.xlsx
+1.4	A new excel file should be created with the name : EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_BBNumber.xlsx
 1.5	The new excel file should be based on the template EEPROM_Container_Review_Template.xlsx
 1.6	The row for BB-Number(D3) must be filled with the BBNumber from the name of the container (e.g. BB95650)
 1.7	The row for SW-Version (D4) must be filled with the BSS version from the name of the container (e.g. BSS2007_V3)
