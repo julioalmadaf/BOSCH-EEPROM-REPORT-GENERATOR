@@ -1,0 +1,38 @@
+1 Functional requirements
+1.1	The software should read a .cnt file as an input
+1.2	The previous report (EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_BBNumber.xlsx) could be loaded for comparison, this should be optional while running the tool.  
+1.3	The BBNumber and the Baseline (BSS) should be read from the container filename (.cnt). E.g. EEPROM_Container_BB95650_BSS2007_V3_IPBCSWNonXCP.cnt
+1.4	A new excel file should be created with the name :
+EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_BBNumber.xlsx
+1.5	The new excel file should be based on the template EEPROM_Container_Review_Template.xlsx
+1.6	The row for BB-Number(D3) must be filled with the BBNumber from the name of the container (e.g. BB95650)
+1.7	The row for SW-Version (D4) must be filled with the BSS version from the name of the container (e.g. BSS2007_V3)
+1.8	Each unique EEPROM element found in the .cnt file must be added to the excel sheet. The information that has be included is :
+1.8.1	- NVM Data Item name
+1.8.2	- ID number
+1.8.3	- Desired Type(range or datablock)
+1.9	Each EEPROM element has its own respective Uses cases (Delivery state, Reset to Delivery state, Reprog), this is coming in the .cnt files, this should be parsed by the tool.
+1.10	All the uses cases from the elements in the .cnt file must be filled in the columns below the section “Current settings (Use Cases) in SW.
+1.11	If the EEPROM is listed in the uses cases, the respective column should be marked with an “X” 
+1.12	If a previous report has been entered, then the EEPROM elements existing in the previous report that are still present in the new .cnt should be carried over, the following columns should be copied to the new report based on the previous report:
+1.12.1	 - CR-P
+1.12.2	CRP ratings (Delivery state, Reset to Delivery state and Reprog columns)
+1.12.3	 - Desired Type(range or datablock)
+1.12.4	 - Desired Data (BBNumber)
+1.12.5	 - Comment
+1.12.6	 - Rating
+1.12.7	 - Rated by
+1.12.8	 - Comments
+1.12.9	 - Reference comments from GA 
+1.13	If a previous report has been entered, a log with the comparison should be saved
+1.14	The comparison log, must have the list of elements that were not changed, the list of  elements that are new, the list of elements that are not new but the id or the uses case information is different;
+1.15	Once the report is complete, the tool must inform the user that it has been created and ask for a folder to save it.
+
+2 Non-functional requirements
+2.1  All path references paths should be relative
+2.3 Proper error handling and debug information should be logged into a text file
+2.4  Language to be used is Python
+2.5 Excel 2013 or above should be used
+2.6  if additional libraries are needed, they must be automatically installed
+2.8 Testing plan with uses cases should be documented
+2.7  A User-guide should be provided
