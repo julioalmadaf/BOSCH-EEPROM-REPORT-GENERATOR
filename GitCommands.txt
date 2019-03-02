@@ -1,0 +1,29 @@
+#Despues de clonar un repositorio, comenzar a detectar cambios
+git init
+
+#Agregar archivos para iniciar el commit
+git add .
+
+#Hacer commit
+git commit -m "[REF] Valor de la variable contador inicia con 1 (antes 0)"
+
+#Subir los archivos
+git push
+
+#Descargar la version mas actualizada del repositorio
+git pull
+
+########################################################
+
+#Configuracion de nombre y correo
+git config --global user.name "Ruben Barajas"
+git config --global user.email barajas.ruben95@gmail.com
+
+#Configurar editor de archivos
+git config --global core.editor nano
+
+#Colorear resultados de comandos en Git
+git config --global color.ui true
+
+#Agregar lineas de \r y \n por default para Windows
+git config --global core.autocrlf true

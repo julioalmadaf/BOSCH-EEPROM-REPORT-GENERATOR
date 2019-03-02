@@ -13,4 +13,4 @@ chore		Chores				Other changes that don't modify src or test files
 revert		Reverts				Reverts a previous commit
 
 EXAMPLE
-git commit -m "[CHORE] CommitGuidelines.txt file added"
+git commit -m "[CHORE] Archivo CommitGuidelines.txt agregado al repositorio"
