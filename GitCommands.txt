@@ -13,6 +13,12 @@ git push
 #Descargar la version mas actualizada del repositorio
 git pull
 
+#Verificar estado de cambios o commits
+git status
+
+#Ver lista de commits que se encuentran en el servidor
+git log
+
 ########################################################
 
 #Configuracion de nombre y correo
