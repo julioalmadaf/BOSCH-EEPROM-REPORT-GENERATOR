@@ -32,6 +32,6 @@
 2.3 Proper error handling and debug information should be logged into a text file
 2.4  Language to be used is Python
 2.5 Excel 2013 or above should be used
-2.6  if additional libraries are needed, they must be automatically installed
+2.6  If additional libraries are needed, they must be automatically installed
 2.8 Testing plan with uses cases should be documented
 2.7  A User-guide should be provided
