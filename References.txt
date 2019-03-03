@@ -1,2 +1,9 @@
 https://openpyxl.readthedocs.io/en/stable/
 
+https://stackoverflow.com/questions/9319317/quick-and-easy-file-dialog-in-python
+
+https://pythonspot.com/tk-message-box/
+
+#Duplicar archivo excel
+https://stackoverflow.com/questions/34357983/copying-and-renaming-excel-files-with-python
+
