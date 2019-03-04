@@ -7,3 +7,6 @@ https://pythonspot.com/tk-message-box/
 #Duplicar archivo excel
 https://stackoverflow.com/questions/34357983/copying-and-renaming-excel-files-with-python
 
+#Lo utilice para poner el BBNumber al archivo excel
+https://docs.python.org/3/tutorial/inputoutput.html
+
