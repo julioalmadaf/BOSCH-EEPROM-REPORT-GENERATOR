@@ -33,3 +33,8 @@ git config --global color.ui true
 
 #Agregar lineas de \r y \n por default para Windows
 git config --global core.autocrlf true
+
+
+########################################################
+#Pagina con explicacion simple de como usar los comandos
+http://rogerdudler.github.io/git-guide/
