@@ -7,14 +7,18 @@
 import os
 import sys
 import tkinter
+import openpyxl
 
+from openpyxl import Workbook
 from tkinter import messagebox
 from pathlib import Path
 from os import listdir
 
 import tkinter as tk
 from tkinter import filedialog
- 
+wb = Workbook()
+ws = wb.active
+
 def list_files(directory, extension):
     return (f for f in listdir(directory) if f.endswith('.' + extension))
 
@@ -39,6 +43,7 @@ def main():
 	#
 	BBNumber = file_path.split('_')[3]
 	Baseline = file_path.split('_')[4]
+	wb.save(f"EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_{BBNumber}.xlsx")
 	
 	print(BBNumber)
 	print(Baseline)
