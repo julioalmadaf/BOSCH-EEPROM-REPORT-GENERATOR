@@ -32,15 +32,16 @@ def cntButton():
         global rutaCNT
         global archivoCNTCargado
 
+        #Abrir Dialog Box para buscar el archivo.
         lbl.configure(text="Opening CNT file")
         rutaCNT = filedialog.askopenfilename(filetypes = (("All CNT files","*.cnt"),("All files","*.*")))
 
         #Verificar que sea archivo CNT o que se haya agregado un archivo.
-        if(rutaCNT.find(".cnt") == -1):
+        if(rutaCNT.find(".cnt") == -1):         #No se selecciono un archivo CNT
                 archivoCNTCargado = 0
-        elif(rutaCNT == ""):
+        elif(rutaCNT == ""):                    #Se dio al boton cancelar.
                 archivoCNTCargado = 0
-        else:
+        else:                                   #se selecciono el archivo correctamente.
                 archivoCNTCargado = 1
 
 def previousReport():
@@ -48,15 +49,16 @@ def previousReport():
         global rutaReportePrevio
         global archivoReportePrevioCargado
 
+        #Abrir Dialog Box para buscar el archivo.
         lbl.configure(text="Opening previous report file")
         rutaReportePrevio = filedialog.askopenfilename(filetypes = (("All Excel files","*.xlsx"),("All files","*.*")))
 
         #Verificar que sea archivo XLSX o que se haya agregado un archivo.
-        if(rutaCNT.find(".xlsx") == -1):
+        if(rutaCNT.find(".xlsx") == -1):         #No se selecciono un archivo XLXS
                 archivoReportePrevioCargado = 0
-        elif(rutaCNT == ""):
+        elif(rutaCNT == ""):                    #Se dio al boton cancelar.
                 archivoReportePrevioCargado = 0
-        else:
+        else:                                   #se selecciono el archivo correctamente.
                 archivoReportePrevioCargado = 1
 
 def createReport():
@@ -68,6 +70,7 @@ def createReport():
 
         lbl.configure(text="Creating report")
 
+        #Garantizar que se haya seleccionado un archivo CNT.
         if(archivoCNTCargado == 1):
                 archivoCNTCargado = 0
 
@@ -106,6 +109,7 @@ def list_files(directory, extension):
 
 def ventana():
 
+        #Titulo de la ventana.
         window.title("Bosch") 
 
         #Tamaño de la ventana.
@@ -120,10 +124,11 @@ def ventana():
         btn3.grid(column=0, row=3)
         btn4.grid(column=1, row=4)
 
+        #Comenzar proceso.
         window.mainloop()
 
 def main():
-
+        
         ventana()
 
 #################################
