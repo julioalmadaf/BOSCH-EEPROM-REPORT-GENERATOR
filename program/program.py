@@ -7,28 +7,26 @@
 import os
 import sys
 import tkinter
-import openpyxl
+import shutil
+import sys 
 
-from openpyxl import Workbook
 from tkinter import messagebox
 from pathlib import Path
 from os import listdir
 
 import tkinter as tk
 from tkinter import filedialog
-wb = Workbook()
-ws = wb.active
 
 def list_files(directory, extension):
     return (f for f in listdir(directory) if f.endswith('.' + extension))
 
 def main():
 
-	#Seleccionar container
+	#Seleccionar container.
 	buscarArchivoCNT = 0
 	while buscarArchivoCNT == 0:
 		
-		#Abrir Dialog Box y seleccionar archivo
+		#Abrir Dialog Box y seleccionar archivo.
 		root = tk.Tk()
 		root.withdraw()
 		file_path = filedialog.askopenfilename()
@@ -40,13 +38,13 @@ def main():
 		else:
 			messagebox.showerror("Error", "Not .cnt file selected")
 	
-	#
+	#Extraer BBNumber y Baseline.
 	BBNumber = file_path.split('_')[3]
 	Baseline = file_path.split('_')[4]
-	wb.save(f"EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_{BBNumber}.xlsx")
 	
-	print(BBNumber)
-	print(Baseline)
+	#Crear archivo Excel.
+	shutil.copy("EEPROM_Container_Review_Template.xlsx", "EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+	
 
 #################################
 if __name__== "__main__":
