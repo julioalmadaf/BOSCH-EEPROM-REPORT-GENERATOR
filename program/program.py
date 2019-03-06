@@ -78,8 +78,11 @@ def createReport():
                 BBNumber = rutaCNT.split('_')[3]
                 Baseline = rutaCNT.split('_')[4]
 
+                #Preguntar directorio para guardar el archivo generado.
+                folder_selected = filedialog.askdirectory()
+
                 #Crear archivo Excel.
-                shutil.copy("EEPROM_Container_Review_Template.xlsx", "EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+                shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
 
                 messagebox.showinfo("Report created", "Report created successfully")
 
@@ -128,7 +131,7 @@ def ventana():
         window.mainloop()
 
 def main():
-        
+
         ventana()
 
 #################################
