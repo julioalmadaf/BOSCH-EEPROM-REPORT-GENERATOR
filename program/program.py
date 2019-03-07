@@ -125,9 +125,11 @@ def ventana():
         #Titulo de la ventana.
         root.title("Bosch") 
 
+        #Configurar paneles.
         panelElements.grid(column=0, row=0, sticky=(N, S, E, W))
         panelImage.grid(column=0, row=1, columnspan=2, rowspan=6, sticky=(N, S, E, W))
 
+        #Configurar elementos (botones, etiqueta e imagen).
         image.pack(side = "bottom", fill = "both", expand = "yes")
         label.grid(column=0, row=0, columnspan=4, sticky=(N, W))
         button_CNT.grid(column=3, row=3)
