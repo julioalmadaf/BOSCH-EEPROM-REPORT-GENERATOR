@@ -104,7 +104,9 @@ def verifyLog():
 #### Objetos ###
 ################
 root = Tk()
-img = ImageTk.PhotoImage(Image.open('C:/Users/Barajas/Documents/bosch_eeprom/program/bosch.png'))
+
+rutaActual = os.getcwd()
+img = ImageTk.PhotoImage(Image.open(rutaActual + "/bosch.png"))
 
 panelElements = ttk.Frame(root, padding=(3,3,12,12))
 panelImage = ttk.Frame(panelElements, borderwidth=5, relief="sunken", width=200, height=200)
