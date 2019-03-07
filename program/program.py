@@ -11,11 +11,14 @@ import os
 import sys
 import tkinter
 import shutil
-import sys 
+import sys
+import tkinter as tk
 
 from tkinter import messagebox
 from tkinter import filedialog
+from tkinter import ttk
 from tkinter import *
+from PIL import ImageTk, Image
 from pathlib import Path
 from os import listdir
 
@@ -100,36 +103,38 @@ def verifyLog():
 ################
 #### Objetos ###
 ################
-window = Tk()
-lbl = Label(window, text="EEPROM report generator", font=("Arial Bold", 30))
-btn1 = Button(window, text="Open CNT file", command=cntButton)
-btn2 = Button(window, text="Open previous report", command=previousReport)
-btn3 = Button(window, text="Create report", command=createReport)
-btn4 = Button(window, text="Verify log", command=verifyLog)
+root = Tk()
+img = ImageTk.PhotoImage(Image.open('C:/Users/Barajas/Documents/bosch_eeprom/program/bosch.png'))
+
+panelElements = ttk.Frame(root, padding=(3,3,12,12))
+panelImage = ttk.Frame(panelElements, borderwidth=5, relief="sunken", width=200, height=200)
+
+label = ttk.Label(panelElements, text="Bosch EEPROM generator", font=("Tahoma", 25, 'bold'))
+button_CNT = ttk.Button(panelElements, text="Select CNT file", style="TButton", command=cntButton)
+button_PreviousReport = ttk.Button(panelElements, text="Select previous report", style="TButton", command=previousReport)
+button_GenerateReport = ttk.Button(panelElements, text="Generate report", style="TButton", command=createReport)
+button_Log = ttk.Button(panelElements, text="LOG", style="TButton", command=verifyLog)
+image = tk.Label(panelImage, image = img)
 
 ##################
 #### Funciones ###
 ##################
-def list_files(directory, extension):
-        return (f for f in listdir(directory) if f.endswith('.' + extension))
 
 def ventana():
 
         #Titulo de la ventana.
         window.title("Bosch") 
 
-        #Tamaño de la ventana.
-        window.geometry('550x350')
+        panelElements.grid(column=0, row=0, sticky=(N, S, E, W))
+        panelImage.grid(column=0, row=1, columnspan=2, rowspan=6, sticky=(N, S, E, W))
 
-        #Etiqueta.
-        lbl.grid(column=0, row=0)
-
-        #Botones.
-        btn1.grid(column=0, row=1)
-        btn2.grid(column=1, row=2)
-        btn3.grid(column=0, row=3)
-        btn4.grid(column=1, row=4)
-
+        image.pack(side = "bottom", fill = "both", expand = "yes")
+        label.grid(column=0, row=0, columnspan=4, sticky=(N, W))
+        button_CNT.grid(column=3, row=3)
+        button_PreviousReport.grid(column=3, row=4)
+        button_GenerateReport.grid(column=3, row=5)
+        button_Log.grid(column=3, row=6)
+        
         #Comenzar proceso.
         window.mainloop()
 
