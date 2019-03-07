@@ -39,7 +39,7 @@ def cntButton():
         global archivoCNTCargado
 
         #Abrir Dialog Box para buscar el archivo.
-        lbl.configure(text="Opening CNT file")
+        label.configure(text="Opening CNT file")
         rutaCNT = filedialog.askopenfilename(filetypes = (("All CNT files","*.cnt"),("All files","*.*")))
 
         #Verificar que sea archivo CNT o que se haya agregado un archivo.
@@ -56,7 +56,7 @@ def previousReport():
         global archivoReportePrevioCargado
 
         #Abrir Dialog Box para buscar el archivo.
-        lbl.configure(text="Opening previous report file")
+        label.configure(text="Opening previous report file")
         rutaReportePrevio = filedialog.askopenfilename(filetypes = (("All Excel files","*.xlsx"),("All files","*.*")))
 
         #Verificar que sea archivo XLSX o que se haya agregado un archivo.
@@ -74,7 +74,7 @@ def createReport():
         global rutaCNT
         global rutaReportePrevio
 
-        lbl.configure(text="Creating report")
+        label.configure(text="Creating report")
 
         #Garantizar que se haya seleccionado un archivo CNT.
         if(archivoCNTCargado == 1):
@@ -95,10 +95,10 @@ def createReport():
         else:
                 messagebox.showerror("Error", "Not .cnt file selected")
 
-        lbl.configure(text="EEPROM report generator")
+        label.configure(text="EEPROM report generator")
 
 def verifyLog():
-        lbl.configure(text="Log")
+        label.configure(text="Log")
 
 ################
 #### Objetos ###
@@ -123,7 +123,7 @@ image = tk.Label(panelImage, image = img)
 def ventana():
 
         #Titulo de la ventana.
-        window.title("Bosch") 
+        root.title("Bosch") 
 
         panelElements.grid(column=0, row=0, sticky=(N, S, E, W))
         panelImage.grid(column=0, row=1, columnspan=2, rowspan=6, sticky=(N, S, E, W))
@@ -136,7 +136,7 @@ def ventana():
         button_Log.grid(column=3, row=6)
         
         #Comenzar proceso.
-        window.mainloop()
+        root.mainloop()
 
 def main():
 
