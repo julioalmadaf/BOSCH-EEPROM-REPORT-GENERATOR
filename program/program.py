@@ -1,8 +1,11 @@
 #pip install openpyxl
 #python -m pip install --upgrade pip            #Actualizar version de pip
-#pip install pillow                                                     #To be able to include images (jpeg, png, bmp) into an openpyxl file.
+#pip install pillow                             #To be able to include images (jpeg, png, bmp) into an openpyxl file.
 #pip install xlrd
 #pip install pathlib
+
+#pip install pillow
+#pip install matplotlib
 
 import os
 import sys
