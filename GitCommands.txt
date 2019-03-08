@@ -1,3 +1,4 @@
+########################################################
 #Despues de clonar un repositorio, comenzar a detectar cambios
 git init
 
@@ -21,6 +22,38 @@ git log
 
 ########################################################
 
+#Ver ramas actuales
+git branch
+
+#Crear rama
+git branch RAMA_NAME
+
+#Crear rama y cambiarnos a ella
+git checkout -b RAMA_NAME
+
+#Cambiar nombre de la rama
+git branch -m RAMA_NAME RAMA_NEW_NAME
+
+#Eliminar rama local
+git branch -D RAMA_NAME
+
+#Eliminar rama remota
+git push origin --delete RAMA_NAME
+
+#Cambiar entre ramas
+git checkout RAMA_NAME
+
+#Ir a master
+git checkout master
+
+#Ver ramas y fusiones de forma grafica
+gitk
+
+#Fusion (estar desde la rama destino)
+git merge RAMA_NAME
+
+#Abortar fusion de rama
+git merge --abort
 #Configuracion de nombre y correo
 git config --global user.name "Ruben Barajas"
 git config --global user.email barajas.ruben95@gmail.com
@@ -33,7 +66,6 @@ git config --global color.ui true
 
 #Agregar lineas de \r y \n por default para Windows
 git config --global core.autocrlf true
-
 
 ########################################################
 #Pagina con explicacion simple de como usar los comandos
