@@ -21,6 +21,7 @@ from tkinter import *
 from PIL import ImageTk, Image
 from pathlib import Path
 from os import listdir
+from openpyxl import load_workbook
 
 ###########################
 #### Variables globales ###
@@ -29,6 +30,9 @@ rutaCNT = "0"
 archivoCNTCargado = 0
 rutaReportePrevio = "0"
 archivoReportePrevioCargado = 0
+BBNumber = 0
+Baseline = 0
+folder_selected="0"
 
 ################
 #### Eventos ###
@@ -73,6 +77,9 @@ def createReport():
         global archivoReportePrevioCargado
         global rutaCNT
         global rutaReportePrevio
+        global folder_selected
+        global BBNumber
+        global Baseline
 
         label.configure(text="Creating report")
 
@@ -89,7 +96,7 @@ def createReport():
 
                 #Crear archivo Excel.
                 shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
-
+                fillExcel()
                 messagebox.showinfo("Report created", "Report created successfully")
 
         else:
@@ -141,6 +148,13 @@ def ventana():
         
         #Comenzar proceso.
         root.mainloop()
+
+def fillExcel():
+        wb = load_workbook(filename = folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")
+        ws=wb.active
+        ws['D3']=BBNumber
+        ws['D4']=Baseline
+        wb.save(folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")
 
 def main():
 
