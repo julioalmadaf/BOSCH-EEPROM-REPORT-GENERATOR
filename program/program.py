@@ -47,8 +47,11 @@ def cntButton():
                 archivoCNTCargado = 0
         elif(rutaCNT == ""):                    #Se dio al boton cancelar.
                 archivoCNTCargado = 0
-        else:                                   #se selecciono el archivo correctamente.
+        else:                                   #Se selecciono el archivo correctamente.
                 archivoCNTCargado = 1
+                button_PreviousReport.grid()	#Ahora se puede mostrar el boton de reporte previo como opcional.
+                button_GenerateReport.grid()	#Ahora se puede mostrar el boton de generar reporte.
+                button_Log.grid_remove()		#Esconder boton de log.
 
 def previousReport():
 
@@ -64,7 +67,7 @@ def previousReport():
                 archivoReportePrevioCargado = 0
         elif(rutaCNT == ""):                    #Se dio al boton cancelar.
                 archivoReportePrevioCargado = 0
-        else:                                   #se selecciono el archivo correctamente.
+        else:                                   #Se selecciono el archivo correctamente.
                 archivoReportePrevioCargado = 1
 
 def createReport():
@@ -93,6 +96,11 @@ def createReport():
                 		shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
 
                 		messagebox.showinfo("Report created", "Report created successfully")
+
+                		button_Log.grid()	#Ahora se puede mostrar el boton del log.
+                		button_PreviousReport.grid_remove()		#Esconder boton de reporte previo.
+                		button_GenerateReport.grid_remove()		#Esconder boton de generar reporte.
+
         else:
                 messagebox.showerror("Error", "Not .cnt file selected")
 
@@ -100,6 +108,7 @@ def createReport():
 
 def verifyLog():
         label.configure(text="Log")
+        button_Log.grid_remove()		#Esconder boton de log.
 
 ################
 #### Objetos ###
@@ -140,6 +149,16 @@ def ventana():
         button_GenerateReport.grid(column=3, row=5)
         button_Log.grid(column=3, row=6)
         
+        #Ocultar botones innecesarios.
+        button_PreviousReport.grid_remove()
+        button_GenerateReport.grid_remove()
+        button_Log.grid_remove()
+
+        #Fondos y colores.
+        style = ttk.Style(root)
+        style.configure('TLabel', background='white', foreground='black')	#Background y foreground de Label
+        style.configure('TFrame', background='white')						#Background y foreground del Frame
+
         #Comenzar proceso.
         root.mainloop()
 
