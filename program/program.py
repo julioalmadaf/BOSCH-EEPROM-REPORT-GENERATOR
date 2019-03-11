@@ -29,6 +29,7 @@ rutaCNT = "0"
 archivoCNTCargado = 0
 rutaReportePrevio = "0"
 archivoReportePrevioCargado = 0
+estadoCheckButton = 0
 
 ################
 #### Eventos ###
@@ -50,10 +51,21 @@ def cntButton():
         else:                                   #Se selecciono el archivo correctamente.
                 archivoCNTCargado = 1
                 button_CNT.configure(style='button_style2.TButton')
+                enable_button.grid()	#Ahora se puede mostrar el checkbuton para habilitar el boton de reporte previo.
                 button_PreviousReport.grid()	#Ahora se puede mostrar el boton de reporte previo como opcional.
                 button_GenerateReport.grid()	#Ahora se puede mostrar el boton de generar reporte.
                 button_GenerateReport.configure(style='button_style1.TButton')
                 button_Log.grid_remove()		#Esconder boton de log.
+
+def enableButtonRP():
+
+	global estadoCheckButton
+
+	estadoCheckButton = estadoCheckButton ^ 1
+	if(estadoCheckButton == 0):
+		button_PreviousReport.state(["disabled"])
+	else:
+		button_PreviousReport.state(["!disabled"])
 
 def previousReport():
 
@@ -101,6 +113,7 @@ def createReport():
 
                 		button_Log.grid()	#Ahora se puede mostrar el boton del log.
                 		button_CNT.configure(style='button_style1.TButton')
+                		enable_button.grid_remove()				#Esconder boton para habilitar reporte previo.
                 		button_PreviousReport.grid_remove()		#Esconder boton de reporte previo.
                 		button_GenerateReport.grid_remove()		#Esconder boton de generar reporte.
                 		button_GenerateReport.configure(style='button_style2.TButton')
@@ -130,6 +143,7 @@ button_CNT = ttk.Button(panelElements, text="Select CNT file", style="TButton", 
 button_PreviousReport = ttk.Button(panelElements, text="Select previous report", style="TButton", command=previousReport)
 button_GenerateReport = ttk.Button(panelElements, text="Generate report", style="TButton", command=createReport)
 button_Log = ttk.Button(panelElements, text="LOG", style="TButton", command=verifyLog)
+enable_button = Checkbutton(panelElements, text="Enable previous report button", onvalue=1,offvalue=0, command=enableButtonRP)
 image = tk.Label(panelImage, image = img)
 
 ##################
@@ -143,25 +157,27 @@ def ventana():
 
         #Configurar paneles.
         panelElements.grid(column=0, row=0, sticky=(N, S, E, W))
-        panelImage.grid(column=0, row=1, columnspan=2, rowspan=6, sticky=(N, S, E, W))
+        panelImage.grid(column=0, row=1, columnspan=2, rowspan=7, sticky=(N, S, E, W))
 
         #Configurar elementos (botones, etiqueta e imagen).
         image.pack(side = "bottom", fill = "both", expand = "yes")
         label.grid(column=0, row=0, columnspan=4, sticky=(N, W))
         button_CNT.grid(column=3, row=3)
-        button_PreviousReport.grid(column=3, row=4)
-        button_GenerateReport.grid(column=3, row=5)
-        button_Log.grid(column=3, row=6)
+        enable_button.grid(column=3, row=4)
+        button_PreviousReport.grid(column=3, row=5)
+        button_GenerateReport.grid(column=3, row=6)
+        button_Log.grid(column=3, row=7)
         
         #Ocultar botones innecesarios.
         button_PreviousReport.grid_remove()
+        enable_button.grid_remove()
         button_GenerateReport.grid_remove()
         button_Log.grid_remove()
 
         #Fondos y colores.
         style = ttk.Style(root)
-        style.configure('TLabel', background='white')						#Background y foreground de la etiqueta.
-        style.configure('TFrame', background='white')						#Background y foreground del Frame.
+        style.configure('TLabel', background='white')	#Background y foreground de la etiqueta.
+        style.configure('TFrame', background='white')	#Background y foreground del Frame.
 
         #Estilo de los botones.
         button_style1 = ttk.Style()
@@ -173,6 +189,10 @@ def ventana():
         button_PreviousReport.configure(style='button_style2.TButton')
         button_GenerateReport.configure(style='button_style2.TButton')
         button_Log.configure(style='button_style2.TButton')
+
+        #Comenzar con el boton de reporte previo deshabilitado.
+        estadoCheckButton = 0
+        button_PreviousReport.state(["disabled"])
 
         #Comenzar proceso.
         root.mainloop()
