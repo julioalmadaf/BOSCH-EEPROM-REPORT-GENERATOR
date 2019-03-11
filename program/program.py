@@ -51,7 +51,7 @@ def cntButton():
         else:                                   #Se selecciono el archivo correctamente.
                 archivoCNTCargado = 1
                 button_CNT.configure(style='button_style2.TButton')
-                enable_button.grid()	#Ahora se puede mostrar el checkbuton para habilitar el boton de reporte previo.
+                enable_button.grid()			#Ahora se puede mostrar el checkbuton para habilitar el boton de reporte previo.
                 button_PreviousReport.grid()	#Ahora se puede mostrar el boton de reporte previo como opcional.
                 button_GenerateReport.grid()	#Ahora se puede mostrar el boton de generar reporte.
                 button_GenerateReport.configure(style='button_style1.TButton')
@@ -62,6 +62,8 @@ def enableButtonRP():
 	global estadoCheckButton
 
 	estadoCheckButton = estadoCheckButton ^ 1
+
+	#Cambiar estado del boton de reporte previo dependiendo del CheckButton.
 	if(estadoCheckButton == 0):
 		button_PreviousReport.state(["disabled"])
 	else:
@@ -159,7 +161,7 @@ def ventana():
         panelElements.grid(column=0, row=0, sticky=(N, S, E, W))
         panelImage.grid(column=0, row=1, columnspan=2, rowspan=7, sticky=(N, S, E, W))
 
-        #Configurar elementos (botones, etiqueta e imagen).
+        #Configurar elementos (botones, etiqueta, imagen, etc).
         image.pack(side = "bottom", fill = "both", expand = "yes")
         label.grid(column=0, row=0, columnspan=4, sticky=(N, W))
         button_CNT.grid(column=3, row=3)
@@ -179,7 +181,7 @@ def ventana():
         style.configure('TLabel', background='white')	#Background y foreground de la etiqueta.
         style.configure('TFrame', background='white')	#Background y foreground del Frame.
 
-        #Estilo de los botones.
+        #Estilo de los elementos.
         button_style1 = ttk.Style()
         button_style2 = ttk.Style()
         button_style1.configure("button_style1.TButton", width = 20, padding=5, font=('Helvetica', 10, 'bold'), background = "black", foreground = 'green')
