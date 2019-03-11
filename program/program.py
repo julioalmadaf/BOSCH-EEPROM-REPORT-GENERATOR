@@ -34,6 +34,47 @@ estadoCheckButton = 0
 ################
 #### Eventos ###
 ################
+def newProgram():
+
+	global rutaCNT
+	global archivoCNTCargado
+	global rutaReportePrevio
+	global archivoReportePrevioCargado
+	global estadoCheckButton
+
+	#Ocultar botones innecesarios.
+	button_PreviousReport.grid_remove()
+	enable_button.grid_remove()
+	button_GenerateReport.grid_remove()
+	button_Log.grid_remove()
+
+	button_CNT.configure(style='button_style1.TButton')
+	enable_button.deselect()
+	button_PreviousReport.configure(style='button_style2.TButton')
+	button_GenerateReport.configure(style='button_style2.TButton')
+	button_Log.configure(style='button_style2.TButton')
+
+	#Comenzar con el boton de reporte previo deshabilitado.
+	estadoCheckButton = 0
+	button_PreviousReport.state(["disabled"])
+
+	rutaCNT = "0"
+	archivoCNTCargado = 0
+	rutaReportePrevio = "0"
+	archivoReportePrevioCargado = 0
+
+def exitProgram():
+	#Preguntar al usuario si desea salir del programa.
+	salir = messagebox.askyesno(message="Do you want to close the program?", title="Close program")
+	if(salir == 1):
+		sys.exit(0)
+
+def aboutProgram():
+	messagebox.showinfo("About EEPROM report generator", "This software has been released by Ruben Barajas Curiel and Julio Cesar Almada Fuerte")
+
+def helpProgram():
+	messagebox.showinfo("Help", "Visit the following link to get more information about this software")
+
 def cntButton():
 
         global rutaCNT
@@ -147,13 +188,15 @@ button_GenerateReport = ttk.Button(panelElements, text="Generate report", style=
 button_Log = ttk.Button(panelElements, text="LOG", style="TButton", command=verifyLog)
 enable_button = Checkbutton(panelElements, text="Enable previous report button", onvalue=1,offvalue=0, command=enableButtonRP)
 image = tk.Label(panelImage, image = img)
+menubar = Menu(panelImage)
 
+button_style1 = ttk.Style()
+button_style2 = ttk.Style()
 ##################
 #### Funciones ###
 ##################
 
 def ventana():
-
         #Titulo de la ventana.
         root.title("Bosch") 
 
@@ -182,8 +225,6 @@ def ventana():
         style.configure('TFrame', background='white')	#Background y foreground del Frame.
 
         #Estilo de los elementos.
-        button_style1 = ttk.Style()
-        button_style2 = ttk.Style()
         button_style1.configure("button_style1.TButton", width = 20, padding=5, font=('Helvetica', 10, 'bold'), background = "black", foreground = 'green')
         button_style2.configure("button_style2.TButton", width = 20, padding=5, font=('Helvetica', 10, 'bold'))
         
@@ -195,6 +236,16 @@ def ventana():
         #Comenzar con el boton de reporte previo deshabilitado.
         estadoCheckButton = 0
         button_PreviousReport.state(["disabled"])
+
+        root.config(menu=menubar)
+        toolBar_Init = Menu(menubar)
+        toolBar_About = Menu(menubar)
+        toolBar_Init.add_command(label="New", command=newProgram)
+        toolBar_Init.add_command(label="Exit", command=exitProgram)
+        toolBar_About.add_command(label="About", command=aboutProgram)
+        toolBar_About.add_command(label="Help", command=helpProgram)
+        menubar.add_cascade(label="File", menu=toolBar_Init)
+        menubar.add_cascade(label="Program", menu=toolBar_About)
 
         #Comenzar proceso.
         root.mainloop()
