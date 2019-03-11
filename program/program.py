@@ -49,8 +49,10 @@ def cntButton():
                 archivoCNTCargado = 0
         else:                                   #Se selecciono el archivo correctamente.
                 archivoCNTCargado = 1
+                button_CNT.configure(style='button_style2.TButton')
                 button_PreviousReport.grid()	#Ahora se puede mostrar el boton de reporte previo como opcional.
                 button_GenerateReport.grid()	#Ahora se puede mostrar el boton de generar reporte.
+                button_GenerateReport.configure(style='button_style1.TButton')
                 button_Log.grid_remove()		#Esconder boton de log.
 
 def previousReport():
@@ -98,8 +100,10 @@ def createReport():
                 		messagebox.showinfo("Report created", "Report created successfully")
 
                 		button_Log.grid()	#Ahora se puede mostrar el boton del log.
+                		button_CNT.configure(style='button_style1.TButton')
                 		button_PreviousReport.grid_remove()		#Esconder boton de reporte previo.
                 		button_GenerateReport.grid_remove()		#Esconder boton de generar reporte.
+                		button_GenerateReport.configure(style='button_style2.TButton')
 
         else:
                 messagebox.showerror("Error", "Not .cnt file selected")
@@ -156,8 +160,19 @@ def ventana():
 
         #Fondos y colores.
         style = ttk.Style(root)
-        style.configure('TLabel', background='white', foreground='black')	#Background y foreground de Label
-        style.configure('TFrame', background='white')						#Background y foreground del Frame
+        style.configure('TLabel', background='white')						#Background y foreground de la etiqueta.
+        style.configure('TFrame', background='white')						#Background y foreground del Frame.
+
+        #Estilo de los botones.
+        button_style1 = ttk.Style()
+        button_style2 = ttk.Style()
+        button_style1.configure("button_style1.TButton", width = 20, padding=5, font=('Helvetica', 10, 'bold'), background = "black", foreground = 'green')
+        button_style2.configure("button_style2.TButton", width = 20, padding=5, font=('Helvetica', 10, 'bold'))
+        
+        button_CNT.configure(style='button_style1.TButton')
+        button_PreviousReport.configure(style='button_style2.TButton')
+        button_GenerateReport.configure(style='button_style2.TButton')
+        button_Log.configure(style='button_style2.TButton')
 
         #Comenzar proceso.
         root.mainloop()
