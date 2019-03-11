@@ -78,20 +78,21 @@ def createReport():
 
         #Garantizar que se haya seleccionado un archivo CNT.
         if(archivoCNTCargado == 1):
-                archivoCNTCargado = 0
-
-                #Extraer BBNumber y Baseline.
-                BBNumber = rutaCNT.split('_')[3]
-                Baseline = rutaCNT.split('_')[4]
-
-                #Preguntar directorio para guardar el archivo generado.
+        		
+        		#Preguntar directorio para guardar el archivo generado.
                 folder_selected = filedialog.askdirectory()
 
-                #Crear archivo Excel.
-                shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+                if(folder_selected != ""):		#Si no se le dio al boton cancelar
+                		archivoCNTCargado = 0
 
-                messagebox.showinfo("Report created", "Report created successfully")
+                		#Extraer BBNumber y Baseline.
+                		BBNumber = rutaCNT.split('_')[3]
+                		Baseline = rutaCNT.split('_')[4]
 
+                		#Crear archivo Excel.
+                		shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+
+                		messagebox.showinfo("Report created", "Report created successfully")
         else:
                 messagebox.showerror("Error", "Not .cnt file selected")
 
@@ -143,9 +144,8 @@ def ventana():
         root.mainloop()
 
 def main():
-
-        ventana()
+		ventana()
 
 #################################
 if __name__== "__main__":
-        main()
+		main()
