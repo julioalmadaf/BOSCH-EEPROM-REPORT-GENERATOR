@@ -96,8 +96,9 @@ def createReport():
 
                 #Crear archivo Excel.
                 shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
-                fillExcel()
                 messagebox.showinfo("Report created", "Report created successfully")
+                #Rellena Excel
+                fillExcel()
 
         else:
                 messagebox.showerror("Error", "Not .cnt file selected")
@@ -150,10 +151,13 @@ def ventana():
         root.mainloop()
 
 def fillExcel():
+        #Carga el archivo
         wb = load_workbook(filename = folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")
         ws=wb.active
+        #Asigna los valores de BBNumber y Baseline a sus respectivas celdas
         ws['D3']=BBNumber
         ws['D4']=Baseline
+        #Guarda los cambios
         wb.save(folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")
 
 def main():
