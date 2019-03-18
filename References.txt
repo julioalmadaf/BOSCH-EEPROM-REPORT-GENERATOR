@@ -10,3 +10,9 @@ https://stackoverflow.com/questions/34357983/copying-and-renaming-excel-files-wi
 #Lo utilice para poner el BBNumber al archivo excel
 https://docs.python.org/3/tutorial/inputoutput.html
 
+#Para ver la estructura de arbol del CNT
+http://xmlgrid.net/
+
+#Guias de ElementTreeXML
+https://docs.python.org/3.5/library/xml.etree.elementtree.html
+https://www.datacamp.com/community/tutorials/python-xml-elementtree
