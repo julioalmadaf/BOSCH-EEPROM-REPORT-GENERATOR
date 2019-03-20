@@ -3,6 +3,9 @@
 #pip install pillow                             #To be able to include images (jpeg, png, bmp) into an openpyxl file.
 #pip install xlrd
 #pip install pathlib
+3
+#pip install xlrd
+#pip install xlwt
 
 #pip install pillow
 #pip install matplotlib
@@ -13,6 +16,8 @@ import tkinter
 import shutil
 import sys
 import tkinter as tk
+import difflib
+import xlrd
 
 from tkinter import messagebox
 from tkinter import filedialog
@@ -120,7 +125,7 @@ def previousReport():
         rutaReportePrevio = filedialog.askopenfilename(filetypes = (("All Excel files","*.xlsx"),("All files","*.*")))
 
         #Verificar que sea archivo XLSX o que se haya agregado un archivo.
-        if(rutaCNT.find(".xlsx") == -1):         #No se selecciono un archivo XLXS
+        if(rutaCNT.find(".xlsx") == -1):        #No se selecciono un archivo XLXS
                 archivoReportePrevioCargado = 0
         elif(rutaCNT == ""):                    #Se dio al boton cancelar.
                 archivoReportePrevioCargado = 0
@@ -148,6 +153,9 @@ def createReport():
                 		#Extraer BBNumber y Baseline.
                 		BBNumber = rutaCNT.split('_')[3]
                 		Baseline = rutaCNT.split('_')[4]
+
+                		previousWorkbook = xlrd.open_workbook(rutaReportePrevio)
+                		worksheet = previousWorkbook.sheet_by_name('Checklist')
 
                 		#Crear archivo Excel.
                 		shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
@@ -256,3 +264,14 @@ def main():
 #################################
 if __name__== "__main__":
 		main()
+
+#sheet.write(0, 0,'Inserting data in 1st Row and 1st Column')
+#sheet.cell(0, 0).value
+
+#if sheet.cell(0, 0).value == xlrd.empty_cell.value:
+	# Do something
+
+#row = sheet.row(1) # Selecting the second row
+#row.write(0,'2nd Row and 1st Column')
+#row.write(1,'1st Row and 2nd Column')
+#row.flush_row_data()	#Delete data in the row
