@@ -18,6 +18,7 @@ import sys
 import tkinter as tk
 import difflib
 import xlrd
+import xml.etree.ElementTree
 
 from tkinter import messagebox
 from tkinter import filedialog
@@ -154,11 +155,25 @@ def createReport():
                 		BBNumber = rutaCNT.split('_')[3]
                 		Baseline = rutaCNT.split('_')[4]
 
+                		#Acomodar el archivo para leerlo.
                 		previousWorkbook = xlrd.open_workbook(rutaReportePrevio)
-                		worksheet = previousWorkbook.sheet_by_name('Checklist')
+                		previousWorksheet = previousWorkbook.sheet_by_name('Checklist')
+                		e = xml.etree.ElementTree.parse(rutaCNT).getroot()
+                		continuarComparacion = previousWorksheet.nrows
+                		contadorCelda = 11			#Posicion del primer elemento NVM data item
+                		valorCelda = ""
 
                 		#Crear archivo Excel.
                 		shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+                		
+                		#Mientras existan NVM data item.
+                		while(contadorCelda < continuarComparacion):
+
+                				#Leer valor de la celda.
+                				valorCelda = previousWorksheet.cell(contadorCelda, 0).value
+                				contadorCelda = contadorCelda + 1
+
+                				#Parser.
 
                 		messagebox.showinfo("Report created", "Report created successfully")
 
@@ -264,14 +279,3 @@ def main():
 #################################
 if __name__== "__main__":
 		main()
-
-#sheet.write(0, 0,'Inserting data in 1st Row and 1st Column')
-#sheet.cell(0, 0).value
-
-#if sheet.cell(0, 0).value == xlrd.empty_cell.value:
-	# Do something
-
-#row = sheet.row(1) # Selecting the second row
-#row.write(0,'2nd Row and 1st Column')
-#row.write(1,'1st Row and 2nd Column')
-#row.flush_row_data()	#Delete data in the row
