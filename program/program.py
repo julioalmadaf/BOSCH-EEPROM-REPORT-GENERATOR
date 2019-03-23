@@ -13,6 +13,7 @@ import tkinter
 import shutil
 import sys
 import tkinter as tk
+import xml.etree.ElementTree as ET
 
 from tkinter import messagebox
 from tkinter import filedialog
@@ -33,6 +34,10 @@ archivoReportePrevioCargado = 0
 BBNumber = 0
 Baseline = 0
 folder_selected="0"
+
+#Variables XML
+#Lee archivo XML
+tree = "0"
 
 ################
 #### Eventos ###
@@ -151,14 +156,77 @@ def ventana():
         root.mainloop()
 
 def fillExcel():
-        #Carga el archivo
+        
+
+        #Carga el archivo Excel anteriormente generado
         wb = load_workbook(filename = folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")
         ws=wb.active
+        
+        #Lee archivo XML
+        tree = ET.parse(rutaCNT)
+
+        #Obtiene el root del XML
+        root = tree.getroot()
+        
+        #Counter de datapointers para cada sesion
+        RC=0            #Reprog
+        DSC=0           #DeliveryState
+        RDSC=0          #ReturnToDeliveryState
+
+        CounterFilasExcel=11
+
+        #Reprog
+        reprogSig = root[1][0][1][2]
+        for Lreprog in reprogSig.findall("./DATAPOINTER/DATAPOINTER-NAME"):
+                #Cuenta cuantos datapointers hay dentro de reprog
+                RC+=1
+        
+        
+        #Imprime cada dato importante de cada datapointer
+        for i in range(0,RC):
+                CounterFilasExcel+=1
+                ws['K'+str(CounterFilasExcel)]="X"
+                for j in range (0,4):
+                        if(j==0): ws['A'+str(CounterFilasExcel)]=root[1][0][1][2][i][j].text
+                        if(j==1): ws['D'+str(CounterFilasExcel)]=root[1][0][1][2][i][j].text
+                        if(j==3): ws['O'+str(CounterFilasExcel)]=root[1][0][1][2][i][j].text
+                        
+        #Deliverystate
+        DSSig = root[1][0][2][2]
+        for DName in DSSig.findall("./DATAPOINTER/DATAPOINTER-NAME"):
+                #Cuenta cuantos datapointers hay dentro de DeliveryState
+                DSC+=1
+
+        #Imprime cada dato importante de cada datapointer
+        for i in range(0,DSC):
+                CounterFilasExcel+=1
+                ws['I'+str(CounterFilasExcel)]="X"
+                for j in range (0,4):
+                        if(j==0): ws['A'+str(CounterFilasExcel)]=root[1][0][2][2][i][j].text
+                        if(j==1): ws['D'+str(CounterFilasExcel)]=root[1][0][2][2][i][j].text
+                        if(j==3): ws['O'+str(CounterFilasExcel)]=root[1][0][2][2][i][j].text
+
+        #Return to delivery state
+        RDSSig = root[1][0][3][2]
+        for DName in RDSSig.findall("./DATAPOINTER/DATAPOINTER-NAME"):
+                #Cuenta cuantos datapointers hay dentro de ResetToDeliveryState
+                RDSC+=1
+
+        #Imprime cada dato importante de cada datapointer
+        for i in range(0,RDSC):
+                CounterFilasExcel+=1
+                ws['J'+str(CounterFilasExcel)]="X"
+                for j in range (0,4):
+                        if(j==0): ws['A'+str(CounterFilasExcel)]=root[1][0][3][2][i][j].text
+                        if(j==1): ws['D'+str(CounterFilasExcel)]=root[1][0][3][2][i][j].text
+                        if(j==3): ws['O'+str(CounterFilasExcel)]=root[1][0][3][2][i][j].text
+
         #Asigna los valores de BBNumber y Baseline a sus respectivas celdas
         ws['D3']=BBNumber
         ws['D4']=Baseline
+        
         #Guarda los cambios
-        wb.save(folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")
+        wb.save(folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")        
 
 def main():
 
