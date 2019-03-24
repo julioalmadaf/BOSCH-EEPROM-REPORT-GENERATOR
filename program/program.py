@@ -3,6 +3,8 @@
 #pip install pillow                             #To be able to include images (jpeg, png, bmp) into an openpyxl file.
 #pip install xlrd
 #pip install pathlib
+#pip install xlrd
+#pip install xlwt
 
 #pip install pillow
 #pip install matplotlib
@@ -14,6 +16,9 @@ import shutil
 import sys
 import tkinter as tk
 import xml.etree.ElementTree as ET
+import difflib
+import xlrd
+import xml.etree.ElementTree as e
 
 from tkinter import messagebox
 from tkinter import filedialog
@@ -39,9 +44,52 @@ folder_selected="0"
 #Lee archivo XML
 tree = "0"
 
+estadoCheckButton = 0
+
 ################
 #### Eventos ###
 ################
+def newProgram():
+
+	global rutaCNT
+	global archivoCNTCargado
+	global rutaReportePrevio
+	global archivoReportePrevioCargado
+	global estadoCheckButton
+
+	#Ocultar botones innecesarios.
+	button_PreviousReport.grid_remove()
+	enable_button.grid_remove()
+	button_GenerateReport.grid_remove()
+	button_Log.grid_remove()
+
+	button_CNT.configure(style='button_style1.TButton')
+	enable_button.deselect()
+	button_PreviousReport.configure(style='button_style2.TButton')
+	button_GenerateReport.configure(style='button_style2.TButton')
+	button_Log.configure(style='button_style2.TButton')
+
+	#Comenzar con el boton de reporte previo deshabilitado.
+	estadoCheckButton = 0
+	button_PreviousReport.state(["disabled"])
+
+	rutaCNT = "0"
+	archivoCNTCargado = 0
+	rutaReportePrevio = "0"
+	archivoReportePrevioCargado = 0
+
+def exitProgram():
+	#Preguntar al usuario si desea salir del programa.
+	salir = messagebox.askyesno(message="Do you want to close the program?", title="Close program")
+	if(salir == 1):
+		sys.exit(0)
+
+def aboutProgram():
+	messagebox.showinfo("About EEPROM report generator", "This software has been released by Ruben Barajas Curiel and Julio Cesar Almada Fuerte")
+
+def helpProgram():
+	messagebox.showinfo("Help", "Visit the following link to get more information about this software")
+
 def cntButton():
 
         global rutaCNT
@@ -56,8 +104,26 @@ def cntButton():
                 archivoCNTCargado = 0
         elif(rutaCNT == ""):                    #Se dio al boton cancelar.
                 archivoCNTCargado = 0
-        else:                                   #se selecciono el archivo correctamente.
+        else:                                   #Se selecciono el archivo correctamente.
                 archivoCNTCargado = 1
+                button_CNT.configure(style='button_style2.TButton')
+                enable_button.grid()			#Ahora se puede mostrar el checkbuton para habilitar el boton de reporte previo.
+                button_PreviousReport.grid()	#Ahora se puede mostrar el boton de reporte previo como opcional.
+                button_GenerateReport.grid()	#Ahora se puede mostrar el boton de generar reporte.
+                button_GenerateReport.configure(style='button_style1.TButton')
+                button_Log.grid_remove()		#Esconder boton de log.
+
+def enableButtonRP():
+
+	global estadoCheckButton
+
+	estadoCheckButton = estadoCheckButton ^ 1
+
+	#Cambiar estado del boton de reporte previo dependiendo del CheckButton.
+	if(estadoCheckButton == 0):
+		button_PreviousReport.state(["disabled"])
+	else:
+		button_PreviousReport.state(["!disabled"])
 
 def previousReport():
 
@@ -69,11 +135,11 @@ def previousReport():
         rutaReportePrevio = filedialog.askopenfilename(filetypes = (("All Excel files","*.xlsx"),("All files","*.*")))
 
         #Verificar que sea archivo XLSX o que se haya agregado un archivo.
-        if(rutaCNT.find(".xlsx") == -1):         #No se selecciono un archivo XLXS
+        if(rutaCNT.find(".xlsx") == -1):        #No se selecciono un archivo XLXS
                 archivoReportePrevioCargado = 0
         elif(rutaCNT == ""):                    #Se dio al boton cancelar.
                 archivoReportePrevioCargado = 0
-        else:                                   #se selecciono el archivo correctamente.
+        else:                                   #Se selecciono el archivo correctamente.
                 archivoReportePrevioCargado = 1
 
 def createReport():
@@ -90,21 +156,48 @@ def createReport():
 
         #Garantizar que se haya seleccionado un archivo CNT.
         if(archivoCNTCargado == 1):
-                archivoCNTCargado = 0
-
-                #Extraer BBNumber y Baseline.
-                BBNumber = rutaCNT.split('_')[3]
-                Baseline = rutaCNT.split('_')[4]
-
-                #Preguntar directorio para guardar el archivo generado.
+        		
+        		#Preguntar directorio para guardar el archivo generado.
                 folder_selected = filedialog.askdirectory()
 
+                if(folder_selected != ""):		#Si no se le dio al boton cancelar
+                		archivoCNTCargado = 0
+
+                		#Extraer BBNumber y Baseline.
+                		BBNumber = rutaCNT.split('_')[3]
+                		Baseline = rutaCNT.split('_')[4]
                 #Crear archivo Excel.
                 shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
                 messagebox.showinfo("Report created", "Report created successfully")
                 #Rellena Excel
                 fillExcel()
+                #Acomodar el archivo para leerlo.
+                previousWorkbook = xlrd.open_workbook(rutaReportePrevio)
+                previousWorksheet = previousWorkbook.sheet_by_name('Checklist')
+                #e = xml.etree.ElementTree.parse(rutaCNT).getroot()
+                continuarComparacion = previousWorksheet.nrows
+                contadorCelda = 11			#Posicion del primer elemento NVM data item
+                valorCelda = ""
 
+                #Crear archivo Excel.
+                shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+                		
+                #Mientras existan NVM data item.
+                while(contadorCelda < continuarComparacion):
+             		#Leer valor de la celda.
+                	valorCelda = previousWorksheet.cell(contadorCelda, 0).value
+                	contadorCelda = contadorCelda + 1
+
+                	#Parser.
+
+                messagebox.showinfo("Report created", "Report created successfully")
+
+                button_Log.grid()	#Ahora se puede mostrar el boton del log.
+                button_CNT.configure(style='button_style1.TButton')
+                enable_button.grid_remove()				#Esconder boton para habilitar reporte previo.
+                button_PreviousReport.grid_remove()		#Esconder boton de reporte previo.
+                button_GenerateReport.grid_remove()		#Esconder boton de generar reporte.
+                button_GenerateReport.configure(style='button_style2.TButton')
         else:
                 messagebox.showerror("Error", "Not .cnt file selected")
 
@@ -112,6 +205,7 @@ def createReport():
 
 def verifyLog():
         label.configure(text="Log")
+        button_Log.grid_remove()		#Esconder boton de log.
 
 ################
 #### Objetos ###
@@ -129,29 +223,67 @@ button_CNT = ttk.Button(panelElements, text="Select CNT file", style="TButton", 
 button_PreviousReport = ttk.Button(panelElements, text="Select previous report", style="TButton", command=previousReport)
 button_GenerateReport = ttk.Button(panelElements, text="Generate report", style="TButton", command=createReport)
 button_Log = ttk.Button(panelElements, text="LOG", style="TButton", command=verifyLog)
+enable_button = Checkbutton(panelElements, text="Enable previous report button", onvalue=1,offvalue=0, command=enableButtonRP)
 image = tk.Label(panelImage, image = img)
+menubar = Menu(panelImage)
 
+button_style1 = ttk.Style()
+button_style2 = ttk.Style()
 ##################
 #### Funciones ###
 ##################
 
 def ventana():
-
         #Titulo de la ventana.
         root.title("Bosch") 
 
         #Configurar paneles.
         panelElements.grid(column=0, row=0, sticky=(N, S, E, W))
-        panelImage.grid(column=0, row=1, columnspan=2, rowspan=6, sticky=(N, S, E, W))
+        panelImage.grid(column=0, row=1, columnspan=2, rowspan=7, sticky=(N, S, E, W))
 
-        #Configurar elementos (botones, etiqueta e imagen).
+        #Configurar elementos (botones, etiqueta, imagen, etc).
         image.pack(side = "bottom", fill = "both", expand = "yes")
         label.grid(column=0, row=0, columnspan=4, sticky=(N, W))
         button_CNT.grid(column=3, row=3)
-        button_PreviousReport.grid(column=3, row=4)
-        button_GenerateReport.grid(column=3, row=5)
-        button_Log.grid(column=3, row=6)
+        enable_button.grid(column=3, row=4)
+        button_PreviousReport.grid(column=3, row=5)
+        button_GenerateReport.grid(column=3, row=6)
+        button_Log.grid(column=3, row=7)
         
+        #Ocultar botones innecesarios.
+        button_PreviousReport.grid_remove()
+        enable_button.grid_remove()
+        button_GenerateReport.grid_remove()
+        button_Log.grid_remove()
+
+        #Fondos y colores.
+        style = ttk.Style(root)
+        style.configure('TLabel', background='white')	#Background y foreground de la etiqueta.
+        style.configure('TFrame', background='white')	#Background y foreground del Frame.
+
+        #Estilo de los elementos.
+        button_style1.configure("button_style1.TButton", width = 20, padding=5, font=('Helvetica', 10, 'bold'), background = "black", foreground = 'green')
+        button_style2.configure("button_style2.TButton", width = 20, padding=5, font=('Helvetica', 10, 'bold'))
+        
+        button_CNT.configure(style='button_style1.TButton')
+        button_PreviousReport.configure(style='button_style2.TButton')
+        button_GenerateReport.configure(style='button_style2.TButton')
+        button_Log.configure(style='button_style2.TButton')
+
+        #Comenzar con el boton de reporte previo deshabilitado.
+        estadoCheckButton = 0
+        button_PreviousReport.state(["disabled"])
+
+        root.config(menu=menubar)
+        toolBar_Init = Menu(menubar)
+        toolBar_About = Menu(menubar)
+        toolBar_Init.add_command(label="New", command=newProgram)
+        toolBar_Init.add_command(label="Exit", command=exitProgram)
+        toolBar_About.add_command(label="About", command=aboutProgram)
+        toolBar_About.add_command(label="Help", command=helpProgram)
+        menubar.add_cascade(label="File", menu=toolBar_Init)
+        menubar.add_cascade(label="Program", menu=toolBar_About)
+
         #Comenzar proceso.
         root.mainloop()
 
@@ -229,9 +361,8 @@ def fillExcel():
         wb.save(folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")        
 
 def main():
-
-        ventana()
+		ventana()
 
 #################################
 if __name__== "__main__":
-        main()
+		main()
