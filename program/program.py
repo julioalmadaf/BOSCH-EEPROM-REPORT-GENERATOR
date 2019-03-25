@@ -3,9 +3,7 @@
 #pip install pillow                             #To be able to include images (jpeg, png, bmp) into an openpyxl file.
 #pip install xlrd
 #pip install pathlib
-#pip install xlrd
 #pip install xlwt
-
 #pip install pillow
 #pip install matplotlib
 
@@ -289,7 +287,6 @@ def ventana():
 
 def fillExcel():
         
-
         #Carga el archivo Excel anteriormente generado
         wb = load_workbook(filename = folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")
         ws=wb.active
