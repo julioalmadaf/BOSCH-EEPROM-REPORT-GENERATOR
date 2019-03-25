@@ -166,38 +166,41 @@ def createReport():
                 		#Extraer BBNumber y Baseline.
                 		BBNumber = rutaCNT.split('_')[3]
                 		Baseline = rutaCNT.split('_')[4]
-                #Crear archivo Excel.
-                shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
-                messagebox.showinfo("Report created", "Report created successfully")
-                #Rellena Excel
-                fillExcel()
+
+                		#Crear archivo Excel.
+                		shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+                		messagebox.showinfo("Report created", "Report created successfully")
+
+                		#Rellena Excel
+                		fillExcel()
+
+                		messagebox.showinfo("Report created", "Report created successfully")
+
+                		button_Log.grid()	#Ahora se puede mostrar el boton del log.
+                		button_CNT.configure(style='button_style1.TButton')
+                		enable_button.grid_remove()											#Esconder boton para habilitar reporte previo.
+                		button_PreviousReport.grid_remove()									#Esconder boton de reporte previo.
+                		button_GenerateReport.grid_remove()									#Esconder boton de generar reporte.
+                		button_GenerateReport.configure(style='button_style2.TButton')
+                
                 #Acomodar el archivo para leerlo.
-                previousWorkbook = xlrd.open_workbook(rutaReportePrevio)
-                previousWorksheet = previousWorkbook.sheet_by_name('Checklist')
+                #previousWorkbook = xlrd.open_workbook(rutaReportePrevio)
+                #previousWorksheet = previousWorkbook.sheet_by_name('Checklist')
                 #e = xml.etree.ElementTree.parse(rutaCNT).getroot()
-                continuarComparacion = previousWorksheet.nrows
-                contadorCelda = 11			#Posicion del primer elemento NVM data item
-                valorCelda = ""
+                #continuarComparacion = previousWorksheet.nrows
+                #contadorCelda = 11			#Posicion del primer elemento NVM data item
+                #valorCelda = ""
 
                 #Crear archivo Excel.
-                shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+                #shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
                 		
                 #Mientras existan NVM data item.
-                while(contadorCelda < continuarComparacion):
-             		#Leer valor de la celda.
-                	valorCelda = previousWorksheet.cell(contadorCelda, 0).value
-                	contadorCelda = contadorCelda + 1
+                #while(contadorCelda < continuarComparacion):
+             	#	#Leer valor de la celda.
+                #	valorCelda = previousWorksheet.cell(contadorCelda, 0).value
+                #	contadorCelda = contadorCelda + 1
 
                 	#Parser.
-
-                messagebox.showinfo("Report created", "Report created successfully")
-
-                button_Log.grid()	#Ahora se puede mostrar el boton del log.
-                button_CNT.configure(style='button_style1.TButton')
-                enable_button.grid_remove()				#Esconder boton para habilitar reporte previo.
-                button_PreviousReport.grid_remove()		#Esconder boton de reporte previo.
-                button_GenerateReport.grid_remove()		#Esconder boton de generar reporte.
-                button_GenerateReport.configure(style='button_style2.TButton')
         else:
                 messagebox.showerror("Error", "Not .cnt file selected")
 
@@ -289,7 +292,6 @@ def ventana():
 
 def fillExcel():
         
-
         #Carga el archivo Excel anteriormente generado
         wb = load_workbook(filename = folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")
         ws=wb.active
