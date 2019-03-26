@@ -8,9 +8,45 @@ tree = ET.parse('EEPROM_Container_BB95650_BSS2007_V3_IPBCSWNonXCP.cnt')
 #Obtiene el root
 root = tree.getroot()
 
+for session in root.iter('SESSION'):
+        sessionN=  session.find('SESSION-NAME')
+        if(sessionN.text=='Reprog'):
+                for MEH in session.find('DATAPOINTERS'):
+                        RC+=1
+                        print(RC)
+                for DPN in session.iter('DATAPOINTER-NAME'):
+                        print(DPN.text)
+                for DPID in session.iter('DATAPOINTER-IDENT'):
+                        print(DPID.text)
+                for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
+                        print(DFID.text)
+        if(sessionN.text=='DeliveryState'):
+                for MEH in session.find('DATAPOINTERS'):
+                        DSC+=1
+                        print(DSC)
+                for DPN in session.iter('DATAPOINTER-NAME'):
+                        print(DPN.text)
+                for DPID in session.iter('DATAPOINTER-IDENT'):
+                        print(DPID.text)
+                for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
+                        print(DFID.text)
+        if(sessionN.text=='ResetToDeliveryState'):
+                for MEH in session.find('DATAPOINTERS'):
+                        RDSC+=1
+                        print(RDSC)
+                for DPN in session.iter('DATAPOINTER-NAME'):
+                        print(DPN.text)
+                for DPID in session.iter('DATAPOINTER-IDENT'):
+                        print(DPID.text)
+                for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
+                        print(DFID.text)
+                        
+
+
+'''
 #Reprog
-reprogSig = root[1][0][1][2]
-for Lreprog in reprogSig.findall("./DATAPOINTER/DATAPOINTER-NAME"):
+#reprogSig = root[1][0][1][2]
+for Lreprog in reprogSig.iter('DATAPOINTER-NAME'):
     #Cuenta cuantos datapointers hay dentro de reprog
     RC+=1
 print(RC)
@@ -21,7 +57,7 @@ for i in range(0,RC):
         print(root[1][0][1][2][i][j].tag)
         print(root[1][0][1][2][i][j].text)
 
-'''
+
 #cheque como moverme entre los datos necesarios de cada datapointer
 print(root[1][0][1][2][0][0].tag)
 print(root[1][0][1][2][0][0].text)
@@ -38,7 +74,7 @@ DFORMAT= root[1][0][1][2][0][3].text
 print(DNAME)
 print(DID)
 print(DFORMAT)
-'''
+
 #Deliverystate
 DSSig = root[1][0][2][2]
 for DName in DSSig.findall("./DATAPOINTER/DATAPOINTER-NAME"):
@@ -65,7 +101,7 @@ for i in range(0,RDSC):
         print(root[1][0][3][2][i][j].tag)
         print(root[1][0][3][2][i][j].text)
 
-'''
+
 #Datapointer-name de la sesion Reprog
 #Dummy_testmoduleCnt
 #ECU-MEM [MEM][SESSIONS][SESSION][DATAPOINTERS][DATAPOINTER][DATAPOINTER-NAME]

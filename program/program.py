@@ -167,7 +167,6 @@ def createReport():
 
                 		#Crear archivo Excel.
                 		shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
-                		messagebox.showinfo("Report created", "Report created successfully")
 
                 		#Rellena Excel
                 		fillExcel()
@@ -301,58 +300,104 @@ def fillExcel():
         root = tree.getroot()
         
         #Counter de datapointers para cada sesion
+        ALLC=0
         RC=0            #Reprog
         DSC=0           #DeliveryState
         RDSC=0          #ReturnToDeliveryState
 
         CounterFilasExcel=11
 
-        #Reprog
-        reprogSig = root[1][0][1][2]
-        for Lreprog in reprogSig.findall("./DATAPOINTER/DATAPOINTER-NAME"):
-                #Cuenta cuantos datapointers hay dentro de reprog
-                RC+=1
+        for session in root.iter('SESSION'):
+                sessionN=  session.find('SESSION-NAME')
+                
+                if(sessionN.text =='__ALL__'):
+                        for MEH in session.find('DATAPOINTERS'):
+                                ALLC+=1
+                        tempCounter=CounterFilasExcel
+                        for DPN in session.iter('DATAPOINTER-NAME'):
+                                tempCounter+=1
+                                ws['A'+str(tempCounter)]=DPN.text
+                        tempCounter=CounterFilasExcel
+                        for DPID in session.iter('DATAPOINTER-IDENT'):
+                                tempCounter+=1
+                                ws['D'+str(tempCounter)]=DPID.text
+                        tempCounter=CounterFilasExcel
+                        for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
+                                CounterFilasExcel+=1
+                                ws['O'+str(CounterFilasExcel)]=DFID.text
+
+                #Reprog
+                if(sessionN.text=='Reprog'):
+                        for MEH in session.find('DATAPOINTERS'):
+                                RC+=1
+                        tempCounter=CounterFilasExcel
+                        for DPN in session.iter('DATAPOINTER-NAME'):
+                                tempCounter+=1
+                                ws['A'+str(tempCounter)]=DPN.text
+                        tempCounter=CounterFilasExcel
+                        for DPID in session.iter('DATAPOINTER-IDENT'):
+                                tempCounter+=1
+                                ws['D'+str(tempCounter)]=DPID.text
+                        tempCounter=CounterFilasExcel
+                        for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
+                                CounterFilasExcel+=1
+                                ws['O'+str(CounterFilasExcel)]=DFID.text
+                                ws['K'+str(CounterFilasExcel)]="X"
+                
+                #DeliveryState
+                if(sessionN.text=='DeliveryState'):
+                        for MEH in session.find('DATAPOINTERS'):
+                                DSC+=1
+                        tempCounter=CounterFilasExcel
+                        for DPN in session.iter('DATAPOINTER-NAME'):
+                                tempCounter+=1
+                                ws['A'+str(tempCounter)]=DPN.text
+                        tempCounter=CounterFilasExcel
+                        for DPID in session.iter('DATAPOINTER-IDENT'):
+                                tempCounter+=1
+                                ws['D'+str(tempCounter)]=DPID.text
+                        tempCounter=CounterFilasExcel
+                        for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
+                                CounterFilasExcel+=1
+                                ws['O'+str(CounterFilasExcel)]=DFID.text
+                                ws['I'+str(CounterFilasExcel)]="X"
+                #ResetToDeliveryState
+                if(sessionN.text=='ResetToDeliveryState'):
+                        for MEH in session.find('DATAPOINTERS'):
+                                RDSC+=1
+                        tempCounter=CounterFilasExcel
+                        for DPN in session.iter('DATAPOINTER-NAME'):
+                                tempCounter+=1
+                                ws['A'+str(tempCounter)]=DPN.text
+                        tempCounter=CounterFilasExcel
+                        for DPID in session.iter('DATAPOINTER-IDENT'):
+                                tempCounter+=1
+                                ws['D'+str(tempCounter)]=DPID.text
+                        tempCounter=CounterFilasExcel
+                        for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
+                                CounterFilasExcel+=1
+                                ws['O'+str(CounterFilasExcel)]=DFID.text
+                                ws['J'+str(CounterFilasExcel)]="X"
         
+        for i in range(12,CounterFilasExcel):
+                temp = ws['A'+str(i)]
+                k=i+1
+                for j in range(k,CounterFilasExcel):
+                        temp2 = ws['A'+str(j)]
+                        if(temp.value == temp2.value):
+                                temp3 = ws['I'+str(j)]
+                                if(temp3.value=="X"):
+                                        ws['I'+str(i)]="X"
+                                        ws.delete_rows(j,1)
+                                temp3 = ws['J'+str(j)]
+                                if(temp3.value=="X"): 
+                                        ws['J'+str(i)]="X"
+                                        ws.delete_rows(j,1)
+                                temp3 = ws['K'+str(j)]
+                                if(temp3.value=="X"): 
+                                        ws['K'+str(i)]="X"
+                                        ws.delete_rows(j,1)
         
-        #Imprime cada dato importante de cada datapointer
-        for i in range(0,RC):
-                CounterFilasExcel+=1
-                ws['K'+str(CounterFilasExcel)]="X"
-                for j in range (0,4):
-                        if(j==0): ws['A'+str(CounterFilasExcel)]=root[1][0][1][2][i][j].text
-                        if(j==1): ws['D'+str(CounterFilasExcel)]=root[1][0][1][2][i][j].text
-                        if(j==3): ws['O'+str(CounterFilasExcel)]=root[1][0][1][2][i][j].text
-                        
-        #Deliverystate
-        DSSig = root[1][0][2][2]
-        for DName in DSSig.findall("./DATAPOINTER/DATAPOINTER-NAME"):
-                #Cuenta cuantos datapointers hay dentro de DeliveryState
-                DSC+=1
-
-        #Imprime cada dato importante de cada datapointer
-        for i in range(0,DSC):
-                CounterFilasExcel+=1
-                ws['I'+str(CounterFilasExcel)]="X"
-                for j in range (0,4):
-                        if(j==0): ws['A'+str(CounterFilasExcel)]=root[1][0][2][2][i][j].text
-                        if(j==1): ws['D'+str(CounterFilasExcel)]=root[1][0][2][2][i][j].text
-                        if(j==3): ws['O'+str(CounterFilasExcel)]=root[1][0][2][2][i][j].text
-
-        #Return to delivery state
-        RDSSig = root[1][0][3][2]
-        for DName in RDSSig.findall("./DATAPOINTER/DATAPOINTER-NAME"):
-                #Cuenta cuantos datapointers hay dentro de ResetToDeliveryState
-                RDSC+=1
-
-        #Imprime cada dato importante de cada datapointer
-        for i in range(0,RDSC):
-                CounterFilasExcel+=1
-                ws['J'+str(CounterFilasExcel)]="X"
-                for j in range (0,4):
-                        if(j==0): ws['A'+str(CounterFilasExcel)]=root[1][0][3][2][i][j].text
-                        if(j==1): ws['D'+str(CounterFilasExcel)]=root[1][0][3][2][i][j].text
-                        if(j==3): ws['O'+str(CounterFilasExcel)]=root[1][0][3][2][i][j].text
-
         #Asigna los valores de BBNumber y Baseline a sus respectivas celdas
         ws['D3']=BBNumber
         ws['D4']=Baseline
