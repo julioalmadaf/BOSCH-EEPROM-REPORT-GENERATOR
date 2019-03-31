@@ -327,13 +327,13 @@ def fillExcel():
                         #Obtiene el Datapointer-ident  del item
                         for DPID in session.iter('DATAPOINTER-IDENT'):
                                 tempCounter+=1
-                                ws['D'+str(tempCounter)]=DPID.text
+                                ws['B'+str(tempCounter)]=DPID.text
                         tempCounter=CounterFilasExcel
                         #Obtiene el Datapointer-identifier del item
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
                                 #Aqui se aumenta el CounterFilasExcel para que se respeten las filas
                                 CounterFilasExcel+=1
-                                ws['O'+str(CounterFilasExcel)]=DFID.text
+                                ws['M'+str(CounterFilasExcel)]=DFID.text
 
                 #Cuando la sesion es Reprog
                 if(sessionN.text=='Reprog'):
@@ -344,13 +344,13 @@ def fillExcel():
                         tempCounter=CounterFilasExcel
                         for DPID in session.iter('DATAPOINTER-IDENT'):
                                 tempCounter+=1
-                                ws['D'+str(tempCounter)]=DPID.text
+                                ws['B'+str(tempCounter)]=DPID.text
                         tempCounter=CounterFilasExcel
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
                                 CounterFilasExcel+=1
-                                ws['O'+str(CounterFilasExcel)]=DFID.text
+                                ws['M'+str(CounterFilasExcel)]=DFID.text
                                 #Marca que el use case de que es Reprog
-                                ws['K'+str(CounterFilasExcel)]="X"
+                                ws['I'+str(CounterFilasExcel)]="X"
                 
                 #Cuando la sesion es DeliveryState
                 if(sessionN.text=='DeliveryState'):
@@ -361,13 +361,13 @@ def fillExcel():
                         tempCounter=CounterFilasExcel
                         for DPID in session.iter('DATAPOINTER-IDENT'):
                                 tempCounter+=1
-                                ws['D'+str(tempCounter)]=DPID.text
+                                ws['B'+str(tempCounter)]=DPID.text
                         tempCounter=CounterFilasExcel
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
                                 CounterFilasExcel+=1
-                                ws['O'+str(CounterFilasExcel)]=DFID.text
+                                ws['M'+str(CounterFilasExcel)]=DFID.text
                                 #Marca que el use case de que es DeliveryState
-                                ws['I'+str(CounterFilasExcel)]="X"
+                                ws['G'+str(CounterFilasExcel)]="X"
                 
                 #Cuando es la sesion es ResetToDeliveryState
                 if(sessionN.text=='ResetToDeliveryState'):
@@ -378,13 +378,13 @@ def fillExcel():
                         tempCounter=CounterFilasExcel
                         for DPID in session.iter('DATAPOINTER-IDENT'):
                                 tempCounter+=1
-                                ws['D'+str(tempCounter)]=DPID.text
+                                ws['B'+str(tempCounter)]=DPID.text
                         tempCounter=CounterFilasExcel
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
                                 CounterFilasExcel+=1
-                                ws['O'+str(CounterFilasExcel)]=DFID.text
+                                ws['M'+str(CounterFilasExcel)]=DFID.text
                                 #Marca que el use case de que es ReturnToDeliveryState
-                                ws['J'+str(CounterFilasExcel)]="X"
+                                ws['H'+str(CounterFilasExcel)]="X"
         
         for datablock in root.iter('DATABLOCK'):
                 #Busca en los datablock que nombre tiene
@@ -399,7 +399,7 @@ def fillExcel():
                                         j+=1
                                         if(j==6):
                                                 #Se copia la descripcion a la columna comment
-                                                ws['Q'+str(i)]=DPN.text  
+                                                ws['O'+str(i)]=DPN.text  
 
         #Para checar si se repite algun NVM Item
         for i in range(12,CounterFilasExcel):
@@ -412,19 +412,19 @@ def fillExcel():
                         #Si son iguales
                         if(temp.value == temp2.value):
                                 #Checa el USE CASES de cada uno
-                                temp3 = ws['I'+str(j)]
+                                temp3 = ws['G'+str(j)]
                                 if(temp3.value=="X"):
                                         #Marca el use case del que se repite 
-                                        ws['I'+str(i)]="X"
+                                        ws['G'+str(i)]="X"
                                         #Borra la fila que se repite
                                         ws.delete_rows(j,1)
-                                temp3 = ws['J'+str(j)]
+                                temp3 = ws['H'+str(j)]
                                 if(temp3.value=="X"): 
-                                        ws['J'+str(i)]="X"
+                                        ws['H'+str(i)]="X"
                                         ws.delete_rows(j,1)
-                                temp3 = ws['K'+str(j)]
+                                temp3 = ws['I'+str(j)]
                                 if(temp3.value=="X"): 
-                                        ws['K'+str(i)]="X"
+                                        ws['I'+str(i)]="X"
                                         ws.delete_rows(j,1)
         
         #Guarda los cambios
@@ -454,17 +454,17 @@ def fillExcel():
         #Los datos los pega ordenados en el archivo excel que es copia del template
         for i in range(12,CounterFilasExcel):
                 ws1['A'+str(i)]=ws['A'+str(j)].value
-                ws1['D'+str(i)]=ws['D'+str(j)].value
+                ws1['B'+str(i)]=ws['B'+str(j)].value
+                ws1['G'+str(i)]=ws['G'+str(j)].value
+                ws1['H'+str(i)]=ws['H'+str(j)].value
                 ws1['I'+str(i)]=ws['I'+str(j)].value
-                ws1['J'+str(i)]=ws['J'+str(j)].value
-                ws1['K'+str(i)]=ws['K'+str(j)].value
+                ws1['M'+str(i)]=ws['M'+str(j)].value
                 ws1['O'+str(i)]=ws['O'+str(j)].value
-                ws1['Q'+str(i)]=ws['Q'+str(j)].value
                 j+=1
 
         #Asigna los valores de BBNumber y Baseline a sus respectivas celdas
-        ws1['D3']=BBNumber
-        ws1['D4']=Baseline
+        ws1['B3']=BBNumber
+        ws1['B4']=Baseline
 
         #Guarda el archivo
         wb1.save(folder_selected +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
