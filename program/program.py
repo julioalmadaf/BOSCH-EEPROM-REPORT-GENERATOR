@@ -384,6 +384,21 @@ def fillExcel():
                                 #Marca que el use case de que es ReturnToDeliveryState
                                 ws['J'+str(CounterFilasExcel)]="X"
         
+        for datablock in root.iter('DATABLOCK'):
+                #Busca en los datablock que nombre tiene
+                DBN=  datablock.find('DATABLOCK-NAME')
+                #Para recorrer el excel
+                for i in range(12,CounterFilasExcel):
+                        #Compara el valor que tiene la celda de excel con el datablock name
+                        if(DBN.text==ws['A'+str(i)].value):
+                                j=0
+                                #Hay varios DATA por datablock, pero el que se ocupa es el 6to
+                                for DPN in datablock.iter('DATA'):
+                                        j+=1
+                                        if(j==6):
+                                                #Se copia la descripcion a la columna comment
+                                                ws['Q'+str(i)]=DPN.text  
+
         #Para checar si se repite algun NVM Item
         for i in range(12,CounterFilasExcel):
                 #Agarra cada fila y las comapara con las demas
@@ -442,6 +457,7 @@ def fillExcel():
                 ws1['J'+str(i)]=ws['J'+str(j)].value
                 ws1['K'+str(i)]=ws['K'+str(j)].value
                 ws1['O'+str(i)]=ws['O'+str(j)].value
+                ws1['Q'+str(i)]=ws['Q'+str(j)].value
                 j+=1
 
         #Asigna los valores de BBNumber y Baseline a sus respectivas celdas
