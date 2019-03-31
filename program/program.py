@@ -6,6 +6,8 @@
 #pip install xlwt
 #pip install pillow
 #pip install matplotlib
+#pip install pandas
+#pip install pypiwin32
 
 import os
 import sys
@@ -16,6 +18,8 @@ import tkinter as tk
 import xml.etree.ElementTree as ET
 import difflib
 import xlrd
+import pandas as pd
+import win32com.client
 import xml.etree.ElementTree as e
 
 from tkinter import messagebox
@@ -166,7 +170,7 @@ def createReport():
                 		Baseline = rutaCNT.split('_')[4]
 
                 		#Crear archivo Excel.
-                		shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+                		shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/fillexcel.xlsx")
 
                 		#Rellena Excel
                 		fillExcel()
@@ -290,7 +294,7 @@ def ventana():
 def fillExcel():
         
         #Carga el archivo Excel anteriormente generado
-        wb = load_workbook(filename = folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")
+        wb = load_workbook(filename = folder_selected + "/fillexcel.xlsx")
         ws=wb.active
         
         #Lee archivo XML
@@ -299,37 +303,38 @@ def fillExcel():
         #Obtiene el root del XML
         root = tree.getroot()
         
-        #Counter de datapointers para cada sesion
-        ALLC=0
-        RC=0            #Reprog
-        DSC=0           #DeliveryState
-        RDSC=0          #ReturnToDeliveryState
-
+        #Counter para ir agregando elementos en excel
         CounterFilasExcel=11
 
+        #Busca el nodo sesion en todo el arbol
         for session in root.iter('SESSION'):
-                sessionN=  session.find('SESSION-NAME')
                 
+                #Busca en los tipos de sesiones que nombre tiene
+                sessionN=  session.find('SESSION-NAME')
+
+                #Cuando la sesion es ALL                
                 if(sessionN.text =='__ALL__'):
-                        for MEH in session.find('DATAPOINTERS'):
-                                ALLC+=1
+                        #Para no alterar el el orden de las filas del excel
                         tempCounter=CounterFilasExcel
+                        #Obtiene el Datapointer-name del item
                         for DPN in session.iter('DATAPOINTER-NAME'):
                                 tempCounter+=1
+                                #guarda el valor en el excel
                                 ws['A'+str(tempCounter)]=DPN.text
                         tempCounter=CounterFilasExcel
+                        #Obtiene el Datapointer-ident  del item
                         for DPID in session.iter('DATAPOINTER-IDENT'):
                                 tempCounter+=1
                                 ws['D'+str(tempCounter)]=DPID.text
                         tempCounter=CounterFilasExcel
+                        #Obtiene el Datapointer-identifier del item
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
+                                #Aqui se aumenta el CounterFilasExcel para que se respeten las filas
                                 CounterFilasExcel+=1
                                 ws['O'+str(CounterFilasExcel)]=DFID.text
 
-                #Reprog
+                #Cuando la sesion es Reprog
                 if(sessionN.text=='Reprog'):
-                        for MEH in session.find('DATAPOINTERS'):
-                                RC+=1
                         tempCounter=CounterFilasExcel
                         for DPN in session.iter('DATAPOINTER-NAME'):
                                 tempCounter+=1
@@ -342,12 +347,11 @@ def fillExcel():
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
                                 CounterFilasExcel+=1
                                 ws['O'+str(CounterFilasExcel)]=DFID.text
+                                #Marca que el use case de que es Reprog
                                 ws['K'+str(CounterFilasExcel)]="X"
                 
-                #DeliveryState
+                #Cuando la sesion es DeliveryState
                 if(sessionN.text=='DeliveryState'):
-                        for MEH in session.find('DATAPOINTERS'):
-                                DSC+=1
                         tempCounter=CounterFilasExcel
                         for DPN in session.iter('DATAPOINTER-NAME'):
                                 tempCounter+=1
@@ -360,11 +364,11 @@ def fillExcel():
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
                                 CounterFilasExcel+=1
                                 ws['O'+str(CounterFilasExcel)]=DFID.text
+                                #Marca que el use case de que es DeliveryState
                                 ws['I'+str(CounterFilasExcel)]="X"
-                #ResetToDeliveryState
+                
+                #Cuando es la sesion es ResetToDeliveryState
                 if(sessionN.text=='ResetToDeliveryState'):
-                        for MEH in session.find('DATAPOINTERS'):
-                                RDSC+=1
                         tempCounter=CounterFilasExcel
                         for DPN in session.iter('DATAPOINTER-NAME'):
                                 tempCounter+=1
@@ -377,17 +381,25 @@ def fillExcel():
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
                                 CounterFilasExcel+=1
                                 ws['O'+str(CounterFilasExcel)]=DFID.text
+                                #Marca que el use case de que es ReturnToDeliveryState
                                 ws['J'+str(CounterFilasExcel)]="X"
         
+        #Para checar si se repite algun NVM Item
         for i in range(12,CounterFilasExcel):
+                #Agarra cada fila y las comapara con las demas
                 temp = ws['A'+str(i)]
                 k=i+1
                 for j in range(k,CounterFilasExcel):
+                        #Aqui se agarra el siguiente en la fila y se checa cada elemento siguiente
                         temp2 = ws['A'+str(j)]
+                        #Si son iguales
                         if(temp.value == temp2.value):
+                                #Checa el USE CASES de cada uno
                                 temp3 = ws['I'+str(j)]
                                 if(temp3.value=="X"):
+                                        #Marca el use case del que se repite 
                                         ws['I'+str(i)]="X"
+                                        #Borra la fila que se repite
                                         ws.delete_rows(j,1)
                                 temp3 = ws['J'+str(j)]
                                 if(temp3.value=="X"): 
@@ -398,12 +410,48 @@ def fillExcel():
                                         ws['K'+str(i)]="X"
                                         ws.delete_rows(j,1)
         
-        #Asigna los valores de BBNumber y Baseline a sus respectivas celdas
-        ws['D3']=BBNumber
-        ws['D4']=Baseline
-        
         #Guarda los cambios
-        wb.save(folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")        
+        wb.save(folder_selected + "/fillexcel.xlsx")        
+        #Para ordenar por ID number
+        #Selecciona el archivo excel
+        excel_file = folder_selected + "/fillexcel.xlsx"
+        #lee el archivo
+        movies = pd.read_excel(excel_file, skiprows=10)
+        #los ordena por numero de ID
+        sorted_by_number = movies.sort_values(by='ID number',ascending=True)
+        #lo guarda
+        sorted_by_number.to_excel(excel_file,index=False)
+
+        #Se crea una copia del Template para poder copiar los datos ordenados al archivo que se generara al final
+        shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+        
+        #Carga el archivo Excel anteriormente generado
+        wb1 = load_workbook(filename = folder_selected +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+        ws1=wb1.active
+
+        #Carga el archivo con los datos ordenados
+        wb=load_workbook(filename = folder_selected +  "/fillexcel.xlsx")
+        ws=wb.active
+        #Desde aqui agarra los datos
+        j=2
+        #Los datos los pega ordenados en el archivo excel que es copia del template
+        for i in range(12,CounterFilasExcel):
+                ws1['A'+str(i)]=ws['A'+str(j)].value
+                ws1['D'+str(i)]=ws['D'+str(j)].value
+                ws1['I'+str(i)]=ws['I'+str(j)].value
+                ws1['J'+str(i)]=ws['J'+str(j)].value
+                ws1['K'+str(i)]=ws['K'+str(j)].value
+                ws1['O'+str(i)]=ws['O'+str(j)].value
+                j+=1
+
+        #Asigna los valores de BBNumber y Baseline a sus respectivas celdas
+        ws1['D3']=BBNumber
+        ws1['D4']=Baseline
+
+        #Guarda el archivo
+        wb1.save(folder_selected +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+        #Borra el archivo que tiene los datos ordenados
+        os.remove(folder_selected + "/fillexcel.xlsx")
 
 def main():
 		ventana()
