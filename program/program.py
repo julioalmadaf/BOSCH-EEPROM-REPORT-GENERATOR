@@ -46,6 +46,8 @@ folder_selected="0"
 #Lee archivo XML
 tree = "0"
 
+CounterFilasExcel=0
+
 estadoCheckButton = 0
 
 ################
@@ -137,9 +139,9 @@ def previousReport():
         rutaReportePrevio = filedialog.askopenfilename(filetypes = (("All Excel files","*.xlsx"),("All files","*.*")))
 
         #Verificar que sea archivo XLSX o que se haya agregado un archivo.
-        if(rutaCNT.find(".xlsx") == -1):        #No se selecciono un archivo XLXS
+        if(rutaReportePrevio.find(".xlsx") == -1):        #No se selecciono un archivo XLXS
                 archivoReportePrevioCargado = 0
-        elif(rutaCNT == ""):                    #Se dio al boton cancelar.
+        elif(rutaReportePrevio== ""):                    #Se dio al boton cancelar.
                 archivoReportePrevioCargado = 0
         else:                                   #Se selecciono el archivo correctamente.
                 archivoReportePrevioCargado = 1
@@ -468,6 +470,11 @@ def fillExcel():
         wb1.save(folder_selected +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
         #Borra el archivo que tiene los datos ordenados
         os.remove(folder_selected + "/fillexcel.xlsx")
+        if(archivoReportePrevioCargado):
+                MergeExcel()
+
+def MergeExcel():
+        print("hola")
 
 def main():
 		ventana()
