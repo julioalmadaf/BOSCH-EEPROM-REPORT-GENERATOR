@@ -308,6 +308,14 @@ def fillExcel():
         #Counter para ir agregando elementos en excel
         CounterFilasExcel=11
 
+        #Guarda el nombre del proyecto
+        for project in root.iter('PROJECT-INFO'):
+                PD=project.find('PROJECT-DESC')
+        
+        #Guarda el nombre del Responsable
+        for info in root.iter('RESPONSIBLE'):
+                PN=info.find('PERSON-NAME')
+
         #Busca el nodo sesion en todo el arbol
         for session in root.iter('SESSION'):
                 
@@ -462,9 +470,11 @@ def fillExcel():
                 ws1['O'+str(i)]=ws['O'+str(j)].value
                 j+=1
 
-        #Asigna los valores de BBNumber y Baseline a sus respectivas celdas
+        #Asigna los valores de BBNumber, Baseline, Encargado y nombre del proyecto a sus respectivas celdas
         ws1['B3']=BBNumber
         ws1['B4']=Baseline
+        ws1['B2']=PD.text
+        ws1['B5']=PN.text
 
         #Guarda el archivo
         wb1.save(folder_selected +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
@@ -474,7 +484,7 @@ def fillExcel():
                 MergeExcel()
 
 def MergeExcel():
-        print("hola")
+        
 
 def main():
 		ventana()
