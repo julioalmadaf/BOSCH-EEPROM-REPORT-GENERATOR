@@ -394,13 +394,14 @@ def fillExcel():
                                 #Marca que el use case de que es ReturnToDeliveryState
                                 ws['H'+str(CounterFilasExcel)]="X"
         
+        #Agrega comments
         for datablock in root.iter('DATABLOCK'):
                 #Busca en los datablock que nombre tiene
                 DBN=  datablock.find('DATABLOCK-NAME')
                 #Para recorrer el excel
                 for i in range(12,CounterFilasExcel):
                         #Compara el valor que tiene la celda de excel con el datablock name
-                        if(DBN.text==ws['A'+str(i)].value):
+                        if(DBN.text==((ws['A'+str(i)].value)+'__Metadata')):
                                 j=0
                                 #Hay varios DATA por datablock, pero el que se ocupa es el 6to
                                 for DPN in datablock.iter('DATA'):
@@ -434,9 +435,113 @@ def fillExcel():
                                 if(temp3.value=="X"): 
                                         ws['I'+str(i)]="X"
                                         ws.delete_rows(j,1)
+
+        #Si un reporte previo es agregado
+        if(archivoReportePrevioCargado):
+                sheet1=wb.worksheets[0]
+                #Cuenta las filas maximas que tiene el archivo original
+                newCounterFilasExcel=sheet1.max_row
+                wb2=load_workbook(rutaReportePrevio)
+                sheet2=wb2.worksheets[0]
+                ws2=wb2.active
+                #cuenta cuantos elementos tiene el archivo previo seleccionado
+                row_count = sheet2.max_row
+                for i in range(12, newCounterFilasExcel):
+                        for j in range(12, row_count):
+                                if(ws['A'+str(i)].value==ws2['A'+str(j)].value):
+                                        #ID Number
+                                        if(ws['B'+str(i)].value==ws2['B'+str(j)].value):
+                                                ws['B'+str(i)]=ws2['B'+str(j)].value
+                                        else:
+                                                ws['B'+str(i)]=ws2['B'+str(j)].value
+
+                                        #cr-p
+                                        if(ws['C'+str(i)].value==ws2['C'+str(j)].value):
+                                                ws['C'+str(i)]=ws2['C'+str(j)].value
+                                        else:
+                                                ws['C'+str(i)]=ws2['C'+str(j)].value
+                                        
+                                        #CRP DELIVERY STATE
+                                        if(ws['D'+str(i)].value==ws2['D'+str(j)].value):
+                                                ws['D'+str(i)]=ws2['D'+str(j)].value
+                                        else:
+                                                ws['D'+str(i)]=ws2['D'+str(j)].value
+                                        
+                                        #CRP RESET DELIVERY STATE
+                                        if(ws['E'+str(i)].value==ws2['E'+str(j)].value):
+                                                ws['E'+str(i)]=ws2['E'+str(j)].value
+                                        else:
+                                                ws['E'+str(i)]=ws2['E'+str(j)].value
+                                        
+                                        #CRP REPROG
+                                        if(ws['F'+str(i)].value==ws2['F'+str(j)].value):
+                                                ws['F'+str(i)]=ws2['F'+str(j)].value
+                                        else:
+                                                ws['F'+str(i)]=ws2['F'+str(j)].value
+                                        
+                                        #EXPECTED DELIVERY STATE
+                                        if(ws['J'+str(i)].value==ws2['J'+str(j)].value):
+                                                ws['J'+str(i)]=ws2['J'+str(j)].value
+                                        else:
+                                                ws['J'+str(i)]=ws2['J'+str(j)].value
+                                        
+                                        #EXPECTED RESET DELIVERY STATE
+                                        if(ws['K'+str(i)].value==ws2['K'+str(j)].value):
+                                                ws['K'+str(i)]=ws2['K'+str(j)].value
+                                        else:
+                                                ws['K'+str(i)]=ws2['K'+str(j)].value
+                                        
+                                        #EXPECTED REPROG
+                                        if(ws['L'+str(i)].value==ws2['L'+str(j)].value):
+                                                ws['L'+str(i)]=ws2['L'+str(j)].value
+                                        else:
+                                                ws['L'+str(i)]=ws2['L'+str(j)].value
+                                        
+                                        #DESIRED TYPE
+                                        if(ws['M'+str(i)].value==ws2['M'+str(j)].value):
+                                                ws['M'+str(i)]=ws2['M'+str(j)].value
+                                        else:
+                                                ws['M'+str(i)]=ws2['M'+str(j)].value
+                                        
+                                        #DESIRED DATA
+                                        if(ws['N'+str(i)].value==ws2['N'+str(j)].value):
+                                                ws['N'+str(i)]=ws2['N'+str(j)].value
+                                        else:
+                                                ws['N'+str(i)]=ws2['N'+str(j)].value
+                                        
+                                        #Comment
+                                        if(ws['O'+str(i)].value==ws2['O'+str(j)].value):
+                                                ws['O'+str(i)]=ws2['O'+str(j)].value
+                                        else:
+                                                ws['O'+str(i)]=ws2['O'+str(j)].value
+                                        
+                                        #Rating
+                                        if(ws['P'+str(i)].value==ws2['P'+str(j)].value):
+                                                ws['P'+str(i)]=ws2['P'+str(j)].value
+                                        else:
+                                                ws['P'+str(i)]=ws2['P'+str(j)].value
+                                        
+                                        #Rated by
+                                        if(ws['Q'+str(i)].value==ws2['Q'+str(j)].value):
+                                                ws['Q'+str(i)]=ws2['Q'+str(j)].value
+                                        else:
+                                                ws['Q'+str(i)]=ws2['Q'+str(j)].value
+                                        
+                                        #Comments
+                                        if(ws['R'+str(i)].value==ws2['R'+str(j)].value):
+                                                ws['R'+str(i)]=ws2['R'+str(j)].value
+                                        else:
+                                                ws['R'+str(i)]=ws2['R'+str(j)].value
+                                        
+                                        #Reference comments from GA
+                                        if(ws['S'+str(i)].value==ws2['S'+str(j)].value):
+                                                ws['S'+str(i)]=ws2['S'+str(j)].value
+                                        else:
+                                                ws['S'+str(i)]=ws2['S'+str(j)].value
         
         #Guarda los cambios
-        wb.save(folder_selected + "/fillexcel.xlsx")        
+        wb.save(folder_selected + "/fillexcel.xlsx")  
+
         #Para ordenar por ID number
         #Selecciona el archivo excel
         excel_file = folder_selected + "/fillexcel.xlsx"
@@ -456,18 +561,36 @@ def fillExcel():
 
         #Carga el archivo con los datos ordenados
         wb=load_workbook(filename = folder_selected +  "/fillexcel.xlsx")
+        sheet=wb.worksheets[0]
+        #Para que no escriba en espacios vacios
+        row_count = sheet.max_row
         ws=wb.active
+
         #Desde aqui agarra los datos
         j=2
+
         #Los datos los pega ordenados en el archivo excel que es copia del template
-        for i in range(12,CounterFilasExcel):
+        #No escribe en espacios vacios
+        for i in range(12, 12+row_count-1):
                 ws1['A'+str(i)]=ws['A'+str(j)].value
                 ws1['B'+str(i)]=ws['B'+str(j)].value
+                ws1['C'+str(i)]=ws['C'+str(j)].value
+                ws1['D'+str(i)]=ws['D'+str(j)].value
+                ws1['E'+str(i)]=ws['E'+str(j)].value
+                ws1['F'+str(i)]=ws['F'+str(j)].value
                 ws1['G'+str(i)]=ws['G'+str(j)].value
                 ws1['H'+str(i)]=ws['H'+str(j)].value
                 ws1['I'+str(i)]=ws['I'+str(j)].value
+                ws1['J'+str(i)]=ws['J'+str(j)].value
+                ws1['K'+str(i)]=ws['K'+str(j)].value
+                ws1['L'+str(i)]=ws['L'+str(j)].value
                 ws1['M'+str(i)]=ws['M'+str(j)].value
+                ws1['N'+str(i)]=ws['N'+str(j)].value
                 ws1['O'+str(i)]=ws['O'+str(j)].value
+                ws1['P'+str(i)]=ws['P'+str(j)].value
+                ws1['Q'+str(i)]=ws['Q'+str(j)].value
+                ws1['R'+str(i)]=ws['R'+str(j)].value
+                ws1['S'+str(i)]=ws['S'+str(j)].value
                 j+=1
 
         #Asigna los valores de BBNumber, Baseline, Encargado y nombre del proyecto a sus respectivas celdas
@@ -480,11 +603,6 @@ def fillExcel():
         wb1.save(folder_selected +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
         #Borra el archivo que tiene los datos ordenados
         os.remove(folder_selected + "/fillexcel.xlsx")
-        if(archivoReportePrevioCargado):
-                MergeExcel()
-
-def MergeExcel():
-        
 
 def main():
 		ventana()

@@ -16,3 +16,9 @@ http://xmlgrid.net/
 #Guias de ElementTreeXML
 https://docs.python.org/3.5/library/xml.etree.elementtree.html
 https://www.datacamp.com/community/tutorials/python-xml-elementtree
+
+#contar rows
+https://stackoverflow.com/questions/13377793/is-it-possible-to-get-an-excel-documents-row-count-without-loading-the-entire-d
+
+#sort de archivo excel
+https://stackoverflow.com/questions/27469182/how-to-sort-excel-sheet-using-python
