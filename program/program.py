@@ -14,50 +14,50 @@ from tkinter import ttk
 from tkinter import *
 
 try:
-		import xlrd
+	import xlrd
 except ImportError:
-		os.system('python -m pip install xlrd')
+	os.system('python -m pip install xlrd')
 
 try:
-		import xlwt
+	import xlwt
 except ImportError:
-		os.system('python -m pip install xlwt')
+	os.system('python -m pip install xlwt')
 
 try:
-		from pathlib import Path
+	from pathlib import Path
 except ImportError:
-		os.system('python -m pip install pathlib')
+	os.system('python -m pip install pathlib')
 
 try:
-		import shutil
+	import shutil
 except ImportError:
-		os.system('python -m pip install pytest-shutil')
+	os.system('python -m pip install pytest-shutil')
 
 try:
-		from PIL import ImageTk, Image
+	from PIL import ImageTk, Image
 except ImportError:
-		os.system('python -m pip install pillow')
+	os.system('python -m pip install pillow')
 
 try:
-		from PIL import ImageTk, Image
+	from PIL import ImageTk, Image
 except ImportError:
-		os.system('python -m pip install pillow')
+	os.system('python -m pip install pillow')
 
 try:
-		from openpyxl import load_workbook
+	from openpyxl import load_workbook
 except ImportError:
-		os.system('python -m pip install openpyxl')
+	os.system('python -m pip install openpyxl')
 
 try:
-		import pandas as pd
+	import pandas as pd
 except ImportError:
-		os.system('python -m pip install pandas')
+	os.system('python -m pip install pandas')
 
 try:
-		import win32com.client
+	import win32com.client
 except ImportError:
-		os.system('python -m pip install pypiwin32')
-		os.system('python -m pip install pywin32')
+	os.system('python -m pip install pypiwin32')
+	os.system('python -m pip install pywin32')
 
 ###########################
 #### Variables globales ###
@@ -104,16 +104,19 @@ def newProgram():
 	archivoReportePrevioCargado = 0
 
 def exitProgram():
-	#Preguntar al usuario si desea salir del programa.
+	
+        #Preguntar al usuario si desea salir del programa.
 	salir = messagebox.askyesno(message="Do you want to close the program?", title="Close program")
 	if(salir == 1):
 		sys.exit(0)
 
 def aboutProgram():
-	messagebox.showinfo("About EEPROM report generator", "This software has been released by Julio Cesar Almada Fuerte and Ruben Barajas Curiel")
+	
+        messagebox.showinfo("About EEPROM report generator", "This software has been released by Julio Cesar Almada Fuerte and Ruben Barajas Curiel")
 
 def helpProgram():
-	messagebox.showinfo("Help", "Visit the following link to get more information about this software")
+	
+        messagebox.showinfo("Help", "Visit the following link to get more information about this software")
 
 def cntButton():
 
@@ -597,4 +600,4 @@ def main():
 
 #################################
 if __name__== "__main__":
-		main()
+	main()
