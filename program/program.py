@@ -63,18 +63,12 @@ except ImportError:
 #### Variables globales ###
 ###########################
 rutaCNT = "0"
+rutaArchivoCNT = "0"
 archivoCNTCargado = 0
 rutaReportePrevio = "0"
 archivoReportePrevioCargado = 0
 BBNumber = 0
 Baseline = 0
-folder_selected="0"
-
-#Variables XML
-#Lee archivo XML
-tree = "0"
-
-CounterFilasExcel=0
 
 estadoCheckButton = 0
 
@@ -84,6 +78,7 @@ estadoCheckButton = 0
 def newProgram():
 
 	global rutaCNT
+	global rutaArchivoCNT
 	global archivoCNTCargado
 	global rutaReportePrevio
 	global archivoReportePrevioCargado
@@ -93,13 +88,11 @@ def newProgram():
 	button_PreviousReport.grid_remove()
 	enable_button.grid_remove()
 	button_GenerateReport.grid_remove()
-	button_Log.grid_remove()
 
 	button_CNT.configure(style='button_style1.TButton')
 	enable_button.deselect()
 	button_PreviousReport.configure(style='button_style2.TButton')
 	button_GenerateReport.configure(style='button_style2.TButton')
-	button_Log.configure(style='button_style2.TButton')
 
 	#Comenzar con el boton de reporte previo deshabilitado.
 	estadoCheckButton = 0
@@ -117,7 +110,7 @@ def exitProgram():
 		sys.exit(0)
 
 def aboutProgram():
-	messagebox.showinfo("About EEPROM report generator", "This software has been released by Ruben Barajas Curiel and Julio Cesar Almada Fuerte")
+	messagebox.showinfo("About EEPROM report generator", "This software has been released by Julio Cesar Almada Fuerte and Ruben Barajas Curiel")
 
 def helpProgram():
 	messagebox.showinfo("Help", "Visit the following link to get more information about this software")
@@ -143,7 +136,6 @@ def cntButton():
                 button_PreviousReport.grid()	#Ahora se puede mostrar el boton de reporte previo como opcional.
                 button_GenerateReport.grid()	#Ahora se puede mostrar el boton de generar reporte.
                 button_GenerateReport.configure(style='button_style1.TButton')
-                button_Log.grid_remove()		#Esconder boton de log.
 
 def enableButtonRP():
 
@@ -167,7 +159,7 @@ def previousReport():
         rutaReportePrevio = filedialog.askopenfilename(filetypes = (("All Excel files","*.xlsx"),("All files","*.*")))
 
         #Verificar que sea archivo XLSX o que se haya agregado un archivo.
-        if(rutaReportePrevio.find(".xlsx") == -1):        #No se selecciono un archivo XLXS
+        if(rutaReportePrevio.find(".xlsx") == -1):       #No se selecciono un archivo XLXS
                 archivoReportePrevioCargado = 0
         elif(rutaReportePrevio== ""):                    #Se dio al boton cancelar.
                 archivoReportePrevioCargado = 0
@@ -179,67 +171,39 @@ def createReport():
         global archivoCNTCargado
         global archivoReportePrevioCargado
         global rutaCNT
+        global rutaArchivoCNT
         global rutaReportePrevio
-        global folder_selected
         global BBNumber
         global Baseline
 
         label.configure(text="Creating report")
 
         #Garantizar que se haya seleccionado un archivo CNT.
-        if(archivoCNTCargado == 1):
-        		
-        		#Preguntar directorio para guardar el archivo generado.
-                folder_selected = filedialog.askdirectory()
+        if(archivoCNTCargado == 1):        		
+                archivoCNTCargado = 0
 
-                if(folder_selected != ""):		#Si no se le dio al boton cancelar
-                		archivoCNTCargado = 0
-
-                		#Extraer BBNumber y Baseline.
-                		BBNumber = rutaCNT.split('_')[3]
-                		Baseline = rutaCNT.split('_')[4]
-
-                		#Crear archivo Excel.
-                		shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/fillexcel.xlsx")
-
-                		#Rellena Excel
-                		fillExcel()
-
-                		messagebox.showinfo("Report created", "Report created successfully")
-
-                		button_Log.grid()	#Ahora se puede mostrar el boton del log.
-                		button_CNT.configure(style='button_style1.TButton')
-                		enable_button.grid_remove()											#Esconder boton para habilitar reporte previo.
-                		button_PreviousReport.grid_remove()									#Esconder boton de reporte previo.
-                		button_GenerateReport.grid_remove()									#Esconder boton de generar reporte.
-                		button_GenerateReport.configure(style='button_style2.TButton')
-                
-                #Acomodar el archivo para leerlo.
-                #previousWorkbook = xlrd.open_workbook(rutaReportePrevio)
-                #previousWorksheet = previousWorkbook.sheet_by_name('Checklist')
-                #e = xml.etree.ElementTree.parse(rutaCNT).getroot()
-                #continuarComparacion = previousWorksheet.nrows
-                #contadorCelda = 11			#Posicion del primer elemento NVM data item
-                #valorCelda = ""
+                #Extraer BBNumber y Baseline.
+                BBNumber = rutaCNT.split('_')[3]
+                Baseline = rutaCNT.split('_')[4]
 
                 #Crear archivo Excel.
-                #shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
-                		
-                #Mientras existan NVM data item.
-                #while(contadorCelda < continuarComparacion):
-             	#	#Leer valor de la celda.
-                #	valorCelda = previousWorksheet.cell(contadorCelda, 0).value
-                #	contadorCelda = contadorCelda + 1
+                rutaArchivoCNT = os.path.dirname(rutaCNT)
+                shutil.copy("EEPROM_Container_Review_Template.xlsx", rutaArchivoCNT + "/fillexcel.xlsx")
 
-                	#Parser.
+                #Rellena Excel
+                fillExcel()
+
+                messagebox.showinfo("Report created", "Report created successfully")
+
+                button_CNT.configure(style='button_style1.TButton')
+                enable_button.grid_remove()											#Esconder boton para habilitar reporte previo.
+                button_PreviousReport.grid_remove()									#Esconder boton de reporte previo.
+                button_GenerateReport.grid_remove()									#Esconder boton de generar reporte.
+                button_GenerateReport.configure(style='button_style2.TButton')
         else:
                 messagebox.showerror("Error", "Not .cnt file selected")
 
         label.configure(text="EEPROM report generator")
-
-def verifyLog():
-        label.configure(text="Log")
-        button_Log.grid_remove()		#Esconder boton de log.
 
 ################
 #### Objetos ###
@@ -256,76 +220,23 @@ label = ttk.Label(panelElements, text="Bosch EEPROM generator", font=("Tahoma", 
 button_CNT = ttk.Button(panelElements, text="Select CNT file", style="TButton", command=cntButton)
 button_PreviousReport = ttk.Button(panelElements, text="Select previous report", style="TButton", command=previousReport)
 button_GenerateReport = ttk.Button(panelElements, text="Generate report", style="TButton", command=createReport)
-button_Log = ttk.Button(panelElements, text="LOG", style="TButton", command=verifyLog)
 enable_button = Checkbutton(panelElements, text="Enable previous report button", onvalue=1,offvalue=0, command=enableButtonRP)
 image = tk.Label(panelImage, image = img)
 menubar = Menu(panelImage)
 
 button_style1 = ttk.Style()
 button_style2 = ttk.Style()
+
 ##################
 #### Funciones ###
 ##################
-
-def ventana():
-        #Titulo de la ventana.
-        root.title("Bosch") 
-
-        #Configurar paneles.
-        panelElements.grid(column=0, row=0, sticky=(N, S, E, W))
-        panelImage.grid(column=0, row=1, columnspan=2, rowspan=7, sticky=(N, S, E, W))
-
-        #Configurar elementos (botones, etiqueta, imagen, etc).
-        image.pack(side = "bottom", fill = "both", expand = "yes")
-        label.grid(column=0, row=0, columnspan=4, sticky=(N, W))
-        button_CNT.grid(column=3, row=3)
-        enable_button.grid(column=3, row=4)
-        button_PreviousReport.grid(column=3, row=5)
-        button_GenerateReport.grid(column=3, row=6)
-        button_Log.grid(column=3, row=7)
-        
-        #Ocultar botones innecesarios.
-        button_PreviousReport.grid_remove()
-        enable_button.grid_remove()
-        button_GenerateReport.grid_remove()
-        button_Log.grid_remove()
-
-        #Fondos y colores.
-        style = ttk.Style(root)
-        style.configure('TLabel', background='white')	#Background y foreground de la etiqueta.
-        style.configure('TFrame', background='white')	#Background y foreground del Frame.
-
-        #Estilo de los elementos.
-        button_style1.configure("button_style1.TButton", width = 20, padding=5, font=('Helvetica', 10, 'bold'), background = "black", foreground = 'green')
-        button_style2.configure("button_style2.TButton", width = 20, padding=5, font=('Helvetica', 10, 'bold'))
-        
-        button_CNT.configure(style='button_style1.TButton')
-        button_PreviousReport.configure(style='button_style2.TButton')
-        button_GenerateReport.configure(style='button_style2.TButton')
-        button_Log.configure(style='button_style2.TButton')
-
-        #Comenzar con el boton de reporte previo deshabilitado.
-        estadoCheckButton = 0
-        button_PreviousReport.state(["disabled"])
-
-        root.config(menu=menubar)
-        toolBar_Init = Menu(menubar)
-        toolBar_About = Menu(menubar)
-        toolBar_Init.add_command(label="New", command=newProgram)
-        toolBar_Init.add_command(label="Exit", command=exitProgram)
-        toolBar_About.add_command(label="About", command=aboutProgram)
-        toolBar_About.add_command(label="Help", command=helpProgram)
-        menubar.add_cascade(label="File", menu=toolBar_Init)
-        menubar.add_cascade(label="Program", menu=toolBar_About)
-
-        #Comenzar proceso.
-        root.mainloop()
-
 def fillExcel():
-        
+
+        global rutaArchivoCNT
+
         #Carga el archivo Excel anteriormente generado
-        wb = load_workbook(filename = folder_selected + "/fillexcel.xlsx")
-        ws=wb.active
+        wb = load_workbook(filename = rutaArchivoCNT + "/fillexcel.xlsx")
+        ws = wb.active
         
         #Lee archivo XML
         tree = ET.parse(rutaCNT)
@@ -568,11 +479,11 @@ def fillExcel():
                                                 ws['S'+str(i)]=ws2['S'+str(j)].value
         
         #Guarda los cambios
-        wb.save(folder_selected + "/fillexcel.xlsx")  
+        wb.save(rutaArchivoCNT + "/fillexcel.xlsx")  
 
         #Para ordenar por ID number
         #Selecciona el archivo excel
-        excel_file = folder_selected + "/fillexcel.xlsx"
+        excel_file = rutaArchivoCNT + "/fillexcel.xlsx"
         #lee el archivo
         movies = pd.read_excel(excel_file, skiprows=10)
         #los ordena por numero de ID
@@ -581,14 +492,14 @@ def fillExcel():
         sorted_by_number.to_excel(excel_file,index=False)
 
         #Se crea una copia del Template para poder copiar los datos ordenados al archivo que se generara al final
-        shutil.copy("EEPROM_Container_Review_Template.xlsx", folder_selected + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+        shutil.copy("EEPROM_Container_Review_Template.xlsx", rutaArchivoCNT + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
         
         #Carga el archivo Excel anteriormente generado
-        wb1 = load_workbook(filename = folder_selected +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+        wb1 = load_workbook(filename = rutaArchivoCNT +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
         ws1=wb1.active
 
         #Carga el archivo con los datos ordenados
-        wb=load_workbook(filename = folder_selected +  "/fillexcel.xlsx")
+        wb=load_workbook(filename = rutaArchivoCNT +  "/fillexcel.xlsx")
         sheet=wb.worksheets[0]
         #Para que no escriba en espacios vacios
         row_count = sheet.max_row
@@ -628,13 +539,61 @@ def fillExcel():
         ws1['B5']=PN.text
 
         #Guarda el archivo
-        wb1.save(folder_selected +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+        wb1.save(rutaArchivoCNT +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
         #Borra el archivo que tiene los datos ordenados
-        os.remove(folder_selected + "/fillexcel.xlsx")
+        os.remove(rutaArchivoCNT + "/fillexcel.xlsx")
 
 def main():
+		
+	#Titulo de la ventana.
+        root.title("Bosch") 
 
-		ventana()
+        #Configurar paneles.
+        panelElements.grid(column=0, row=0, sticky=(N, S, E, W))
+        panelImage.grid(column=0, row=1, columnspan=2, rowspan=6, sticky=(N, S, E, W))
+
+        #Configurar elementos (botones, etiqueta, imagen, etc).
+        image.pack(side = "bottom", fill = "both", expand = "yes")
+        label.grid(column=0, row=0, columnspan=4, sticky=(N, W))
+        button_CNT.grid(column=3, row=3)
+        enable_button.grid(column=3, row=4)
+        button_PreviousReport.grid(column=3, row=5)
+        button_GenerateReport.grid(column=3, row=6)
+        
+        #Ocultar botones innecesarios.
+        button_PreviousReport.grid_remove()
+        enable_button.grid_remove()
+        button_GenerateReport.grid_remove()
+
+        #Fondos y colores.
+        style = ttk.Style(root)
+        style.configure('TLabel', background='white')	#Background y foreground de la etiqueta.
+        style.configure('TFrame', background='white')	#Background y foreground del Frame.
+
+        #Estilo de los elementos.
+        button_style1.configure("button_style1.TButton", width = 20, padding=5, font=('Helvetica', 10, 'bold'), background = "black", foreground = 'green')
+        button_style2.configure("button_style2.TButton", width = 20, padding=5, font=('Helvetica', 10, 'bold'))
+        
+        button_CNT.configure(style='button_style1.TButton')
+        button_PreviousReport.configure(style='button_style2.TButton')
+        button_GenerateReport.configure(style='button_style2.TButton')
+
+        #Comenzar con el boton de reporte previo deshabilitado.
+        estadoCheckButton = 0
+        button_PreviousReport.state(["disabled"])
+
+        root.config(menu=menubar)
+        toolBar_Init = Menu(menubar)
+        toolBar_About = Menu(menubar)
+        toolBar_Init.add_command(label="New", command=newProgram)
+        toolBar_Init.add_command(label="Exit", command=exitProgram)
+        toolBar_About.add_command(label="About", command=aboutProgram)
+        toolBar_About.add_command(label="Help", command=helpProgram)
+        menubar.add_cascade(label="File", menu=toolBar_Init)
+        menubar.add_cascade(label="Program", menu=toolBar_About)
+
+        #Comenzar proceso.
+        root.mainloop()
 
 #################################
 if __name__== "__main__":
