@@ -1,35 +1,63 @@
-#pip install openpyxl
-#python -m pip install --upgrade pip            #Actualizar version de pip
-#pip install pillow                             #To be able to include images (jpeg, png, bmp) into an openpyxl file.
-#pip install xlrd
-#pip install pathlib
-#pip install xlwt
-#pip install pillow
-#pip install matplotlib
-#pip install pandas
-#pip install pypiwin32
-
+##################
+#### Librerias ###
+##################
 import os
-import sys
-import tkinter
-import shutil
 import sys
 import tkinter as tk
 import xml.etree.ElementTree as ET
-import difflib
-import xlrd
-import pandas as pd
-import win32com.client
 import xml.etree.ElementTree as e
 
+from os import listdir
 from tkinter import messagebox
 from tkinter import filedialog
 from tkinter import ttk
 from tkinter import *
-from PIL import ImageTk, Image
-from pathlib import Path
-from os import listdir
-from openpyxl import load_workbook
+
+try:
+		import xlrd
+except ImportError:
+		os.system('python -m pip install xlrd')
+
+try:
+		import xlwt
+except ImportError:
+		os.system('python -m pip install xlwt')
+
+try:
+		from pathlib import Path
+except ImportError:
+		os.system('python -m pip install pathlib')
+
+try:
+		import shutil
+except ImportError:
+		os.system('python -m pip install pytest-shutil')
+
+try:
+		from PIL import ImageTk, Image
+except ImportError:
+		os.system('python -m pip install pillow')
+
+try:
+		from PIL import ImageTk, Image
+except ImportError:
+		os.system('python -m pip install pillow')
+
+try:
+		from openpyxl import load_workbook
+except ImportError:
+		os.system('python -m pip install openpyxl')
+
+try:
+		import pandas as pd
+except ImportError:
+		os.system('python -m pip install pandas')
+
+try:
+		import win32com.client
+except ImportError:
+		os.system('python -m pip install pypiwin32')
+		os.system('python -m pip install pywin32')
 
 ###########################
 #### Variables globales ###
@@ -605,6 +633,7 @@ def fillExcel():
         os.remove(folder_selected + "/fillexcel.xlsx")
 
 def main():
+
 		ventana()
 
 #################################
