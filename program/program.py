@@ -105,40 +105,40 @@ def newProgram():
 
 def exitProgram():
 	
-        #Preguntar al usuario si desea salir del programa.
+    #Preguntar al usuario si desea salir del programa.
 	salir = messagebox.askyesno(message="Do you want to close the program?", title="Close program")
 	if(salir == 1):
 		sys.exit(0)
 
 def aboutProgram():
 	
-        messagebox.showinfo("About EEPROM report generator", "This software has been released by Julio Cesar Almada Fuerte and Ruben Barajas Curiel")
+    messagebox.showinfo("About EEPROM report generator", "This software has been released by Julio Cesar Almada Fuerte and Ruben Barajas Curiel")
 
 def helpProgram():
 	
-        messagebox.showinfo("Help", "Visit the following link to get more information about this software")
+    messagebox.showinfo("Help", "Visit the following link to get more information about this software")
 
 def cntButton():
 
-        global rutaCNT
-        global archivoCNTCargado
+    global rutaCNT
+    global archivoCNTCargado
 
-        #Abrir Dialog Box para buscar el archivo.
-        label.configure(text="Opening CNT file")
-        rutaCNT = filedialog.askopenfilename(filetypes = (("All CNT files","*.cnt"),("All files","*.*")))
+    #Abrir Dialog Box para buscar el archivo.
+    label.configure(text="Opening CNT file")
+    rutaCNT = filedialog.askopenfilename(filetypes = (("All CNT files","*.cnt"),("All files","*.*")))
 
-        #Verificar que sea archivo CNT o que se haya agregado un archivo.
-        if(rutaCNT.find(".cnt") == -1):         #No se selecciono un archivo CNT
-                archivoCNTCargado = 0
-        elif(rutaCNT == ""):                    #Se dio al boton cancelar.
-                archivoCNTCargado = 0
-        else:                                   #Se selecciono el archivo correctamente.
-                archivoCNTCargado = 1
-                button_CNT.configure(style='button_style2.TButton')
-                enable_button.grid()			#Ahora se puede mostrar el checkbuton para habilitar el boton de reporte previo.
-                button_PreviousReport.grid()	#Ahora se puede mostrar el boton de reporte previo como opcional.
-                button_GenerateReport.grid()	#Ahora se puede mostrar el boton de generar reporte.
-                button_GenerateReport.configure(style='button_style1.TButton')
+    #Verificar que sea archivo CNT o que se haya agregado un archivo.
+    if(rutaCNT.find(".cnt") == -1):         #No se selecciono un archivo CNT
+        archivoCNTCargado = 0
+    elif(rutaCNT == ""):                    #Se dio al boton cancelar.
+        archivoCNTCargado = 0
+    else:                                   #Se selecciono el archivo correctamente.
+        archivoCNTCargado = 1
+        button_CNT.configure(style='button_style2.TButton')
+        enable_button.grid()			#Ahora se puede mostrar el checkbuton para habilitar el boton de reporte previo.
+        button_PreviousReport.grid()	#Ahora se puede mostrar el boton de reporte previo como opcional.
+        button_GenerateReport.grid()	#Ahora se puede mostrar el boton de generar reporte.
+        button_GenerateReport.configure(style='button_style1.TButton')
 
 def enableButtonRP():
 
@@ -154,59 +154,59 @@ def enableButtonRP():
 
 def previousReport():
 
-        global rutaReportePrevio
-        global archivoReportePrevioCargado
+    global rutaReportePrevio
+    global archivoReportePrevioCargado
 
-        #Abrir Dialog Box para buscar el archivo.
-        label.configure(text="Opening previous report file")
-        rutaReportePrevio = filedialog.askopenfilename(filetypes = (("All Excel files","*.xlsx"),("All files","*.*")))
+    #Abrir Dialog Box para buscar el archivo.
+    label.configure(text="Opening previous report file")
+    rutaReportePrevio = filedialog.askopenfilename(filetypes = (("All Excel files","*.xlsx"),("All files","*.*")))
 
-        #Verificar que sea archivo XLSX o que se haya agregado un archivo.
-        if(rutaReportePrevio.find(".xlsx") == -1):       #No se selecciono un archivo XLXS
-                archivoReportePrevioCargado = 0
-        elif(rutaReportePrevio== ""):                    #Se dio al boton cancelar.
-                archivoReportePrevioCargado = 0
-        else:                                   #Se selecciono el archivo correctamente.
-                archivoReportePrevioCargado = 1
+    #Verificar que sea archivo XLSX o que se haya agregado un archivo.
+    if(rutaReportePrevio.find(".xlsx") == -1):       #No se selecciono un archivo XLXS
+        archivoReportePrevioCargado = 0
+    elif(rutaReportePrevio== ""):                    #Se dio al boton cancelar.
+        archivoReportePrevioCargado = 0
+    else:                                   #Se selecciono el archivo correctamente.
+        archivoReportePrevioCargado = 1
 
 def createReport():
 
-        global archivoCNTCargado
-        global archivoReportePrevioCargado
-        global rutaCNT
-        global rutaArchivoCNT
-        global rutaReportePrevio
-        global BBNumber
-        global Baseline
+    global archivoCNTCargado
+    global archivoReportePrevioCargado
+    global rutaCNT
+    global rutaArchivoCNT
+    global rutaReportePrevio
+    global BBNumber
+    global Baseline
 
-        label.configure(text="Creating report")
+    label.configure(text="Creating report")
 
-        #Garantizar que se haya seleccionado un archivo CNT.
-        if(archivoCNTCargado == 1):        		
-                archivoCNTCargado = 0
+    #Garantizar que se haya seleccionado un archivo CNT.
+    if(archivoCNTCargado == 1):        		
+        archivoCNTCargado = 0
 
-                #Extraer BBNumber y Baseline.
-                BBNumber = rutaCNT.split('_')[3]
-                Baseline = rutaCNT.split('_')[4]
+        #Extraer BBNumber y Baseline.
+        BBNumber = rutaCNT.split('_')[3]
+        Baseline = rutaCNT.split('_')[4]
 
-                #Crear archivo Excel.
-                rutaArchivoCNT = os.path.dirname(rutaCNT)
-                shutil.copy("EEPROM_Container_Review_Template.xlsx", rutaArchivoCNT + "/fillexcel.xlsx")
+        #Crear archivo Excel.
+        rutaArchivoCNT = os.path.dirname(rutaCNT)
+        shutil.copy("EEPROM_Container_Review_Template.xlsx", rutaArchivoCNT + "/fillexcel.xlsx")
 
-                #Rellena Excel
-                fillExcel()
+        #Rellena Excel
+        fillExcel()
 
-                messagebox.showinfo("Report created", "Report created successfully")
+        messagebox.showinfo("Report created", "Report created successfully")
 
-                button_CNT.configure(style='button_style1.TButton')
-                enable_button.grid_remove()											#Esconder boton para habilitar reporte previo.
-                button_PreviousReport.grid_remove()									#Esconder boton de reporte previo.
-                button_GenerateReport.grid_remove()									#Esconder boton de generar reporte.
-                button_GenerateReport.configure(style='button_style2.TButton')
-        else:
-                messagebox.showerror("Error", "Not .cnt file selected")
+        button_CNT.configure(style='button_style1.TButton')
+        enable_button.grid_remove()											#Esconder boton para habilitar reporte previo.
+        button_PreviousReport.grid_remove()									#Esconder boton de reporte previo.
+        button_GenerateReport.grid_remove()									#Esconder boton de generar reporte.
+        button_GenerateReport.configure(style='button_style2.TButton')
+    else:
+        messagebox.showerror("Error", "Not .cnt file selected")
 
-        label.configure(text="EEPROM report generator")
+    label.configure(text="EEPROM report generator")
 
 ################
 #### Objetos ###
@@ -237,55 +237,55 @@ def fillExcel():
 
         global rutaArchivoCNT
 
-        #Carga el archivo Excel anteriormente generado
+        #Carga el archivo Excel anteriormente generado.
         wb = load_workbook(filename = rutaArchivoCNT + "/fillexcel.xlsx")
         ws = wb.active
         
-        #Lee archivo XML
+        #Lee archivo XML.
         tree = ET.parse(rutaCNT)
 
-        #Obtiene el root del XML
+        #Obtiene el root del XML.
         root = tree.getroot()
         
-        #Counter para ir agregando elementos en excel
+        #Counter para ir agregando elementos en excel.
         CounterFilasExcel=11
 
-        #Guarda el nombre del proyecto
+        #Guarda el nombre del proyecto.
         for project in root.iter('PROJECT-INFO'):
                 PD=project.find('PROJECT-DESC')
         
-        #Guarda el nombre del Responsable
+        #Guarda el nombre del responsable.
         for info in root.iter('RESPONSIBLE'):
                 PN=info.find('PERSON-NAME')
 
-        #Busca el nodo sesion en todo el arbol
+        #Busca el nodo sesion en todo el arbol.
         for session in root.iter('SESSION'):
                 
-                #Busca en los tipos de sesiones que nombre tiene
+                #Busca en los tipos de sesiones que nombre tiene.
                 sessionN=  session.find('SESSION-NAME')
 
-                #Cuando la sesion es ALL                
+                #Cuando la sesion es ALL.
                 if(sessionN.text =='__ALL__'):
-                        #Para no alterar el el orden de las filas del excel
+                        #Para no alterar el el orden de las filas del excel.
                         tempCounter=CounterFilasExcel
-                        #Obtiene el Datapointer-name del item
+                        #Obtiene el Datapointer-name del item.
                         for DPN in session.iter('DATAPOINTER-NAME'):
                                 tempCounter+=1
-                                #guarda el valor en el excel
+                                #Guarda el valor en el excel.
                                 ws['A'+str(tempCounter)]=DPN.text
                         tempCounter=CounterFilasExcel
-                        #Obtiene el Datapointer-ident  del item
+                        #Obtiene el Datapointer-ident  del item.
                         for DPID in session.iter('DATAPOINTER-IDENT'):
                                 tempCounter+=1
                                 ws['B'+str(tempCounter)]=DPID.text
                         tempCounter=CounterFilasExcel
-                        #Obtiene el Datapointer-identifier del item
+                        #Obtiene el Datapointer-identifier del item.
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
-                                #Aqui se aumenta el CounterFilasExcel para que se respeten las filas
+                                #Aqui se aumenta el CounterFilasExcel para que se respeten las filas.
                                 CounterFilasExcel+=1
                                 ws['M'+str(CounterFilasExcel)]=DFID.text
 
-                #Cuando la sesion es Reprog
+                #Cuando la sesion es Reprog.
                 if(sessionN.text=='Reprog'):
                         tempCounter=CounterFilasExcel
                         for DPN in session.iter('DATAPOINTER-NAME'):
@@ -299,10 +299,10 @@ def fillExcel():
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
                                 CounterFilasExcel+=1
                                 ws['M'+str(CounterFilasExcel)]=DFID.text
-                                #Marca que el use case de que es Reprog
+                                #Marca que el use case de que es Reprog.
                                 ws['I'+str(CounterFilasExcel)]="X"
                 
-                #Cuando la sesion es DeliveryState
+                #Cuando la sesion es DeliveryState.
                 if(sessionN.text=='DeliveryState'):
                         tempCounter=CounterFilasExcel
                         for DPN in session.iter('DATAPOINTER-NAME'):
@@ -316,10 +316,10 @@ def fillExcel():
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
                                 CounterFilasExcel+=1
                                 ws['M'+str(CounterFilasExcel)]=DFID.text
-                                #Marca que el use case de que es DeliveryState
+                                #Marca que el use case de que es DeliveryState.
                                 ws['G'+str(CounterFilasExcel)]="X"
                 
-                #Cuando es la sesion es ResetToDeliveryState
+                #Cuando es la sesion es ResetToDeliveryState.
                 if(sessionN.text=='ResetToDeliveryState'):
                         tempCounter=CounterFilasExcel
                         for DPN in session.iter('DATAPOINTER-NAME'):
@@ -333,41 +333,41 @@ def fillExcel():
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
                                 CounterFilasExcel+=1
                                 ws['M'+str(CounterFilasExcel)]=DFID.text
-                                #Marca que el use case de que es ReturnToDeliveryState
+                                #Marca que el use case de que es ReturnToDeliveryState.
                                 ws['H'+str(CounterFilasExcel)]="X"
         
-        #Agrega comments
+        #Agrega comments.
         for datablock in root.iter('DATABLOCK'):
-                #Busca en los datablock que nombre tiene
+                #Busca en los datablock que nombre tiene.
                 DBN=  datablock.find('DATABLOCK-NAME')
-                #Para recorrer el excel
+                #Para recorrer el excel.
                 for i in range(12,CounterFilasExcel):
-                        #Compara el valor que tiene la celda de excel con el datablock name
+                        #Compara el valor que tiene la celda de excel con el datablock name.
                         if(DBN.text==((ws['A'+str(i)].value)+'__Metadata')):
                                 j=0
-                                #Hay varios DATA por datablock, pero el que se ocupa es el 6to
+                                #Hay varios DATA por datablock, pero el que se ocupa es el 6to.
                                 for DPN in datablock.iter('DATA'):
                                         j+=1
                                         if(j==6):
-                                                #Se copia la descripcion a la columna comment
+                                                #Se copia la descripcion a la columna comment.
                                                 ws['O'+str(i)]=DPN.text  
 
-        #Para checar si se repite algun NVM Item
+        #Para checar si se repite algun NVM Item.
         for i in range(12,CounterFilasExcel):
-                #Agarra cada fila y las comapara con las demas
+                #Agarra cada fila y las comapara con las demas.
                 temp = ws['A'+str(i)]
                 k=i+1
                 for j in range(k,CounterFilasExcel):
-                        #Aqui se agarra el siguiente en la fila y se checa cada elemento siguiente
+                        #Aqui se toma el siguiente en la fila y se checa cada elemento siguiente.
                         temp2 = ws['A'+str(j)]
-                        #Si son iguales
+                        #Si son iguales.
                         if(temp.value == temp2.value):
-                                #Checa el USE CASES de cada uno
+                                #Checa el USE CASES de cada uno.
                                 temp3 = ws['G'+str(j)]
                                 if(temp3.value=="X"):
-                                        #Marca el use case del que se repite 
+                                        #Marca el use case del que se repite .
                                         ws['G'+str(i)]="X"
-                                        #Borra la fila que se repite
+                                        #Borra la fila que se repite.
                                         ws.delete_rows(j,1)
                                 temp3 = ws['H'+str(j)]
                                 if(temp3.value=="X"): 
@@ -378,141 +378,143 @@ def fillExcel():
                                         ws['I'+str(i)]="X"
                                         ws.delete_rows(j,1)
 
-        #Si un reporte previo es agregado
+        #Si un reporte previo es agregado.
         if(archivoReportePrevioCargado):
                 sheet1=wb.worksheets[0]
-                #Cuenta las filas maximas que tiene el archivo original
+                #Cuenta las filas maximas que tiene el archivo original.
                 newCounterFilasExcel=sheet1.max_row
                 wb2=load_workbook(rutaReportePrevio)
                 sheet2=wb2.worksheets[0]
                 ws2=wb2.active
-                #cuenta cuantos elementos tiene el archivo previo seleccionado
+                #Cuenta cuantos elementos tiene el archivo previo seleccionado.
                 row_count = sheet2.max_row
                 for i in range(12, newCounterFilasExcel):
                         for j in range(12, row_count):
                                 if(ws['A'+str(i)].value==ws2['A'+str(j)].value):
-                                        #ID Number
+                                        
+                                        #ID Number.
                                         if(ws['B'+str(i)].value==ws2['B'+str(j)].value):
                                                 ws['B'+str(i)]=ws2['B'+str(j)].value
                                         else:
                                                 ws['B'+str(i)]=ws2['B'+str(j)].value
 
-                                        #cr-p
+                                        #cr-p.
                                         if(ws['C'+str(i)].value==ws2['C'+str(j)].value):
                                                 ws['C'+str(i)]=ws2['C'+str(j)].value
                                         else:
                                                 ws['C'+str(i)]=ws2['C'+str(j)].value
                                         
-                                        #CRP DELIVERY STATE
+                                        #CRP delivery state.
                                         if(ws['D'+str(i)].value==ws2['D'+str(j)].value):
                                                 ws['D'+str(i)]=ws2['D'+str(j)].value
                                         else:
                                                 ws['D'+str(i)]=ws2['D'+str(j)].value
                                         
-                                        #CRP RESET DELIVERY STATE
+                                        #CRP reset delivery state.
                                         if(ws['E'+str(i)].value==ws2['E'+str(j)].value):
                                                 ws['E'+str(i)]=ws2['E'+str(j)].value
                                         else:
                                                 ws['E'+str(i)]=ws2['E'+str(j)].value
                                         
-                                        #CRP REPROG
+                                        #CRP reprog.
                                         if(ws['F'+str(i)].value==ws2['F'+str(j)].value):
                                                 ws['F'+str(i)]=ws2['F'+str(j)].value
                                         else:
                                                 ws['F'+str(i)]=ws2['F'+str(j)].value
                                         
-                                        #EXPECTED DELIVERY STATE
+                                        #Expected delivery state.
                                         if(ws['J'+str(i)].value==ws2['J'+str(j)].value):
                                                 ws['J'+str(i)]=ws2['J'+str(j)].value
                                         else:
                                                 ws['J'+str(i)]=ws2['J'+str(j)].value
                                         
-                                        #EXPECTED RESET DELIVERY STATE
+                                        #Expected reset delivery state.
                                         if(ws['K'+str(i)].value==ws2['K'+str(j)].value):
                                                 ws['K'+str(i)]=ws2['K'+str(j)].value
                                         else:
                                                 ws['K'+str(i)]=ws2['K'+str(j)].value
                                         
-                                        #EXPECTED REPROG
+                                        #Expected reprog.
                                         if(ws['L'+str(i)].value==ws2['L'+str(j)].value):
                                                 ws['L'+str(i)]=ws2['L'+str(j)].value
                                         else:
                                                 ws['L'+str(i)]=ws2['L'+str(j)].value
                                         
-                                        #DESIRED TYPE
+                                        #Desired type.
                                         if(ws['M'+str(i)].value==ws2['M'+str(j)].value):
                                                 ws['M'+str(i)]=ws2['M'+str(j)].value
                                         else:
                                                 ws['M'+str(i)]=ws2['M'+str(j)].value
                                         
-                                        #DESIRED DATA
+                                        #Desired data.
                                         if(ws['N'+str(i)].value==ws2['N'+str(j)].value):
                                                 ws['N'+str(i)]=ws2['N'+str(j)].value
                                         else:
                                                 ws['N'+str(i)]=ws2['N'+str(j)].value
                                         
-                                        #Comment
+                                        #Comment.
                                         if(ws['O'+str(i)].value==ws2['O'+str(j)].value):
                                                 ws['O'+str(i)]=ws2['O'+str(j)].value
                                         else:
                                                 ws['O'+str(i)]=ws2['O'+str(j)].value
                                         
-                                        #Rating
+                                        #Rating.
                                         if(ws['P'+str(i)].value==ws2['P'+str(j)].value):
                                                 ws['P'+str(i)]=ws2['P'+str(j)].value
                                         else:
                                                 ws['P'+str(i)]=ws2['P'+str(j)].value
                                         
-                                        #Rated by
+                                        #Rated by.
                                         if(ws['Q'+str(i)].value==ws2['Q'+str(j)].value):
                                                 ws['Q'+str(i)]=ws2['Q'+str(j)].value
                                         else:
                                                 ws['Q'+str(i)]=ws2['Q'+str(j)].value
                                         
-                                        #Comments
+                                        #Comments.
                                         if(ws['R'+str(i)].value==ws2['R'+str(j)].value):
                                                 ws['R'+str(i)]=ws2['R'+str(j)].value
                                         else:
                                                 ws['R'+str(i)]=ws2['R'+str(j)].value
                                         
-                                        #Reference comments from GA
+                                        #Reference comments from GA.
                                         if(ws['S'+str(i)].value==ws2['S'+str(j)].value):
                                                 ws['S'+str(i)]=ws2['S'+str(j)].value
                                         else:
                                                 ws['S'+str(i)]=ws2['S'+str(j)].value
         
-        #Guarda los cambios
+        #Guarda los cambios.
         wb.save(rutaArchivoCNT + "/fillexcel.xlsx")  
 
-        #Para ordenar por ID number
-        #Selecciona el archivo excel
+        #Para ordenar por ID number.
+        #Selecciona el archivo excel.
         excel_file = rutaArchivoCNT + "/fillexcel.xlsx"
-        #lee el archivo
+        #Leer el archivo.
         movies = pd.read_excel(excel_file, skiprows=10)
-        #los ordena por numero de ID
+        #Ordena por numero de ID.
         sorted_by_number = movies.sort_values(by='ID number',ascending=True)
-        #lo guarda
+        #Guardar.
         sorted_by_number.to_excel(excel_file,index=False)
 
-        #Se crea una copia del Template para poder copiar los datos ordenados al archivo que se generara al final
+        #Se crea una copia del Template para poder copiar los datos ordenados al archivo que se generara al final.
         shutil.copy("EEPROM_Container_Review_Template.xlsx", rutaArchivoCNT + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
         
-        #Carga el archivo Excel anteriormente generado
+        #Carga el archivo Excel anteriormente generado.
         wb1 = load_workbook(filename = rutaArchivoCNT +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
         ws1=wb1.active
 
-        #Carga el archivo con los datos ordenados
+        #Carga el archivo con los datos ordenados.
         wb=load_workbook(filename = rutaArchivoCNT +  "/fillexcel.xlsx")
         sheet=wb.worksheets[0]
-        #Para que no escriba en espacios vacios
+        
+        #Para que no escriba en espacios vacios.
         row_count = sheet.max_row
         ws=wb.active
 
-        #Desde aqui agarra los datos
+        #Desde aqui toma los datos.
         j=2
 
-        #Los datos los pega ordenados en el archivo excel que es copia del template
-        #No escribe en espacios vacios
+        #Los datos los pega ordenados en el archivo excel que es copia del template.
+        #No escribe en espacios vacios.
         for i in range(12, 12+row_count-1):
                 ws1['A'+str(i)]=ws['A'+str(j)].value
                 ws1['B'+str(i)]=ws['B'+str(j)].value
@@ -535,68 +537,69 @@ def fillExcel():
                 ws1['S'+str(i)]=ws['S'+str(j)].value
                 j+=1
 
-        #Asigna los valores de BBNumber, Baseline, Encargado y nombre del proyecto a sus respectivas celdas
+        #Asigna los valores de BBNumber, Baseline, Encargado y nombre del proyecto a sus respectivas celdas.
         ws1['B3']=BBNumber
         ws1['B4']=Baseline
         ws1['B2']=PD.text
         ws1['B5']=PN.text
 
-        #Guarda el archivo
+        #Guarda el archivo.
         wb1.save(rutaArchivoCNT +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
-        #Borra el archivo que tiene los datos ordenados
+        
+        #Borra el archivo que tiene los datos ordenados.
         os.remove(rutaArchivoCNT + "/fillexcel.xlsx")
 
 def main():
 		
 	#Titulo de la ventana.
-        root.title("Bosch") 
+    root.title("Bosch") 
 
-        #Configurar paneles.
-        panelElements.grid(column=0, row=0, sticky=(N, S, E, W))
-        panelImage.grid(column=0, row=1, columnspan=2, rowspan=6, sticky=(N, S, E, W))
+    #Configurar paneles.
+    panelElements.grid(column=0, row=0, sticky=(N, S, E, W))
+    panelImage.grid(column=0, row=1, columnspan=2, rowspan=6, sticky=(N, S, E, W))
 
-        #Configurar elementos (botones, etiqueta, imagen, etc).
-        image.pack(side = "bottom", fill = "both", expand = "yes")
-        label.grid(column=0, row=0, columnspan=4, sticky=(N, W))
-        button_CNT.grid(column=3, row=3)
-        enable_button.grid(column=3, row=4)
-        button_PreviousReport.grid(column=3, row=5)
-        button_GenerateReport.grid(column=3, row=6)
+    #Configurar elementos (botones, etiqueta, imagen, etc).
+    image.pack(side = "bottom", fill = "both", expand = "yes")
+    label.grid(column=0, row=0, columnspan=4, sticky=(N, W))
+    button_CNT.grid(column=3, row=3)
+    enable_button.grid(column=3, row=4)
+    button_PreviousReport.grid(column=3, row=5)
+    button_GenerateReport.grid(column=3, row=6)
         
-        #Ocultar botones innecesarios.
-        button_PreviousReport.grid_remove()
-        enable_button.grid_remove()
-        button_GenerateReport.grid_remove()
+    #Ocultar botones innecesarios.
+    button_PreviousReport.grid_remove()
+    enable_button.grid_remove()
+    button_GenerateReport.grid_remove()
 
-        #Fondos y colores.
-        style = ttk.Style(root)
-        style.configure('TLabel', background='white')	#Background y foreground de la etiqueta.
-        style.configure('TFrame', background='white')	#Background y foreground del Frame.
+    #Fondos y colores.
+    style = ttk.Style(root)
+    style.configure('TLabel', background='white')	#Background y foreground de la etiqueta.
+    style.configure('TFrame', background='white')	#Background y foreground del Frame.
 
-        #Estilo de los elementos.
-        button_style1.configure("button_style1.TButton", width = 20, padding=5, font=('Helvetica', 10, 'bold'), background = "black", foreground = 'green')
-        button_style2.configure("button_style2.TButton", width = 20, padding=5, font=('Helvetica', 10, 'bold'))
+    #Estilo de los elementos.
+    button_style1.configure("button_style1.TButton", width = 20, padding=5, font=('Helvetica', 10, 'bold'), background = "black", foreground = 'green')
+    button_style2.configure("button_style2.TButton", width = 20, padding=5, font=('Helvetica', 10, 'bold'))
         
-        button_CNT.configure(style='button_style1.TButton')
-        button_PreviousReport.configure(style='button_style2.TButton')
-        button_GenerateReport.configure(style='button_style2.TButton')
+    button_CNT.configure(style='button_style1.TButton')
+    button_PreviousReport.configure(style='button_style2.TButton')
+    button_GenerateReport.configure(style='button_style2.TButton')
 
-        #Comenzar con el boton de reporte previo deshabilitado.
-        estadoCheckButton = 0
-        button_PreviousReport.state(["disabled"])
+    #Comenzar con el boton de reporte previo deshabilitado.
+    estadoCheckButton = 0
+    button_PreviousReport.state(["disabled"])
 
-        root.config(menu=menubar)
-        toolBar_Init = Menu(menubar)
-        toolBar_About = Menu(menubar)
-        toolBar_Init.add_command(label="New", command=newProgram)
-        toolBar_Init.add_command(label="Exit", command=exitProgram)
-        toolBar_About.add_command(label="About", command=aboutProgram)
-        toolBar_About.add_command(label="Help", command=helpProgram)
-        menubar.add_cascade(label="File", menu=toolBar_Init)
-        menubar.add_cascade(label="Program", menu=toolBar_About)
+    root.config(menu=menubar)
+    toolBar_Init = Menu(menubar)
+    toolBar_About = Menu(menubar)
+    toolBar_Init.add_command(label="New", command=newProgram)
+    toolBar_Init.add_command(label="Exit", command=exitProgram)
+    toolBar_About.add_command(label="About", command=aboutProgram)
+    toolBar_About.add_command(label="Help", command=helpProgram)
+    menubar.add_cascade(label="File", menu=toolBar_Init)
+    menubar.add_cascade(label="Program", menu=toolBar_About)
 
-        #Comenzar proceso.
-        root.mainloop()
+    #Comenzar proceso.
+    root.mainloop()
 
 #################################
 if __name__== "__main__":
