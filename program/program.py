@@ -246,7 +246,7 @@ def fillExcel():
     
     #Lee archivo XML.
     tree = ET.parse(rutaCNT)
-    logProgram.write("CNT file read.\r\n")
+    logProgram.write("CNT file read.\r\n\r\n")
 
     #Obtiene el root del XML.
     root = tree.getroot()
@@ -320,9 +320,9 @@ def fillExcel():
         		tempCounter=CounterFilasExcel
         		
         		#Obtiene el Datapointer-name del item.
-        		foundDNP = 0
+        		foundDNP_ALL = 0
         		for DPN in session.iter('DATAPOINTER-NAME'):
-        			foundDNP = 1
+        			foundDNP_ALL = 1
         			tempCounter += 1
         			
         			#Guarda el valor en el excel.
@@ -331,9 +331,9 @@ def fillExcel():
         		tempCounter = CounterFilasExcel
         		
         		#Obtiene el Datapointer-ident del item.
-        		foundDPID = 0
+        		foundDPID_ALL = 0
         		for DPID in session.iter('DATAPOINTER-IDENT'):
-        			foundDPID = 1
+        			foundDPID_ALL = 1
         			tempCounter += 1
 
         			#Guarda el valor en el excel.
@@ -342,9 +342,9 @@ def fillExcel():
         		tempCounter = CounterFilasExcel
         		
         		#Obtiene el Datapointer-identifier del item.
-        		foundDFID = 0
+        		foundDFID_ALL = 0
         		for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
-        			foundDFID = 1
+        			foundDFID_ALL = 1
 
         			#Aqui se aumenta el CounterFilasExcel para que se respeten las filas.
         			CounterFilasExcel += 1
@@ -356,59 +356,92 @@ def fillExcel():
         		foundSessionNReprog = 1
 
         		tempCounter = CounterFilasExcel
+        		
+        		foundDNP_Reprog = 0
         		for DPN in session.iter('DATAPOINTER-NAME'):
-        			tempCounter+=1
-        			ws['A'+str(tempCounter)]=DPN.text
-        		tempCounter=CounterFilasExcel
+        			foundDNP_Reprog = 1
+        			tempCounter += 1
+        			ws['A'+ str(tempCounter)] = DPN.text
+        		
+        		tempCounter = CounterFilasExcel
+        		
+        		foundDPID_Reprog = 0
         		for DPID in session.iter('DATAPOINTER-IDENT'):
-        			tempCounter+=1
-        			ws['B'+str(tempCounter)]=DPID.text
+        			foundDPID_Reprog = 1
+        			tempCounter += 1
+        			ws['B'+ str(tempCounter)] = DPID.text
+        		
         		tempCounter=CounterFilasExcel
+        		
+        		foundDFID_Reprog = 0
         		for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
-        			CounterFilasExcel+=1
-        			ws['M'+str(CounterFilasExcel)]=DFID.text
+        			foundDFID_Reprog = 1
+        			CounterFilasExcel += 1
+        			ws['M'+ str(CounterFilasExcel)] = DFID.text
         			#Marca que el use case de que es Reprog.
-        			ws['I'+str(CounterFilasExcel)]="X"
+        			ws['I'+ str(CounterFilasExcel)] = "X"
 
         	#Cuando la sesion es DeliveryState.
         	foundSessionNDeliveryState = 0
-        	if(sessionN.text=='DeliveryState'):
+        	if(sessionN.text == 'DeliveryState'):
         		foundSessionNDeliveryState = 1
 
-        		tempCounter=CounterFilasExcel
+        		tempCounter = CounterFilasExcel
+
+        		foundDNP_DeliveryState = 0
         		for DPN in session.iter('DATAPOINTER-NAME'):
-        			tempCounter+=1
-        			ws['A'+str(tempCounter)]=DPN.text
-        		tempCounter=CounterFilasExcel
+        			foundDNP_DeliveryState = 1
+        			tempCounter += 1
+        			ws['A'+ str(tempCounter)] = DPN.text
+
+        		tempCounter = CounterFilasExcel
+
+        		foundDPID_DeliveryState = 0
         		for DPID in session.iter('DATAPOINTER-IDENT'):
-        			tempCounter+=1
-        			ws['B'+str(tempCounter)]=DPID.text
-        		tempCounter=CounterFilasExcel
+        			foundDPID_DeliveryState = 1
+        			tempCounter += 1
+        			ws['B'+ str(tempCounter)] = DPID.text
+        		
+        		tempCounter = CounterFilasExcel
+
+        		foundDFID_DeliveryState = 0
         		for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
-        			CounterFilasExcel+=1
-        			ws['M'+str(CounterFilasExcel)]=DFID.text
+        			foundDFID_DeliveryState = 1
+        			CounterFilasExcel += 1
+        			ws['M'+ str(CounterFilasExcel)] = DFID.text
         			#Marca que el use case de que es DeliveryState.
-        			ws['G'+str(CounterFilasExcel)]="X"
+        			ws['G'+ str(CounterFilasExcel)] = "X"
 
         	#Cuando es la sesion es ResetToDeliveryState.
         	foundSessionNResetToDeliveryState = 0
-        	if(sessionN.text=='ResetToDeliveryState'):
+        	if(sessionN.text == 'ResetToDeliveryState'):
         		foundSessionNResetToDeliveryState = 1
 
-        		tempCounter=CounterFilasExcel
+        		tempCounter = CounterFilasExcel
+
+        		foundDNP_ResetToDeliveryState = 0
         		for DPN in session.iter('DATAPOINTER-NAME'):
-        			tempCounter+=1
-        			ws['A'+str(tempCounter)]=DPN.text
-        		tempCounter=CounterFilasExcel
+        			foundDNP_ResetToDeliveryState = 1
+        			tempCounter += 1
+        			ws['A'+ str(tempCounter)] = DPN.text
+        		
+        		tempCounter = CounterFilasExcel
+
+        		foundDPID_ResetToDeliveryState = 0
         		for DPID in session.iter('DATAPOINTER-IDENT'):
-        			tempCounter+=1
-        			ws['B'+str(tempCounter)]=DPID.text
-        		tempCounter=CounterFilasExcel
+        			foundDPID_ResetToDeliveryState = 1
+        			tempCounter += 1
+        			ws['B'+ str(tempCounter)] = DPID.text
+        		
+        		tempCounter = CounterFilasExcel
+
+        		foundDFID_ResetToDeliveryState = 0
         		for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
-        			CounterFilasExcel+=1
-        			ws['M'+str(CounterFilasExcel)]=DFID.text
+        			foundDFID_ResetToDeliveryState = 1
+        			CounterFilasExcel += 1
+        			ws['M'+ str(CounterFilasExcel)] = DFID.text
         			#Marca que el use case de que es ReturnToDeliveryState.
-        			ws['H'+str(CounterFilasExcel)]="X"
+        			ws['H'+ str(CounterFilasExcel)] = "X"
 
     #Verificar si se encontro SESSION.
     if(foundSession == 0):
@@ -427,17 +460,17 @@ def fillExcel():
     		else:
     			logProgram.write("		__ALL__ found\r\n")
 
-    			if(foundDNP == 0):
+    			if(foundDNP_ALL == 0):
     				logProgram.write("			DATAPOINTER-NAME not found\r\n")
     			else:
     				logProgram.write("			DATAPOINTER-NAME found\r\n")
 
-    			if(foundDPID == 0):
+    			if(foundDPID_ALL == 0):
     				logProgram.write("			DATAPOINTER-IDENT not found\r\n")
     			else:
     				logProgram.write("			DATAPOINTER-IDENT found\r\n")
 
-    			if(foundDFID == 0):
+    			if(foundDFID_ALL == 0):
     				logProgram.write("			DATAFORMAT-IDENTIFIER not found\r\n")
     			else:
     				logProgram.write("			DATAFORMAT-IDENTIFIER found\r\n")
@@ -447,15 +480,60 @@ def fillExcel():
     		else:
     			logProgram.write("		Reprog found\r\n")
 
+    			if(foundDNP_Reprog == 0):
+    				logProgram.write("			DATAPOINTER-NAME not found\r\n")
+    			else:
+    				logProgram.write("			DATAPOINTER-NAME found\r\n")
+
+    			if(foundDPID_Reprog == 0):
+    				logProgram.write("			DATAPOINTER-IDENT not found\r\n")
+    			else:
+    				logProgram.write("			DATAPOINTER-IDENT found\r\n")
+
+    			if(foundDFID_Reprog == 0):
+    				logProgram.write("			DATAFORMAT-IDENTIFIER not found\r\n")
+    			else:
+    				logProgram.write("			DATAFORMAT-IDENTIFIER found\r\n")
+
     		if(foundSessionNDeliveryState == 0):
     		    logProgram.write("		DeliveryState not found\r\n")
     		else:
     			logProgram.write("		DeliveryState found\r\n")
 
+    			if(foundDNP_DeliveryState == 0):
+    				logProgram.write("			DATAPOINTER-NAME not found\r\n")
+    			else:
+    				logProgram.write("			DATAPOINTER-NAME found\r\n")
+
+    			if(foundDPID_DeliveryState == 0):
+    				logProgram.write("			DATAPOINTER-IDENT not found\r\n")
+    			else:
+    				logProgram.write("			DATAPOINTER-IDENT found\r\n")
+
+    			if(foundDFID_DeliveryState == 0):
+    				logProgram.write("			DATAFORMAT-IDENTIFIER not found\r\n")
+    			else:
+    				logProgram.write("			DATAFORMAT-IDENTIFIER found\r\n")
+
     		if(foundSessionNResetToDeliveryState == 0):
     		    logProgram.write("		ResetToDeliveryState not found\r\n")
     		else:
     			logProgram.write("		ResetToDeliveryState found\r\n")
+
+    			if(foundDNP_ResetToDeliveryState == 0):
+    				logProgram.write("			DATAPOINTER-NAME not found\r\n")
+    			else:
+    				logProgram.write("			DATAPOINTER-NAME found\r\n")
+
+    			if(foundDPID_ResetToDeliveryState == 0):
+    				logProgram.write("			DATAPOINTER-IDENT not found\r\n")
+    			else:
+    				logProgram.write("			DATAPOINTER-IDENT found\r\n")
+
+    			if(foundDFID_ResetToDeliveryState == 0):
+    				logProgram.write("			DATAFORMAT-IDENTIFIER not found\r\n")
+    			else:
+    				logProgram.write("			DATAFORMAT-IDENTIFIER found\r\n")
 
     ######################################################
     #Agrega comments.
@@ -608,8 +686,7 @@ def fillExcel():
     #Guarda los cambios.
     wb.save(rutaArchivoCNT + "/fillexcel.xlsx")  
 
-    #Para ordenar por ID number.
-    #Selecciona el archivo excel.
+    #Para ordenar por ID number. Selecciona el archivo excel.
     excel_file = rutaArchivoCNT + "/fillexcel.xlsx"
     #Leer el archivo.
     movies = pd.read_excel(excel_file, skiprows=10)
