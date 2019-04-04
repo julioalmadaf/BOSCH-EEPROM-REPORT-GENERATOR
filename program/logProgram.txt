@@ -1,7 +1,11 @@
 CNT file read.
 PROJECT-INFO found
-PROJECT-DESC found
+	PROJECT-DESC found
 RESPONSIBLE found
-PERSON-NAME found
+	PERSON-NAME found
 SESSION found
-SESSION-NAME found
+	SESSION-NAME found
+		__ALL__ not found
+		Reprog not found
+		DeliveryState not found
+		ResetToDeliveryState found

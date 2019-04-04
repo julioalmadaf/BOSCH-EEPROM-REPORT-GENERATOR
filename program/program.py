@@ -273,9 +273,9 @@ def fillExcel():
     	
     	#Verificar si se encontro PROJECT-DESC.
     	if(foundProjectDesc == 0):
-    		logProgram.write("PROJECT-DESC not found\r\n")
+    		logProgram.write("	PROJECT-DESC not found\r\n")
     	else:
-    		logProgram.write("PROJECT-DESC found\r\n")
+    		logProgram.write("	PROJECT-DESC found\r\n")
 
     ######################################################
     #Guarda el nombre del responsable.
@@ -295,46 +295,67 @@ def fillExcel():
 
     	#Verificar si se encontro PERSON-NAME.
     	if(foundPersonName == 0):
-    		logProgram.write("PERSON-NAME not found\r\n")
+    		logProgram.write("	PERSON-NAME not found\r\n")
     	else:
-    		logProgram.write("PERSON-NAME found\r\n")
+    		logProgram.write("	PERSON-NAME found\r\n")
 
     ######################################################
     #Busca el nodo sesion en todo el arbol.
     foundSession = 0
-    foundSessionN = 0
     for session in root.iter('SESSION'):
         foundSession = 1
 
         #Busca en los tipos de sesiones que nombre tiene.
+        foundSessionN = 0
         sessionN = session.find('SESSION-NAME')
         if sessionN is not None:
         	foundSessionN = 1
 
         	#Cuando la sesion es ALL.
-        	if(sessionN.text =='__ALL__'):
+        	foundSessionNAll = 0
+        	if(sessionN.text == '__ALL__'):
+        		foundSessionNAll = 1
+
         		#Para no alterar el orden de las filas del excel.
         		tempCounter=CounterFilasExcel
+        		
         		#Obtiene el Datapointer-name del item.
+        		foundDNP = 0
         		for DPN in session.iter('DATAPOINTER-NAME'):
-        			tempCounter+=1
+        			foundDNP = 1
+        			tempCounter += 1
+        			
         			#Guarda el valor en el excel.
-        			ws['A'+str(tempCounter)]=DPN.text
-        		tempCounter=CounterFilasExcel
-        		#Obtiene el Datapointer-ident  del item.
+        			ws['A'+ str(tempCounter)] = DPN.text
+        		
+        		tempCounter = CounterFilasExcel
+        		
+        		#Obtiene el Datapointer-ident del item.
+        		foundDPID = 0
         		for DPID in session.iter('DATAPOINTER-IDENT'):
-        			tempCounter+=1
-        			ws['B'+str(tempCounter)]=DPID.text
-        		tempCounter=CounterFilasExcel
+        			foundDPID = 1
+        			tempCounter += 1
+
+        			#Guarda el valor en el excel.
+        			ws['B'+ str(tempCounter)] = DPID.text
+        		
+        		tempCounter = CounterFilasExcel
+        		
         		#Obtiene el Datapointer-identifier del item.
+        		foundDFID = 0
         		for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
+        			foundDFID = 1
+
         			#Aqui se aumenta el CounterFilasExcel para que se respeten las filas.
-        			CounterFilasExcel+=1
-        			ws['M'+str(CounterFilasExcel)]=DFID.text
+        			CounterFilasExcel += 1
+        			ws['M'+ str(CounterFilasExcel)] = DFID.text
 
         	#Cuando la sesion es Reprog.
-        	if(sessionN.text=='Reprog'):
-        		tempCounter=CounterFilasExcel
+        	foundSessionNReprog = 0
+        	if(sessionN.text == 'Reprog'):
+        		foundSessionNReprog = 1
+
+        		tempCounter = CounterFilasExcel
         		for DPN in session.iter('DATAPOINTER-NAME'):
         			tempCounter+=1
         			ws['A'+str(tempCounter)]=DPN.text
@@ -350,7 +371,10 @@ def fillExcel():
         			ws['I'+str(CounterFilasExcel)]="X"
 
         	#Cuando la sesion es DeliveryState.
+        	foundSessionNDeliveryState = 0
         	if(sessionN.text=='DeliveryState'):
+        		foundSessionNDeliveryState = 1
+
         		tempCounter=CounterFilasExcel
         		for DPN in session.iter('DATAPOINTER-NAME'):
         			tempCounter+=1
@@ -367,7 +391,10 @@ def fillExcel():
         			ws['G'+str(CounterFilasExcel)]="X"
 
         	#Cuando es la sesion es ResetToDeliveryState.
+        	foundSessionNResetToDeliveryState = 0
         	if(sessionN.text=='ResetToDeliveryState'):
+        		foundSessionNResetToDeliveryState = 1
+
         		tempCounter=CounterFilasExcel
         		for DPN in session.iter('DATAPOINTER-NAME'):
         			tempCounter+=1
@@ -391,9 +418,45 @@ def fillExcel():
 
     	#Verificar si se encontro SESSION-NAME.
     	if(foundSessionN == 0):
-    		logProgram.write("SESSION-NAME not found\r\n")
+    		logProgram.write("	SESSION-NAME not found\r\n")
     	else:
-    		logProgram.write("SESSION-NAME found\r\n")
+    		logProgram.write("	SESSION-NAME found\r\n")
+
+    		if(foundSessionNAll == 0):
+    			logProgram.write("		__ALL__ not found\r\n")
+    		else:
+    			logProgram.write("		__ALL__ found\r\n")
+
+    			if(foundDNP == 0):
+    				logProgram.write("			DATAPOINTER-NAME not found\r\n")
+    			else:
+    				logProgram.write("			DATAPOINTER-NAME found\r\n")
+
+    			if(foundDPID == 0):
+    				logProgram.write("			DATAPOINTER-IDENT not found\r\n")
+    			else:
+    				logProgram.write("			DATAPOINTER-IDENT found\r\n")
+
+    			if(foundDFID == 0):
+    				logProgram.write("			DATAFORMAT-IDENTIFIER not found\r\n")
+    			else:
+    				logProgram.write("			DATAFORMAT-IDENTIFIER found\r\n")
+
+    		if(foundSessionNReprog == 0):
+    		    logProgram.write("		Reprog not found\r\n")
+    		else:
+    			logProgram.write("		Reprog found\r\n")
+
+    		if(foundSessionNDeliveryState == 0):
+    		    logProgram.write("		DeliveryState not found\r\n")
+    		else:
+    			logProgram.write("		DeliveryState found\r\n")
+
+    		if(foundSessionNResetToDeliveryState == 0):
+    		    logProgram.write("		ResetToDeliveryState not found\r\n")
+    		else:
+    			logProgram.write("		ResetToDeliveryState found\r\n")
+
     ######################################################
     #Agrega comments.
     for datablock in root.iter('DATABLOCK'):
