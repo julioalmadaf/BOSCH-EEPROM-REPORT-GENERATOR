@@ -1,0 +1,7 @@
+CNT file read.
+PROJECT-INFO found
+PROJECT-DESC found
+RESPONSIBLE found
+PERSON-NAME found
+SESSION found
+SESSION-NAME found

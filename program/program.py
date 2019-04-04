@@ -235,319 +235,382 @@ button_style2 = ttk.Style()
 ##################
 def fillExcel():
 
-        global rutaArchivoCNT
+    global rutaArchivoCNT
 
-        #Carga el archivo Excel anteriormente generado.
-        wb = load_workbook(filename = rutaArchivoCNT + "/fillexcel.xlsx")
-        ws = wb.active
-        
-        #Lee archivo XML.
-        tree = ET.parse(rutaCNT)
+    #Open log file.
+    logProgram = open(rutaArchivoCNT + "/logProgram.txt","w+")
 
-        #Obtiene el root del XML.
-        root = tree.getroot()
-        
-        #Counter para ir agregando elementos en excel.
-        CounterFilasExcel=11
+    #Carga el archivo Excel anteriormente generado.
+    wb = load_workbook(filename = rutaArchivoCNT + "/fillexcel.xlsx")
+    ws = wb.active
+    
+    #Lee archivo XML.
+    tree = ET.parse(rutaCNT)
+    logProgram.write("CNT file read.\r\n")
 
-        #Guarda el nombre del proyecto.
-        for project in root.iter('PROJECT-INFO'):
-                PD=project.find('PROJECT-DESC')
-        
-        #Guarda el nombre del responsable.
-        for info in root.iter('RESPONSIBLE'):
-                PN=info.find('PERSON-NAME')
+    #Obtiene el root del XML.
+    root = tree.getroot()
+    
+    #Counter para ir agregando elementos en excel.
+    CounterFilasExcel = 11
 
-        #Busca el nodo sesion en todo el arbol.
-        for session in root.iter('SESSION'):
-                
-                #Busca en los tipos de sesiones que nombre tiene.
-                sessionN=  session.find('SESSION-NAME')
+    ######################################################
+    #Guarda el nombre del proyecto.
+    foundProjectInfo = 0
+    foundProjectDesc = 0
+    for project in root.iter('PROJECT-INFO'):
+    	foundProjectInfo = 1
+    	PD = project.find('PROJECT-DESC')
+    	if PD is not None:
+    		foundProjectDesc = 1
 
-                #Cuando la sesion es ALL.
-                if(sessionN.text =='__ALL__'):
-                        #Para no alterar el el orden de las filas del excel.
-                        tempCounter=CounterFilasExcel
-                        #Obtiene el Datapointer-name del item.
-                        for DPN in session.iter('DATAPOINTER-NAME'):
-                                tempCounter+=1
-                                #Guarda el valor en el excel.
-                                ws['A'+str(tempCounter)]=DPN.text
-                        tempCounter=CounterFilasExcel
-                        #Obtiene el Datapointer-ident  del item.
-                        for DPID in session.iter('DATAPOINTER-IDENT'):
-                                tempCounter+=1
-                                ws['B'+str(tempCounter)]=DPID.text
-                        tempCounter=CounterFilasExcel
-                        #Obtiene el Datapointer-identifier del item.
-                        for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
-                                #Aqui se aumenta el CounterFilasExcel para que se respeten las filas.
-                                CounterFilasExcel+=1
-                                ws['M'+str(CounterFilasExcel)]=DFID.text
+    
+    #Verificar si se encontro PROJECT-INFO.
+    if(foundProjectInfo == 0):
+    	logProgram.write("PROJECT-INFO not found\r\n")
+    else:
+    	logProgram.write("PROJECT-INFO found\r\n")
+    	
+    	#Verificar si se encontro PROJECT-DESC.
+    	if(foundProjectDesc == 0):
+    		logProgram.write("PROJECT-DESC not found\r\n")
+    	else:
+    		logProgram.write("PROJECT-DESC found\r\n")
 
-                #Cuando la sesion es Reprog.
-                if(sessionN.text=='Reprog'):
-                        tempCounter=CounterFilasExcel
-                        for DPN in session.iter('DATAPOINTER-NAME'):
-                                tempCounter+=1
-                                ws['A'+str(tempCounter)]=DPN.text
-                        tempCounter=CounterFilasExcel
-                        for DPID in session.iter('DATAPOINTER-IDENT'):
-                                tempCounter+=1
-                                ws['B'+str(tempCounter)]=DPID.text
-                        tempCounter=CounterFilasExcel
-                        for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
-                                CounterFilasExcel+=1
-                                ws['M'+str(CounterFilasExcel)]=DFID.text
-                                #Marca que el use case de que es Reprog.
-                                ws['I'+str(CounterFilasExcel)]="X"
-                
-                #Cuando la sesion es DeliveryState.
-                if(sessionN.text=='DeliveryState'):
-                        tempCounter=CounterFilasExcel
-                        for DPN in session.iter('DATAPOINTER-NAME'):
-                                tempCounter+=1
-                                ws['A'+str(tempCounter)]=DPN.text
-                        tempCounter=CounterFilasExcel
-                        for DPID in session.iter('DATAPOINTER-IDENT'):
-                                tempCounter+=1
-                                ws['B'+str(tempCounter)]=DPID.text
-                        tempCounter=CounterFilasExcel
-                        for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
-                                CounterFilasExcel+=1
-                                ws['M'+str(CounterFilasExcel)]=DFID.text
-                                #Marca que el use case de que es DeliveryState.
-                                ws['G'+str(CounterFilasExcel)]="X"
-                
-                #Cuando es la sesion es ResetToDeliveryState.
-                if(sessionN.text=='ResetToDeliveryState'):
-                        tempCounter=CounterFilasExcel
-                        for DPN in session.iter('DATAPOINTER-NAME'):
-                                tempCounter+=1
-                                ws['A'+str(tempCounter)]=DPN.text
-                        tempCounter=CounterFilasExcel
-                        for DPID in session.iter('DATAPOINTER-IDENT'):
-                                tempCounter+=1
-                                ws['B'+str(tempCounter)]=DPID.text
-                        tempCounter=CounterFilasExcel
-                        for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
-                                CounterFilasExcel+=1
-                                ws['M'+str(CounterFilasExcel)]=DFID.text
-                                #Marca que el use case de que es ReturnToDeliveryState.
-                                ws['H'+str(CounterFilasExcel)]="X"
-        
-        #Agrega comments.
-        for datablock in root.iter('DATABLOCK'):
-                #Busca en los datablock que nombre tiene.
-                DBN=  datablock.find('DATABLOCK-NAME')
-                #Para recorrer el excel.
-                for i in range(12,CounterFilasExcel):
-                        #Compara el valor que tiene la celda de excel con el datablock name.
-                        if(DBN.text==((ws['A'+str(i)].value)+'__Metadata')):
-                                j=0
-                                #Hay varios DATA por datablock, pero el que se ocupa es el 6to.
-                                for DPN in datablock.iter('DATA'):
-                                        j+=1
-                                        if(j==6):
-                                                #Se copia la descripcion a la columna comment.
-                                                ws['O'+str(i)]=DPN.text  
+    ######################################################
+    #Guarda el nombre del responsable.
+    foundResponsible = 0
+    foundPersonName = 0
+    for info in root.iter('RESPONSIBLE'):
+    	foundResponsible = 1
+    	PN = info.find('PERSON-NAME')
+    	if PN is not None:
+    		foundPersonName = 1
 
-        #Para checar si se repite algun NVM Item.
+    #Verificar si se encontro RESPONSIBLE.
+    if(foundResponsible == 0):
+    	logProgram.write("RESPONSIBLE not found\r\n")
+    else:
+    	logProgram.write("RESPONSIBLE found\r\n")
+
+    	#Verificar si se encontro PERSON-NAME.
+    	if(foundPersonName == 0):
+    		logProgram.write("PERSON-NAME not found\r\n")
+    	else:
+    		logProgram.write("PERSON-NAME found\r\n")
+
+    ######################################################
+    #Busca el nodo sesion en todo el arbol.
+    foundSession = 0
+    foundSessionN = 0
+    for session in root.iter('SESSION'):
+        foundSession = 1
+
+        #Busca en los tipos de sesiones que nombre tiene.
+        sessionN = session.find('SESSION-NAME')
+        if sessionN is not None:
+        	foundSessionN = 1
+
+        	#Cuando la sesion es ALL.
+        	if(sessionN.text =='__ALL__'):
+        		#Para no alterar el orden de las filas del excel.
+        		tempCounter=CounterFilasExcel
+        		#Obtiene el Datapointer-name del item.
+        		for DPN in session.iter('DATAPOINTER-NAME'):
+        			tempCounter+=1
+        			#Guarda el valor en el excel.
+        			ws['A'+str(tempCounter)]=DPN.text
+        		tempCounter=CounterFilasExcel
+        		#Obtiene el Datapointer-ident  del item.
+        		for DPID in session.iter('DATAPOINTER-IDENT'):
+        			tempCounter+=1
+        			ws['B'+str(tempCounter)]=DPID.text
+        		tempCounter=CounterFilasExcel
+        		#Obtiene el Datapointer-identifier del item.
+        		for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
+        			#Aqui se aumenta el CounterFilasExcel para que se respeten las filas.
+        			CounterFilasExcel+=1
+        			ws['M'+str(CounterFilasExcel)]=DFID.text
+
+        	#Cuando la sesion es Reprog.
+        	if(sessionN.text=='Reprog'):
+        		tempCounter=CounterFilasExcel
+        		for DPN in session.iter('DATAPOINTER-NAME'):
+        			tempCounter+=1
+        			ws['A'+str(tempCounter)]=DPN.text
+        		tempCounter=CounterFilasExcel
+        		for DPID in session.iter('DATAPOINTER-IDENT'):
+        			tempCounter+=1
+        			ws['B'+str(tempCounter)]=DPID.text
+        		tempCounter=CounterFilasExcel
+        		for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
+        			CounterFilasExcel+=1
+        			ws['M'+str(CounterFilasExcel)]=DFID.text
+        			#Marca que el use case de que es Reprog.
+        			ws['I'+str(CounterFilasExcel)]="X"
+
+        	#Cuando la sesion es DeliveryState.
+        	if(sessionN.text=='DeliveryState'):
+        		tempCounter=CounterFilasExcel
+        		for DPN in session.iter('DATAPOINTER-NAME'):
+        			tempCounter+=1
+        			ws['A'+str(tempCounter)]=DPN.text
+        		tempCounter=CounterFilasExcel
+        		for DPID in session.iter('DATAPOINTER-IDENT'):
+        			tempCounter+=1
+        			ws['B'+str(tempCounter)]=DPID.text
+        		tempCounter=CounterFilasExcel
+        		for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
+        			CounterFilasExcel+=1
+        			ws['M'+str(CounterFilasExcel)]=DFID.text
+        			#Marca que el use case de que es DeliveryState.
+        			ws['G'+str(CounterFilasExcel)]="X"
+
+        	#Cuando es la sesion es ResetToDeliveryState.
+        	if(sessionN.text=='ResetToDeliveryState'):
+        		tempCounter=CounterFilasExcel
+        		for DPN in session.iter('DATAPOINTER-NAME'):
+        			tempCounter+=1
+        			ws['A'+str(tempCounter)]=DPN.text
+        		tempCounter=CounterFilasExcel
+        		for DPID in session.iter('DATAPOINTER-IDENT'):
+        			tempCounter+=1
+        			ws['B'+str(tempCounter)]=DPID.text
+        		tempCounter=CounterFilasExcel
+        		for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
+        			CounterFilasExcel+=1
+        			ws['M'+str(CounterFilasExcel)]=DFID.text
+        			#Marca que el use case de que es ReturnToDeliveryState.
+        			ws['H'+str(CounterFilasExcel)]="X"
+
+    #Verificar si se encontro SESSION.
+    if(foundSession == 0):
+    	logProgram.write("SESSION not found\r\n")
+    else:
+    	logProgram.write("SESSION found\r\n")
+
+    	#Verificar si se encontro SESSION-NAME.
+    	if(foundSessionN == 0):
+    		logProgram.write("SESSION-NAME not found\r\n")
+    	else:
+    		logProgram.write("SESSION-NAME found\r\n")
+    ######################################################
+    #Agrega comments.
+    for datablock in root.iter('DATABLOCK'):
+        #Busca en los datablock que nombre tiene.
+        DBN=  datablock.find('DATABLOCK-NAME')
+        #Para recorrer el excel.
         for i in range(12,CounterFilasExcel):
-                #Agarra cada fila y las comapara con las demas.
-                temp = ws['A'+str(i)]
-                k=i+1
-                for j in range(k,CounterFilasExcel):
-                        #Aqui se toma el siguiente en la fila y se checa cada elemento siguiente.
-                        temp2 = ws['A'+str(j)]
-                        #Si son iguales.
-                        if(temp.value == temp2.value):
-                                #Checa el USE CASES de cada uno.
-                                temp3 = ws['G'+str(j)]
-                                if(temp3.value=="X"):
-                                        #Marca el use case del que se repite .
-                                        ws['G'+str(i)]="X"
-                                        #Borra la fila que se repite.
-                                        ws.delete_rows(j,1)
-                                temp3 = ws['H'+str(j)]
-                                if(temp3.value=="X"): 
-                                        ws['H'+str(i)]="X"
-                                        ws.delete_rows(j,1)
-                                temp3 = ws['I'+str(j)]
-                                if(temp3.value=="X"): 
-                                        ws['I'+str(i)]="X"
-                                        ws.delete_rows(j,1)
+            #Compara el valor que tiene la celda de excel con el datablock name.
+            if(DBN.text==((ws['A'+str(i)].value)+'__Metadata')):
+                j=0
+                #Hay varios DATA por datablock, pero el que se ocupa es el 6to.
+                for DPN in datablock.iter('DATA'):
+                    j+=1
+                    if(j==6):
+                        #Se copia la descripcion a la columna comment.
+                        ws['O'+str(i)]=DPN.text
 
-        #Si un reporte previo es agregado.
-        if(archivoReportePrevioCargado):
-                sheet1=wb.worksheets[0]
-                #Cuenta las filas maximas que tiene el archivo original.
-                newCounterFilasExcel=sheet1.max_row
-                wb2=load_workbook(rutaReportePrevio)
-                sheet2=wb2.worksheets[0]
-                ws2=wb2.active
-                #Cuenta cuantos elementos tiene el archivo previo seleccionado.
-                row_count = sheet2.max_row
-                for i in range(12, newCounterFilasExcel):
-                        for j in range(12, row_count):
-                                if(ws['A'+str(i)].value==ws2['A'+str(j)].value):
-                                        
-                                        #ID Number.
-                                        if(ws['B'+str(i)].value==ws2['B'+str(j)].value):
-                                                ws['B'+str(i)]=ws2['B'+str(j)].value
-                                        else:
-                                                ws['B'+str(i)]=ws2['B'+str(j)].value
+    ######################################################
+    #Para checar si se repite algun NVM Item.
+    for i in range(12,CounterFilasExcel):
+        #Agarra cada fila y las comapara con las demas.
+        temp = ws['A'+str(i)]
+        k=i+1
+        for j in range(k,CounterFilasExcel):
+            #Aqui se toma el siguiente en la fila y se checa cada elemento siguiente.
+            temp2 = ws['A'+str(j)]
+            #Si son iguales.
+            if(temp.value == temp2.value):
+                #Checa el USE CASES de cada uno.
+                temp3 = ws['G'+str(j)]
+                if(temp3.value=="X"):
+                    #Marca el use case del que se repite .
+                    ws['G'+str(i)]="X"
+                    #Borra la fila que se repite.
+                    ws.delete_rows(j,1)
+                temp3 = ws['H'+str(j)]
+                if(temp3.value=="X"): 
+                    ws['H'+str(i)]="X"
+                    ws.delete_rows(j,1)
+                temp3 = ws['I'+str(j)]
+                if(temp3.value=="X"): 
+                    ws['I'+str(i)]="X"
+                    ws.delete_rows(j,1)
 
-                                        #cr-p.
-                                        if(ws['C'+str(i)].value==ws2['C'+str(j)].value):
-                                                ws['C'+str(i)]=ws2['C'+str(j)].value
-                                        else:
-                                                ws['C'+str(i)]=ws2['C'+str(j)].value
-                                        
-                                        #CRP delivery state.
-                                        if(ws['D'+str(i)].value==ws2['D'+str(j)].value):
-                                                ws['D'+str(i)]=ws2['D'+str(j)].value
-                                        else:
-                                                ws['D'+str(i)]=ws2['D'+str(j)].value
-                                        
-                                        #CRP reset delivery state.
-                                        if(ws['E'+str(i)].value==ws2['E'+str(j)].value):
-                                                ws['E'+str(i)]=ws2['E'+str(j)].value
-                                        else:
-                                                ws['E'+str(i)]=ws2['E'+str(j)].value
-                                        
-                                        #CRP reprog.
-                                        if(ws['F'+str(i)].value==ws2['F'+str(j)].value):
-                                                ws['F'+str(i)]=ws2['F'+str(j)].value
-                                        else:
-                                                ws['F'+str(i)]=ws2['F'+str(j)].value
-                                        
-                                        #Expected delivery state.
-                                        if(ws['J'+str(i)].value==ws2['J'+str(j)].value):
-                                                ws['J'+str(i)]=ws2['J'+str(j)].value
-                                        else:
-                                                ws['J'+str(i)]=ws2['J'+str(j)].value
-                                        
-                                        #Expected reset delivery state.
-                                        if(ws['K'+str(i)].value==ws2['K'+str(j)].value):
-                                                ws['K'+str(i)]=ws2['K'+str(j)].value
-                                        else:
-                                                ws['K'+str(i)]=ws2['K'+str(j)].value
-                                        
-                                        #Expected reprog.
-                                        if(ws['L'+str(i)].value==ws2['L'+str(j)].value):
-                                                ws['L'+str(i)]=ws2['L'+str(j)].value
-                                        else:
-                                                ws['L'+str(i)]=ws2['L'+str(j)].value
-                                        
-                                        #Desired type.
-                                        if(ws['M'+str(i)].value==ws2['M'+str(j)].value):
-                                                ws['M'+str(i)]=ws2['M'+str(j)].value
-                                        else:
-                                                ws['M'+str(i)]=ws2['M'+str(j)].value
-                                        
-                                        #Desired data.
-                                        if(ws['N'+str(i)].value==ws2['N'+str(j)].value):
-                                                ws['N'+str(i)]=ws2['N'+str(j)].value
-                                        else:
-                                                ws['N'+str(i)]=ws2['N'+str(j)].value
-                                        
-                                        #Comment.
-                                        if(ws['O'+str(i)].value==ws2['O'+str(j)].value):
-                                                ws['O'+str(i)]=ws2['O'+str(j)].value
-                                        else:
-                                                ws['O'+str(i)]=ws2['O'+str(j)].value
-                                        
-                                        #Rating.
-                                        if(ws['P'+str(i)].value==ws2['P'+str(j)].value):
-                                                ws['P'+str(i)]=ws2['P'+str(j)].value
-                                        else:
-                                                ws['P'+str(i)]=ws2['P'+str(j)].value
-                                        
-                                        #Rated by.
-                                        if(ws['Q'+str(i)].value==ws2['Q'+str(j)].value):
-                                                ws['Q'+str(i)]=ws2['Q'+str(j)].value
-                                        else:
-                                                ws['Q'+str(i)]=ws2['Q'+str(j)].value
-                                        
-                                        #Comments.
-                                        if(ws['R'+str(i)].value==ws2['R'+str(j)].value):
-                                                ws['R'+str(i)]=ws2['R'+str(j)].value
-                                        else:
-                                                ws['R'+str(i)]=ws2['R'+str(j)].value
-                                        
-                                        #Reference comments from GA.
-                                        if(ws['S'+str(i)].value==ws2['S'+str(j)].value):
-                                                ws['S'+str(i)]=ws2['S'+str(j)].value
-                                        else:
-                                                ws['S'+str(i)]=ws2['S'+str(j)].value
-        
-        #Guarda los cambios.
-        wb.save(rutaArchivoCNT + "/fillexcel.xlsx")  
+    #Si un reporte previo es agregado.
+    if(archivoReportePrevioCargado):
+            sheet1=wb.worksheets[0]
+            #Cuenta las filas maximas que tiene el archivo original.
+            newCounterFilasExcel=sheet1.max_row
+            wb2=load_workbook(rutaReportePrevio)
+            sheet2=wb2.worksheets[0]
+            ws2=wb2.active
+            #Cuenta cuantos elementos tiene el archivo previo seleccionado.
+            row_count = sheet2.max_row
+            for i in range(12, newCounterFilasExcel):
+                    for j in range(12, row_count):
+                            if(ws['A'+str(i)].value==ws2['A'+str(j)].value):
+                                    
+                                    #ID Number.
+                                    if(ws['B'+str(i)].value==ws2['B'+str(j)].value):
+                                            ws['B'+str(i)]=ws2['B'+str(j)].value
+                                    else:
+                                            ws['B'+str(i)]=ws2['B'+str(j)].value
 
-        #Para ordenar por ID number.
-        #Selecciona el archivo excel.
-        excel_file = rutaArchivoCNT + "/fillexcel.xlsx"
-        #Leer el archivo.
-        movies = pd.read_excel(excel_file, skiprows=10)
-        #Ordena por numero de ID.
-        sorted_by_number = movies.sort_values(by='ID number',ascending=True)
-        #Guardar.
-        sorted_by_number.to_excel(excel_file,index=False)
+                                    #cr-p.
+                                    if(ws['C'+str(i)].value==ws2['C'+str(j)].value):
+                                            ws['C'+str(i)]=ws2['C'+str(j)].value
+                                    else:
+                                            ws['C'+str(i)]=ws2['C'+str(j)].value
+                                    
+                                    #CRP delivery state.
+                                    if(ws['D'+str(i)].value==ws2['D'+str(j)].value):
+                                            ws['D'+str(i)]=ws2['D'+str(j)].value
+                                    else:
+                                            ws['D'+str(i)]=ws2['D'+str(j)].value
+                                    
+                                    #CRP reset delivery state.
+                                    if(ws['E'+str(i)].value==ws2['E'+str(j)].value):
+                                            ws['E'+str(i)]=ws2['E'+str(j)].value
+                                    else:
+                                            ws['E'+str(i)]=ws2['E'+str(j)].value
+                                    
+                                    #CRP reprog.
+                                    if(ws['F'+str(i)].value==ws2['F'+str(j)].value):
+                                            ws['F'+str(i)]=ws2['F'+str(j)].value
+                                    else:
+                                            ws['F'+str(i)]=ws2['F'+str(j)].value
+                                    
+                                    #Expected delivery state.
+                                    if(ws['J'+str(i)].value==ws2['J'+str(j)].value):
+                                            ws['J'+str(i)]=ws2['J'+str(j)].value
+                                    else:
+                                            ws['J'+str(i)]=ws2['J'+str(j)].value
+                                    
+                                    #Expected reset delivery state.
+                                    if(ws['K'+str(i)].value==ws2['K'+str(j)].value):
+                                            ws['K'+str(i)]=ws2['K'+str(j)].value
+                                    else:
+                                            ws['K'+str(i)]=ws2['K'+str(j)].value
+                                    
+                                    #Expected reprog.
+                                    if(ws['L'+str(i)].value==ws2['L'+str(j)].value):
+                                            ws['L'+str(i)]=ws2['L'+str(j)].value
+                                    else:
+                                            ws['L'+str(i)]=ws2['L'+str(j)].value
+                                    
+                                    #Desired type.
+                                    if(ws['M'+str(i)].value==ws2['M'+str(j)].value):
+                                            ws['M'+str(i)]=ws2['M'+str(j)].value
+                                    else:
+                                            ws['M'+str(i)]=ws2['M'+str(j)].value
+                                    
+                                    #Desired data.
+                                    if(ws['N'+str(i)].value==ws2['N'+str(j)].value):
+                                            ws['N'+str(i)]=ws2['N'+str(j)].value
+                                    else:
+                                            ws['N'+str(i)]=ws2['N'+str(j)].value
+                                    
+                                    #Comment.
+                                    if(ws['O'+str(i)].value==ws2['O'+str(j)].value):
+                                            ws['O'+str(i)]=ws2['O'+str(j)].value
+                                    else:
+                                            ws['O'+str(i)]=ws2['O'+str(j)].value
+                                    
+                                    #Rating.
+                                    if(ws['P'+str(i)].value==ws2['P'+str(j)].value):
+                                            ws['P'+str(i)]=ws2['P'+str(j)].value
+                                    else:
+                                            ws['P'+str(i)]=ws2['P'+str(j)].value
+                                    
+                                    #Rated by.
+                                    if(ws['Q'+str(i)].value==ws2['Q'+str(j)].value):
+                                            ws['Q'+str(i)]=ws2['Q'+str(j)].value
+                                    else:
+                                            ws['Q'+str(i)]=ws2['Q'+str(j)].value
+                                    
+                                    #Comments.
+                                    if(ws['R'+str(i)].value==ws2['R'+str(j)].value):
+                                            ws['R'+str(i)]=ws2['R'+str(j)].value
+                                    else:
+                                            ws['R'+str(i)]=ws2['R'+str(j)].value
+                                    
+                                    #Reference comments from GA.
+                                    if(ws['S'+str(i)].value==ws2['S'+str(j)].value):
+                                            ws['S'+str(i)]=ws2['S'+str(j)].value
+                                    else:
+                                            ws['S'+str(i)]=ws2['S'+str(j)].value
+    
+    #Guarda los cambios.
+    wb.save(rutaArchivoCNT + "/fillexcel.xlsx")  
 
-        #Se crea una copia del Template para poder copiar los datos ordenados al archivo que se generara al final.
-        shutil.copy("EEPROM_Container_Review_Template.xlsx", rutaArchivoCNT + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
-        
-        #Carga el archivo Excel anteriormente generado.
-        wb1 = load_workbook(filename = rutaArchivoCNT +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
-        ws1=wb1.active
+    #Para ordenar por ID number.
+    #Selecciona el archivo excel.
+    excel_file = rutaArchivoCNT + "/fillexcel.xlsx"
+    #Leer el archivo.
+    movies = pd.read_excel(excel_file, skiprows=10)
+    #Ordena por numero de ID.
+    sorted_by_number = movies.sort_values(by='ID number',ascending=True)
+    #Guardar.
+    sorted_by_number.to_excel(excel_file,index=False)
 
-        #Carga el archivo con los datos ordenados.
-        wb=load_workbook(filename = rutaArchivoCNT +  "/fillexcel.xlsx")
-        sheet=wb.worksheets[0]
-        
-        #Para que no escriba en espacios vacios.
-        row_count = sheet.max_row
-        ws=wb.active
+    #Se crea una copia del Template para poder copiar los datos ordenados al archivo que se generara al final.
+    shutil.copy("EEPROM_Container_Review_Template.xlsx", rutaArchivoCNT + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+    
+    #Carga el archivo Excel anteriormente generado.
+    wb1 = load_workbook(filename = rutaArchivoCNT +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+    ws1=wb1.active
 
-        #Desde aqui toma los datos.
-        j=2
+    #Carga el archivo con los datos ordenados.
+    wb=load_workbook(filename = rutaArchivoCNT +  "/fillexcel.xlsx")
+    sheet=wb.worksheets[0]
+    
+    #Para que no escriba en espacios vacios.
+    row_count = sheet.max_row
+    ws=wb.active
 
-        #Los datos los pega ordenados en el archivo excel que es copia del template.
-        #No escribe en espacios vacios.
-        for i in range(12, 12+row_count-1):
-                ws1['A'+str(i)]=ws['A'+str(j)].value
-                ws1['B'+str(i)]=ws['B'+str(j)].value
-                ws1['C'+str(i)]=ws['C'+str(j)].value
-                ws1['D'+str(i)]=ws['D'+str(j)].value
-                ws1['E'+str(i)]=ws['E'+str(j)].value
-                ws1['F'+str(i)]=ws['F'+str(j)].value
-                ws1['G'+str(i)]=ws['G'+str(j)].value
-                ws1['H'+str(i)]=ws['H'+str(j)].value
-                ws1['I'+str(i)]=ws['I'+str(j)].value
-                ws1['J'+str(i)]=ws['J'+str(j)].value
-                ws1['K'+str(i)]=ws['K'+str(j)].value
-                ws1['L'+str(i)]=ws['L'+str(j)].value
-                ws1['M'+str(i)]=ws['M'+str(j)].value
-                ws1['N'+str(i)]=ws['N'+str(j)].value
-                ws1['O'+str(i)]=ws['O'+str(j)].value
-                ws1['P'+str(i)]=ws['P'+str(j)].value
-                ws1['Q'+str(i)]=ws['Q'+str(j)].value
-                ws1['R'+str(i)]=ws['R'+str(j)].value
-                ws1['S'+str(i)]=ws['S'+str(j)].value
-                j+=1
+    #Desde aqui toma los datos.
+    j=2
 
-        #Asigna los valores de BBNumber, Baseline, Encargado y nombre del proyecto a sus respectivas celdas.
-        ws1['B3']=BBNumber
-        ws1['B4']=Baseline
-        ws1['B2']=PD.text
-        ws1['B5']=PN.text
+    #Los datos los pega ordenados en el archivo excel que es copia del template.
+    #No escribe en espacios vacios.
+    for i in range(12, 12+row_count-1):
+            ws1['A'+str(i)]=ws['A'+str(j)].value
+            ws1['B'+str(i)]=ws['B'+str(j)].value
+            ws1['C'+str(i)]=ws['C'+str(j)].value
+            ws1['D'+str(i)]=ws['D'+str(j)].value
+            ws1['E'+str(i)]=ws['E'+str(j)].value
+            ws1['F'+str(i)]=ws['F'+str(j)].value
+            ws1['G'+str(i)]=ws['G'+str(j)].value
+            ws1['H'+str(i)]=ws['H'+str(j)].value
+            ws1['I'+str(i)]=ws['I'+str(j)].value
+            ws1['J'+str(i)]=ws['J'+str(j)].value
+            ws1['K'+str(i)]=ws['K'+str(j)].value
+            ws1['L'+str(i)]=ws['L'+str(j)].value
+            ws1['M'+str(i)]=ws['M'+str(j)].value
+            ws1['N'+str(i)]=ws['N'+str(j)].value
+            ws1['O'+str(i)]=ws['O'+str(j)].value
+            ws1['P'+str(i)]=ws['P'+str(j)].value
+            ws1['Q'+str(i)]=ws['Q'+str(j)].value
+            ws1['R'+str(i)]=ws['R'+str(j)].value
+            ws1['S'+str(i)]=ws['S'+str(j)].value
+            j+=1
 
-        #Guarda el archivo.
-        wb1.save(rutaArchivoCNT +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
-        
-        #Borra el archivo que tiene los datos ordenados.
-        os.remove(rutaArchivoCNT + "/fillexcel.xlsx")
+    #Asigna los valores de BBNumber, Baseline, Encargado y nombre del proyecto a sus respectivas celdas.
+    ws1['B3']=BBNumber
+    ws1['B4']=Baseline
+    #ws1['B2']=PD.text
+    ws1['B5']=PN.text
+
+    #Guarda el archivo.
+    wb1.save(rutaArchivoCNT +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
+    
+    #Borra el archivo que tiene los datos ordenados.
+    os.remove(rutaArchivoCNT + "/fillexcel.xlsx")
+
+    #Close log.
+    logProgram.close()
 
 def main():
 		
