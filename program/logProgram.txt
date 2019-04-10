@@ -1,0 +1,189 @@
+CNT file read.
+
+PROJECT-INFO -- <Element 'PROJECT-INFO' at 0x06383D80>
+      PROJECT-DESC -- <Element 'PROJECT-DESC' at 0x06383120>
+RESPONSIBLE -- <Element 'RESPONSIBLE' at 0x063836F0>
+      PERSON-NAME -- <Element 'PERSON-NAME' at 0x063838A0>
+SESSION -- <Element 'SESSION' at 0x06383930>
+      SESSION-NAME -- <Element 'SESSION-NAME' at 0x063839F0>
+              __ALL__ -- __ALL__
+                      DATAPOINTER-NAME -- Id_Config
+                      DATAPOINTER-NAME -- DUMMY_TestModuleCnt
+                      DATAPOINTER-NAME -- ASDFClockTower
+                      DATAPOINTER-NAME -- SampleData_01
+                      DATAPOINTER-NAME -- SampleData_02
+                      DATAPOINTER-NAME -- SampleData_03
+                      DATAPOINTER-NAME -- SampleData_04
+                      DATAPOINTER-NAME -- SampleData_05
+                      DATAPOINTER-NAME -- TestData_07
+                      DATAPOINTER-NAME -- TestData_08
+                      DATAPOINTER-NAME -- TestData_09
+                      DATAPOINTER-NAME -- TestData_10
+                      DATAPOINTER-NAME -- TestData_11
+                      DATAPOINTER-IDENT -- 1
+                      DATAPOINTER-IDENT -- 31416
+                      DATAPOINTER-IDENT -- 111255
+                      DATAPOINTER-IDENT -- 1710
+                      DATAPOINTER-IDENT -- 1711
+                      DATAPOINTER-IDENT -- 1712
+                      DATAPOINTER-IDENT -- 1713
+                      DATAPOINTER-IDENT -- 1714
+                      DATAPOINTER-IDENT -- 12345
+                      DATAPOINTER-IDENT -- 12346
+                      DATAPOINTER-IDENT -- 12347
+                      DATAPOINTER-IDENT -- 12348
+                      DATAPOINTER-IDENT -- 12349
+                      DATAPOINTER-IDENTIFIER -- ee_datablock
+                      DATAPOINTER-IDENTIFIER -- ee_erase
+                      DATAPOINTER-IDENTIFIER -- ee_datablock
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+SESSION -- <Element 'SESSION' at 0x06379D80>
+      SESSION-NAME -- <Element 'SESSION-NAME' at 0x06379900>
+              Reprog -- Reprog
+                      DATAPOINTER-NAME -- DUMMY_TestModuleCnt
+                      DATAPOINTER-NAME -- SampleData_03
+                      DATAPOINTER-NAME -- SampleData_05
+                      DATAPOINTER-NAME -- TestData_08
+                      DATAPOINTER-NAME -- TestData_10
+                      DATAPOINTER-NAME -- TestData_11
+                      DATAPOINTER-IDENT -- 31416
+                      DATAPOINTER-IDENT -- 1712
+                      DATAPOINTER-IDENT -- 1714
+                      DATAPOINTER-IDENT -- 12346
+                      DATAPOINTER-IDENT -- 12348
+                      DATAPOINTER-IDENT -- 12349
+                      DATAPOINTER-IDENTIFIER -- ee_erase
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+SESSION -- <Element 'SESSION' at 0x06376210>
+      SESSION-NAME -- <Element 'SESSION-NAME' at 0x06376120>
+              DeliveryState -- DeliveryState
+                      DATAPOINTER-NAME -- ASDFClockTower
+                      DATAPOINTER-NAME -- SampleData_02
+                      DATAPOINTER-NAME -- SampleData_04
+                      DATAPOINTER-NAME -- TestData_07
+                      DATAPOINTER-NAME -- TestData_09
+                      DATAPOINTER-NAME -- TestData_11
+                      DATAPOINTER-IDENT -- 111255
+                      DATAPOINTER-IDENT -- 1711
+                      DATAPOINTER-IDENT -- 1713
+                      DATAPOINTER-IDENT -- 12345
+                      DATAPOINTER-IDENT -- 12347
+                      DATAPOINTER-IDENT -- 12349
+                      DATAPOINTER-IDENTIFIER -- ee_datablock
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+SESSION -- <Element 'SESSION' at 0x06327210>
+      SESSION-NAME -- <Element 'SESSION-NAME' at 0x063271E0>
+              ResetToDeliveryState -- ResetToDeliveryState
+                      DATAPOINTER-NAME -- SampleData_02
+                      DATAPOINTER-NAME -- SampleData_05
+                      DATAPOINTER-NAME -- TestData_07
+                      DATAPOINTER-NAME -- TestData_10
+                      DATAPOINTER-NAME -- TestData_11
+                      DATAPOINTER-IDENT -- 1711
+                      DATAPOINTER-IDENT -- 1714
+                      DATAPOINTER-IDENT -- 12345
+                      DATAPOINTER-IDENT -- 12348
+                      DATAPOINTER-IDENT -- 12349
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+                      DATAPOINTER-IDENTIFIER -- ee_range
+DATABLOCK -- <Element 'DATABLOCK' at 0x063270F0>
+DATABLOCK -- <Element 'DATABLOCK' at 0x063279C0>
+DATABLOCK -- <Element 'DATABLOCK' at 0x06316480>
+      	DATA -- data_size=41
+DATABLOCK -- <Element 'DATABLOCK' at 0x06316D80>
+DATABLOCK -- <Element 'DATABLOCK' at 0x06377FC0>
+      	DATA -- description=- Component: ASDF
+- REPROG info: use case REPROG must not be set.
+- REPROG info: In certain cases there are two comments of this type.
+There are also strings up to 160 characters per row, only on description fields and usually is not only one row. Like this example but a little bit longer. 
+      	DATA -- description=- Component: ASDF
+- REPROG info: use case REPROG must not be set.
+- REPROG info: In certain cases there are two comments of this type.
+There are also strings up to 160 characters per row, only on description fields and usually is not only one row. Like this example but a little bit longer. 
+DATABLOCK -- <Element 'DATABLOCK' at 0x06377AE0>
+      	DATA -- description=- Component: Sample
+- This comment is different from the REPROG info.
+- REPROG info: To be evaluated based on the reprogramming scenario.
+The quick brown fox jumps over the lazy dog. 
+DATABLOCK -- <Element 'DATABLOCK' at 0x063772A0>
+      	DATA -- description=- Component: SP Data
+- REPROG info: undefined
+      	DATA -- description=- Component: SP Data
+- REPROG info: undefined
+      	DATA -- description=- Component: SP Data
+- REPROG info: undefined
+DATABLOCK -- <Element 'DATABLOCK' at 0x063236C0>
+      	DATA -- description=- Component: SP Data
+- REPROG info: tbd
+      	DATA -- description=- Component: SP Data
+- REPROG info: tbd
+DATABLOCK -- <Element 'DATABLOCK' at 0x06389720>
+      	DATA -- description=- Component: SPD
+- REPROG info: t.b.d
+      	DATA -- description=- Component: SPD
+- REPROG info: t.b.d
+DATABLOCK -- <Element 'DATABLOCK' at 0x0638E3F0>
+      	DATA -- description=- Component: SPD
+- REPROG info: use case REPROG must be set
+      	DATA -- description=- Component: SPD
+- REPROG info: use case REPROG must be set
+      	DATA -- description=- Component: SPD
+- REPROG info: use case REPROG must be set
+DATABLOCK -- <Element 'DATABLOCK' at 0x0638ECC0>
+      	DATA -- description=- Component: Test
+- REPROG info: To be evaluated.
+      	DATA -- description=- Component: Test
+- REPROG info: To be evaluated.
+      	DATA -- description=- Component: Test
+- REPROG info: To be evaluated.
+DATABLOCK -- <Element 'DATABLOCK' at 0x063964B0>
+      	DATA -- description=- Component: TST Data
+- REPROG info: undefined
+      	DATA -- description=- Component: TST Data
+- REPROG info: undefined
+DATABLOCK -- <Element 'DATABLOCK' at 0x06396990>
+      	DATA -- description=- Component: TST Data
+- REPROG info: tbd
+      	DATA -- description=- Component: TST Data
+- REPROG info: tbd
+DATABLOCK -- <Element 'DATABLOCK' at 0x06396ED0>
+      	DATA -- description=- Component: TST
+- REPROG info: t.b.d
+      	DATA -- description=- Component: TST
+- REPROG info: t.b.d
+      	DATA -- description=- Component: TST
+- REPROG info: t.b.d
+DATABLOCK -- <Element 'DATABLOCK' at 0x063A6450>
+      	DATA -- description=- Component: TST
+- REPROG info: use case REPROG must be set
+      	DATA -- description=- Component: TST
+- REPROG info: use case REPROG must be set
+      	DATA -- description=- Component: TST
+- REPROG info: use case REPROG must be set
+SORTING BY NVM ID NUMBER
+
+BBNumber -- BB95650
+Baseline -- BSS2007
+PROJECT MANAGER -- Oscar Gonzalez
+
+END
