@@ -98,6 +98,8 @@ def newProgram():
         estadoCheckButton = 0
         button_PreviousReport.state(["disabled"])
 
+        label.configure(text="EEPROM report generator")
+
         rutaCNT = "0"
         archivoCNTCargado = 0
         rutaReportePrevio = "0"
@@ -135,10 +137,12 @@ def cntButton():
     else:                                   #Se selecciono el archivo correctamente.
         archivoCNTCargado = 1
         button_CNT.configure(style='button_style2.TButton')
-        enable_button.grid()                    #Ahora se puede mostrar el checkbuton para habilitar el boton de reporte previo.
+        enable_button.grid()            #Ahora se puede mostrar el checkbuton para habilitar el boton de reporte previo.
         button_PreviousReport.grid()    #Ahora se puede mostrar el boton de reporte previo como opcional.
         button_GenerateReport.grid()    #Ahora se puede mostrar el boton de generar reporte.
         button_GenerateReport.configure(style='button_style1.TButton')
+    
+    label.configure(text="EEPROM report generator")
 
 def enableButtonRP():
 
