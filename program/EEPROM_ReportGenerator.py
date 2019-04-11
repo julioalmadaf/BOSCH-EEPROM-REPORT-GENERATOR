@@ -107,18 +107,31 @@ def newProgram():
 
 def exitProgram():
         
+        label.configure(text="Closing program")
+
         #Preguntar al usuario si desea salir del programa.
         salir = messagebox.askyesno(message="Do you want to close the program?", title="Close program")
+
         if(salir == 1):
                 sys.exit(0)
+        
+        label.configure(text="EEPROM report generator")
 
 def aboutProgram():
         
+        label.configure(text="About the program")
+
         messagebox.showinfo("About EEPROM report generator", "This software has been released by Julio Cesar Almada Fuerte and Ruben Barajas Curiel")
+
+        label.configure(text="EEPROM report generator")
 
 def helpProgram():
         
+        label.configure(text="Help")
+
         messagebox.showinfo("Help", "Visit the following link to get more information about this software")
+
+        label.configure(text="EEPROM report generator")
 
 def cntButton():
 
@@ -406,7 +419,7 @@ def fillExcel():
                 for DPN in datablock.iter('DATA'):
                     j += 1
                     if(j == 6):
-                        logProgram.write("      	DATA -- " + str(DPN.text) + "\r\n")
+                        logProgram.write("          DATA -- " + str(DPN.text) + "\r\n")
                         #Se copia la descripcion a la columna comment.
                         ws['O' + str(i)] = DPN.text
 
