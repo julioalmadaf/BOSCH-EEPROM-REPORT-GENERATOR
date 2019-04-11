@@ -253,9 +253,11 @@ button_style2 = ttk.Style()
 def fillExcel():
 
     global rutaArchivoCNT
-
+    
     #Open log file.
-    logProgram = open(rutaArchivoCNT + "/logProgram.txt","w+")
+    logProgram = open(rutaArchivoCNT + "/logProgram"+str(BBNumber)+".txt","w+")
+
+    logProgram.write("Generating new Excel file\r\n\r\n")
 
     #Carga el archivo Excel anteriormente generado.
     wb = load_workbook(filename = rutaArchivoCNT + "/fillexcel.xlsx")
@@ -270,36 +272,35 @@ def fillExcel():
     
     #Counter para ir agregando elementos en excel.
     CounterFilasExcel = 11
-
+    
     ######################################################
     #Guarda el nombre del proyecto.
     for project in root.iter('PROJECT-INFO'):
-        logProgram.write("PROJECT-INFO -- " + str(project) +"\r\n")
+        logProgram.write("PROJECT-INFO\r\n")
         PD = project.find('PROJECT-DESC')
         if PD is not None:
-                logProgram.write("      PROJECT-DESC -- " + str(PD) + "\r\n")
+                logProgram.write("      PROJECT-DESC -- " + PD.text + "\r\n")
 
     ######################################################
     #Guarda el nombre del responsable.
     for info in root.iter('RESPONSIBLE'):
-        logProgram.write("RESPONSIBLE -- " + str(info) + "\r\n")
+        logProgram.write("RESPONSIBLE \r\n")
         PN = info.find('PERSON-NAME')
         if PN is not None:
-                logProgram.write("      PERSON-NAME -- " + str(PN) + "\r\n")
+                logProgram.write("      PERSON-NAME -- " + PN.text + "\r\n")
 
     ######################################################
     #Busca el nodo sesion en todo el arbol.
+    logProgram.write("SESSIONS\r\n")
     for session in root.iter('SESSION'):
-        logProgram.write("SESSION -- " + str(session) + "\r\n")
 
         #Busca en los tipos de sesiones que nombre tiene.
         sessionN = session.find('SESSION-NAME')
         if sessionN is not None:
-                logProgram.write("      SESSION-NAME -- " + str(sessionN) + "\r\n")
+                logProgram.write("      SESSION-NAME -- " + sessionN.text + "\r\n")
 
                 #Cuando la sesion es ALL.
                 if(sessionN.text == '__ALL__'):
-                        logProgram.write("              __ALL__ -- " + str(sessionN.text) + "\r\n")
 
                         #Para no alterar el orden de las filas del excel.
                         tempCounter=CounterFilasExcel
@@ -314,7 +315,7 @@ def fillExcel():
                         
                         #Obtiene el Datapointer-ident del item.
                         for DPID in session.iter('DATAPOINTER-IDENT'):
-                                logProgram.write("                      DATAPOINTER-IDENT -- " + str(DPID.text) + "\r\n")
+                                logProgram.write("                      DATAPOINTER-ID -- " + str(DPID.text) + "\r\n")
                                 tempCounter += 1
                                 ws['B'+ str(tempCounter)] = DPID.text   #Guarda el valor en el excel.
                         
@@ -322,13 +323,12 @@ def fillExcel():
                         
                         #Obtiene el Datapointer-identifier del item.
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
-                                logProgram.write("                      DATAPOINTER-IDENTIFIER -- " + str(DFID.text) + "\r\n")
+                                logProgram.write("                      DATAPOINTER-DESIRED TYPE -- " + str(DFID.text) + "\r\n")
                                 CounterFilasExcel += 1          #Aqui se aumenta el CounterFilasExcel para que se respeten las filas.
                                 ws['M'+ str(CounterFilasExcel)] = DFID.text
 
                 #Cuando la sesion es Reprog.
                 if(sessionN.text == 'Reprog'):
-                        logProgram.write("              Reprog -- " + str(sessionN.text) + "\r\n")
 
                         tempCounter = CounterFilasExcel
                         
@@ -340,21 +340,20 @@ def fillExcel():
                         tempCounter = CounterFilasExcel
                         
                         for DPID in session.iter('DATAPOINTER-IDENT'):
-                                logProgram.write("                      DATAPOINTER-IDENT -- " + str(DPID.text) + "\r\n")
+                                logProgram.write("                      DATAPOINTER-ID -- " + str(DPID.text) + "\r\n")
                                 tempCounter += 1
                                 ws['B'+ str(tempCounter)] = DPID.text
                         
                         tempCounter=CounterFilasExcel
                         
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
-                                logProgram.write("                      DATAPOINTER-IDENTIFIER -- " + str(DFID.text) + "\r\n")
+                                logProgram.write("                      DATAPOINTER-DESIRED TYPE -- " + str(DFID.text) + "\r\n")
                                 CounterFilasExcel += 1
                                 ws['M'+ str(CounterFilasExcel)] = DFID.text
                                 ws['I'+ str(CounterFilasExcel)] = "X"           #Marca que el use case de que es Reprog.
 
                 #Cuando la sesion es DeliveryState.
                 if(sessionN.text == 'DeliveryState'):
-                        logProgram.write("              DeliveryState -- " + str(sessionN.text) + "\r\n")
 
                         tempCounter = CounterFilasExcel
 
@@ -366,21 +365,20 @@ def fillExcel():
                         tempCounter = CounterFilasExcel
 
                         for DPID in session.iter('DATAPOINTER-IDENT'):
-                                logProgram.write("                      DATAPOINTER-IDENT -- " + str(DPID.text) + "\r\n")
+                                logProgram.write("                      DATAPOINTER-ID -- " + str(DPID.text) + "\r\n")
                                 tempCounter += 1
                                 ws['B'+ str(tempCounter)] = DPID.text
                         
                         tempCounter = CounterFilasExcel
 
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
-                                logProgram.write("                      DATAPOINTER-IDENTIFIER -- " + str(DFID.text) + "\r\n")
+                                logProgram.write("                      DATAPOINTER-DESIRED TYPE -- " + str(DFID.text) + "\r\n")
                                 CounterFilasExcel += 1
                                 ws['M'+ str(CounterFilasExcel)] = DFID.text
                                 ws['G'+ str(CounterFilasExcel)] = "X"           #Marca que el use case de que es DeliveryState.
 
                 #Cuando es la sesion es ResetToDeliveryState.
                 if(sessionN.text == 'ResetToDeliveryState'):
-                        logProgram.write("              ResetToDeliveryState -- " + str(sessionN.text) + "\r\n")
 
                         tempCounter = CounterFilasExcel
 
@@ -392,37 +390,19 @@ def fillExcel():
                         tempCounter = CounterFilasExcel
 
                         for DPID in session.iter('DATAPOINTER-IDENT'):
-                                logProgram.write("                      DATAPOINTER-IDENT -- " + str(DPID.text) + "\r\n")
+                                logProgram.write("                      DATAPOINTER-ID -- " + str(DPID.text) + "\r\n")
                                 tempCounter += 1
                                 ws['B'+ str(tempCounter)] = DPID.text
                         
                         tempCounter = CounterFilasExcel
 
                         for DFID in session.iter('DATAFORMAT-IDENTIFIER'):
-                                logProgram.write("                      DATAPOINTER-IDENTIFIER -- " + str(DFID.text) + "\r\n")
+                                logProgram.write("                      DATAPOINTER-DESIRED TYPE -- " + str(DFID.text) + "\r\n")
                                 CounterFilasExcel += 1
                                 ws['M'+ str(CounterFilasExcel)] = DFID.text
                                 ws['H'+ str(CounterFilasExcel)] = "X"           #Marca que el use case de que es ReturnToDeliveryState.
 
-    ######################################################
-    #Agrega comments.
-    for datablock in root.iter('DATABLOCK'):
-        logProgram.write("DATABLOCK -- " + str(datablock) + "\r\n")
-        #Busca en los datablock que nombre tiene.
-        DBN = datablock.find('DATABLOCK-NAME')
-        #Para recorrer el excel.
-        for i in range(12, CounterFilasExcel):
-            #Compara el valor que tiene la celda de excel con el datablock name.
-            if(DBN.text == ((ws['A' + str(i)].value) + '__Metadata')):
-                j = 0
-                #Hay varios DATA por datablock, pero el que se ocupa es el 6to.
-                for DPN in datablock.iter('DATA'):
-                    j += 1
-                    if(j == 6):
-                        logProgram.write("          DATA -- " + str(DPN.text) + "\r\n")
-                        #Se copia la descripcion a la columna comment.
-                        ws['O' + str(i)] = DPN.text
-
+    logProgram.write("Repeated Datapointers deleted " + str(DPID.text) + "\r\n")
     ######################################################
     #Para checar si se repite algun NVM Item.
     for i in range(12,CounterFilasExcel):
@@ -441,14 +421,37 @@ def fillExcel():
                     ws['G'+str(i)]="X"
                     #Borra la fila que se repite.
                     ws.delete_rows(j,1)
+                    CounterFilasExcel-=1
                 temp3 = ws['H'+str(j)]
                 if(temp3.value=="X"): 
                     ws['H'+str(i)]="X"
                     ws.delete_rows(j,1)
+                    CounterFilasExcel-=1
                 temp3 = ws['I'+str(j)]
                 if(temp3.value=="X"): 
                     ws['I'+str(i)]="X"
                     ws.delete_rows(j,1)
+                    CounterFilasExcel-=1
+
+    ######################################################
+    #Agrega comments.
+    for datablock in root.iter('DATABLOCK'):
+        #Busca en los datablock que nombre tiene.
+        DBN = datablock.find('DATABLOCK-NAME')
+        #Para recorrer el excel.
+        for i in range(12, CounterFilasExcel):
+            #Compara el valor que tiene la celda de excel con el datablock name.
+            if(DBN.text == ((ws['A' + str(i)].value) + '__Metadata')):
+                j = 0
+                #Hay varios DATA por datablock, pero el que se ocupa es el 6to.
+                for DPN in datablock.iter('DATA'):
+                    j += 1
+                    if(j == 6):
+                        logProgram.write("DATAPOINTER-NAME -- " + DBN.text + "\r\n")
+                        logProgram.write("       COMMENT -- " + str(DPN.text) + "\r\n")
+                        #Se copia la descripcion a la columna comment.
+                        ws['O' + str(i)] = DPN.text
+
 
     #Si un reporte previo es agregado.
     if(archivoReportePrevioCargado):
@@ -464,102 +467,132 @@ def fillExcel():
         for i in range(12, newCounterFilasExcel):
             for j in range(12, row_count):
                 if(ws['A'+str(i)].value==ws2['A'+str(j)].value):
-                    
+                    logProgram.write("      FROM " + ws['A'+str(i)].value + " \r\n")
                     #ID Number.
                     if(ws['B'+str(i)].value==ws2['B'+str(j)].value):
                         ws['B'+str(i)]=ws2['B'+str(j)].value
+                        logProgram.write("          ID NUMBER NOT CHANGED \r\n")
                     else:
                         ws['B'+str(i)]=ws2['B'+str(j)].value
+                        logProgram.write("          ID NUMBER CHANGED \r\n")
 
                     #cr-p.
                     if(ws['C'+str(i)].value==ws2['C'+str(j)].value):
                         ws['C'+str(i)]=ws2['C'+str(j)].value
+                        logProgram.write("          CR - P NOT CHANGED \r\n")
                     else:
                         ws['C'+str(i)]=ws2['C'+str(j)].value
+                        logProgram.write("          CR - P CHANGED \r\n")
                     
                     #CRP delivery state.
                     if(ws['D'+str(i)].value==ws2['D'+str(j)].value):
                         ws['D'+str(i)]=ws2['D'+str(j)].value
+                        logProgram.write("          CRP DELIVERY STATE NOT CHANGED \r\n")
                     else:
                         ws['D'+str(i)]=ws2['D'+str(j)].value
-                    
+                        logProgram.write("          CRP DELIVERY STATE CHANGED \r\n")
+
                     #CRP reset delivery state.
                     if(ws['E'+str(i)].value==ws2['E'+str(j)].value):
                         ws['E'+str(i)]=ws2['E'+str(j)].value
+                        logProgram.write("          CRP RESET DELIVERY STATE NOT CHANGED \r\n")
                     else:
                         ws['E'+str(i)]=ws2['E'+str(j)].value
+                        logProgram.write("          CRP RESET DELIVERY STATE CHANGED \r\n")
                     
                     #CRP reprog.
                     if(ws['F'+str(i)].value==ws2['F'+str(j)].value):
                         ws['F'+str(i)]=ws2['F'+str(j)].value
+                        logProgram.write("          CRP REPROG NOT CHANGED \r\n")
                     else:
                         ws['F'+str(i)]=ws2['F'+str(j)].value
+                        logProgram.write("          CRP REPROG CHANGED \r\n")
                     
                     #Expected delivery state.
                     if(ws['J'+str(i)].value==ws2['J'+str(j)].value):
                         ws['J'+str(i)]=ws2['J'+str(j)].value
+                        logProgram.write("          EXPECTED DELIVERY STATE NOT CHANGED \r\n")
                     else:
                         ws['J'+str(i)]=ws2['J'+str(j)].value
+                        logProgram.write("          EXPECTED DELIVERY STATE CHANGED \r\n")
                     
                     #Expected reset delivery state.
                     if(ws['K'+str(i)].value==ws2['K'+str(j)].value):
                         ws['K'+str(i)]=ws2['K'+str(j)].value
+                        logProgram.write("          EXPECTED RESET DELIVERY STATE NOT CHANGED \r\n")
                     else:
                         ws['K'+str(i)]=ws2['K'+str(j)].value
+                        logProgram.write("          EXPECTED RESET DELIVERY STATE CHANGED \r\n")
                     
                     #Expected reprog.
                     if(ws['L'+str(i)].value==ws2['L'+str(j)].value):
                         ws['L'+str(i)]=ws2['L'+str(j)].value
+                        logProgram.write("          EXPECTED REPROG NOT CHANGED \r\n")
                     else:
                         ws['L'+str(i)]=ws2['L'+str(j)].value
-                    
+                        logProgram.write("          EXPECTED REPROG CHANGED \r\n")
+
                     #Desired type.
                     if(ws['M'+str(i)].value==ws2['M'+str(j)].value):
                         ws['M'+str(i)]=ws2['M'+str(j)].value
+                        logProgram.write("          DESIRED TYPE NOT CHANGED \r\n")
                     else:
                         ws['M'+str(i)]=ws2['M'+str(j)].value
+                        logProgram.write("          DESIRED TYPE CHANGED \r\n")
                     
                     #Desired data.
                     if(ws['N'+str(i)].value==ws2['N'+str(j)].value):
                         ws['N'+str(i)]=ws2['N'+str(j)].value
+                        logProgram.write("          DESIRED DATA NOT CHANGED \r\n")
                     else:
                         ws['N'+str(i)]=ws2['N'+str(j)].value
+                        logProgram.write("          DESIRED DATA CHANGED \r\n")
                     
                     #Comment.
                     if(ws['O'+str(i)].value==ws2['O'+str(j)].value):
                         ws['O'+str(i)]=ws2['O'+str(j)].value
+                        logProgram.write("          COMMENT NOT CHANGED \r\n")
                     else:
                         ws['O'+str(i)]=ws2['O'+str(j)].value
+                        logProgram.write("          COMMENT CHANGED \r\n")
                     
                     #Rating.
                     if(ws['P'+str(i)].value==ws2['P'+str(j)].value):
                         ws['P'+str(i)]=ws2['P'+str(j)].value
+                        logProgram.write("          RATING NOT CHANGED \r\n")
                     else:
                         ws['P'+str(i)]=ws2['P'+str(j)].value
+                        logProgram.write("          RATING CHANGED \r\n")
                     
                     #Rated by.
                     if(ws['Q'+str(i)].value==ws2['Q'+str(j)].value):
                         ws['Q'+str(i)]=ws2['Q'+str(j)].value
+                        logProgram.write("          RATED BY NOT CHANGED \r\n")
                     else:
                         ws['Q'+str(i)]=ws2['Q'+str(j)].value
+                        logProgram.write("          RATED BY CHANGED \r\n")
                     
                     #Comments.
                     if(ws['R'+str(i)].value==ws2['R'+str(j)].value):
                         ws['R'+str(i)]=ws2['R'+str(j)].value
+                        logProgram.write("          COMMENTS NOT CHANGED \r\n")
                     else:
                         ws['R'+str(i)]=ws2['R'+str(j)].value
+                        logProgram.write("          COMMENTS CHANGED \r\n")
                     
                     #Reference comments from GA.
                     if(ws['S'+str(i)].value==ws2['S'+str(j)].value):
                         ws['S'+str(i)]=ws2['S'+str(j)].value
+                        logProgram.write("          REFERENCE COMMENTS FROM GA NOT CHANGED \r\n")
                     else:
                         ws['S'+str(i)]=ws2['S'+str(j)].value
+                        logProgram.write("          REFERENCE COMMENTS FROM GA CHANGED \r\n")
     
     #Guarda los cambios.
     wb.save(rutaArchivoCNT + "/fillexcel.xlsx")
 
     #Para ordenar por ID number. Selecciona el archivo excel.
-    logProgram.write("\r\nSORTING BY NVM ID NUMBER\r\n\r\n")
+    logProgram.write("\r\nEXCEL FILE DATA POINTERS SORTED BY NVM ID NUMBER\r\n\r\n")
     excel_file = rutaArchivoCNT + "/fillexcel.xlsx"
     #Leer el archivo.
     movies = pd.read_excel(excel_file, skiprows=10)
@@ -611,12 +644,14 @@ def fillExcel():
         j+=1
 
     #Asigna los valores de BBNumber, Baseline, Encargado y nombre del proyecto a sus respectivas celdas.
-    logProgram.write("BBNumber -- " + str(BBNumber) + "\r\n")
-    logProgram.write("Baseline -- " + str(Baseline) + "\r\n")
-    logProgram.write("PROJECT MANAGER -- " + str(PN.text) + "\r\n\r\n")
+    logProgram.write("BBNumber -- " + str(BBNumber) + " added to Excel file.\r\n\r\n")
+    logProgram.write("Baseline -- " + str(Baseline) + " added to Excel file.\r\n\r\n")
+    logProgram.write("PROJECT MANAGER -- " + PN.text + " added to Excel file.\r\n\r\n")
+    logProgram.write("PROJECT DESCRIPTION -- " + PD.text + " added to Excel file.\r\n\r\n")
     ws1['B3']=BBNumber
     ws1['B4']=Baseline
     ws1['B5']=PN.text
+    ws1['B2']=PD.text
 
     #Guarda el archivo.
     wb1.save(rutaArchivoCNT +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + BBNumber + ".xlsx")
@@ -625,7 +660,7 @@ def fillExcel():
     os.remove(rutaArchivoCNT + "/fillexcel.xlsx")
 
     #Close log.
-    logProgram.write("END\r\n")
+    logProgram.write("END OF LOG FILE\r\n")
     logProgram.close()
 
 def main():

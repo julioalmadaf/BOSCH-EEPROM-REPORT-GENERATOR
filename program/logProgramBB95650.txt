@@ -1,0 +1,254 @@
+Generating new Excel file
+
+CNT file read.
+
+PROJECT-INFO
+      PROJECT-DESC -- BB-No=0123456789
+RESPONSIBLE 
+      PERSON-NAME -- Oscar Gonzalez
+SESSIONS
+      SESSION-NAME -- __ALL__
+                      DATAPOINTER-NAME -- Id_Config
+                      DATAPOINTER-NAME -- DUMMY_TestModuleCnt
+                      DATAPOINTER-NAME -- ASDFClockTower
+                      DATAPOINTER-NAME -- SampleData_01
+                      DATAPOINTER-NAME -- SampleData_02
+                      DATAPOINTER-NAME -- SampleData_03
+                      DATAPOINTER-NAME -- SampleData_04
+                      DATAPOINTER-NAME -- SampleData_05
+                      DATAPOINTER-NAME -- TestData_07
+                      DATAPOINTER-NAME -- TestData_08
+                      DATAPOINTER-NAME -- TestData_09
+                      DATAPOINTER-NAME -- TestData_10
+                      DATAPOINTER-NAME -- TestData_11
+                      DATAPOINTER-ID -- 1
+                      DATAPOINTER-ID -- 31416
+                      DATAPOINTER-ID -- 111255
+                      DATAPOINTER-ID -- 1710
+                      DATAPOINTER-ID -- 1711
+                      DATAPOINTER-ID -- 1712
+                      DATAPOINTER-ID -- 1713
+                      DATAPOINTER-ID -- 1714
+                      DATAPOINTER-ID -- 12345
+                      DATAPOINTER-ID -- 12346
+                      DATAPOINTER-ID -- 12347
+                      DATAPOINTER-ID -- 12348
+                      DATAPOINTER-ID -- 12349
+                      DATAPOINTER-DESIRED TYPE -- ee_datablock
+                      DATAPOINTER-DESIRED TYPE -- ee_erase
+                      DATAPOINTER-DESIRED TYPE -- ee_datablock
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+      SESSION-NAME -- Reprog
+                      DATAPOINTER-NAME -- DUMMY_TestModuleCnt
+                      DATAPOINTER-NAME -- SampleData_03
+                      DATAPOINTER-NAME -- SampleData_05
+                      DATAPOINTER-NAME -- TestData_08
+                      DATAPOINTER-NAME -- TestData_10
+                      DATAPOINTER-NAME -- TestData_11
+                      DATAPOINTER-ID -- 31416
+                      DATAPOINTER-ID -- 1712
+                      DATAPOINTER-ID -- 1714
+                      DATAPOINTER-ID -- 12346
+                      DATAPOINTER-ID -- 12348
+                      DATAPOINTER-ID -- 12349
+                      DATAPOINTER-DESIRED TYPE -- ee_erase
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+      SESSION-NAME -- DeliveryState
+                      DATAPOINTER-NAME -- ASDFClockTower
+                      DATAPOINTER-NAME -- SampleData_02
+                      DATAPOINTER-NAME -- SampleData_04
+                      DATAPOINTER-NAME -- TestData_07
+                      DATAPOINTER-NAME -- TestData_09
+                      DATAPOINTER-NAME -- TestData_11
+                      DATAPOINTER-ID -- 111255
+                      DATAPOINTER-ID -- 1711
+                      DATAPOINTER-ID -- 1713
+                      DATAPOINTER-ID -- 12345
+                      DATAPOINTER-ID -- 12347
+                      DATAPOINTER-ID -- 12349
+                      DATAPOINTER-DESIRED TYPE -- ee_datablock
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+      SESSION-NAME -- ResetToDeliveryState
+                      DATAPOINTER-NAME -- SampleData_02
+                      DATAPOINTER-NAME -- SampleData_05
+                      DATAPOINTER-NAME -- TestData_07
+                      DATAPOINTER-NAME -- TestData_10
+                      DATAPOINTER-NAME -- TestData_11
+                      DATAPOINTER-ID -- 1711
+                      DATAPOINTER-ID -- 1714
+                      DATAPOINTER-ID -- 12345
+                      DATAPOINTER-ID -- 12348
+                      DATAPOINTER-ID -- 12349
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DATAPOINTER-DESIRED TYPE -- ee_range
+Repeated Datapointers deleted 12349
+DATAPOINTER-NAME -- Id_Config__Metadata
+       COMMENT -- data_size=41
+DATAPOINTER-NAME -- ASDFClockTower__Metadata
+       COMMENT -- description=- Component: ASDF
+- REPROG info: use case REPROG must not be set.
+- REPROG info: In certain cases there are two comments of this type.
+There are also strings up to 160 characters per row, only on description fields and usually is not only one row. Like this example but a little bit longer. 
+DATAPOINTER-NAME -- SampleData_01__Metadata
+       COMMENT -- description=- Component: Sample
+- This comment is different from the REPROG info.
+- REPROG info: To be evaluated based on the reprogramming scenario.
+The quick brown fox jumps over the lazy dog. 
+DATAPOINTER-NAME -- SampleData_02__Metadata
+       COMMENT -- description=- Component: SP Data
+- REPROG info: undefined
+DATAPOINTER-NAME -- SampleData_03__Metadata
+       COMMENT -- description=- Component: SP Data
+- REPROG info: tbd
+DATAPOINTER-NAME -- SampleData_04__Metadata
+       COMMENT -- description=- Component: SPD
+- REPROG info: t.b.d
+DATAPOINTER-NAME -- SampleData_05__Metadata
+       COMMENT -- description=- Component: SPD
+- REPROG info: use case REPROG must be set
+DATAPOINTER-NAME -- TestData_07__Metadata
+       COMMENT -- description=- Component: Test
+- REPROG info: To be evaluated.
+DATAPOINTER-NAME -- TestData_08__Metadata
+       COMMENT -- description=- Component: TST Data
+- REPROG info: undefined
+DATAPOINTER-NAME -- TestData_09__Metadata
+       COMMENT -- description=- Component: TST Data
+- REPROG info: tbd
+DATAPOINTER-NAME -- TestData_10__Metadata
+       COMMENT -- description=- Component: TST
+- REPROG info: t.b.d
+DATAPOINTER-NAME -- TestData_11__Metadata
+       COMMENT -- description=- Component: TST
+- REPROG info: use case REPROG must be set
+
+PREVIOUS REPORT ADDED
+
+      FROM TestData_07 
+          ID NUMBER CHANGED 
+          CR - P CHANGED 
+          CRP DELIVERY STATE NOT CHANGED 
+          CRP RESET DELIVERY STATE NOT CHANGED 
+          CRP REPROG CHANGED 
+          EXPECTED DELIVERY STATE NOT CHANGED 
+          EXPECTED RESET DELIVERY STATE NOT CHANGED 
+          EXPECTED REPROG CHANGED 
+          DESIRED TYPE NOT CHANGED 
+          DESIRED DATA NOT CHANGED 
+          COMMENT CHANGED 
+          RATING NOT CHANGED 
+          RATED BY NOT CHANGED 
+          COMMENTS NOT CHANGED 
+          REFERENCE COMMENTS FROM GA CHANGED 
+      FROM TestData_08 
+          ID NUMBER NOT CHANGED 
+          CR - P CHANGED 
+          CRP DELIVERY STATE NOT CHANGED 
+          CRP RESET DELIVERY STATE CHANGED 
+          CRP REPROG NOT CHANGED 
+          EXPECTED DELIVERY STATE NOT CHANGED 
+          EXPECTED RESET DELIVERY STATE NOT CHANGED 
+          EXPECTED REPROG NOT CHANGED 
+          DESIRED TYPE NOT CHANGED 
+          DESIRED DATA NOT CHANGED 
+          COMMENT CHANGED 
+          RATING CHANGED 
+          RATED BY CHANGED 
+          COMMENTS CHANGED 
+          REFERENCE COMMENTS FROM GA CHANGED 
+      FROM TestData_09 
+          ID NUMBER NOT CHANGED 
+          CR - P CHANGED 
+          CRP DELIVERY STATE NOT CHANGED 
+          CRP RESET DELIVERY STATE CHANGED 
+          CRP REPROG CHANGED 
+          EXPECTED DELIVERY STATE NOT CHANGED 
+          EXPECTED RESET DELIVERY STATE NOT CHANGED 
+          EXPECTED REPROG NOT CHANGED 
+          DESIRED TYPE NOT CHANGED 
+          DESIRED DATA CHANGED 
+          COMMENT CHANGED 
+          RATING CHANGED 
+          RATED BY CHANGED 
+          COMMENTS CHANGED 
+          REFERENCE COMMENTS FROM GA CHANGED 
+      FROM TestData_10 
+          ID NUMBER NOT CHANGED 
+          CR - P CHANGED 
+          CRP DELIVERY STATE CHANGED 
+          CRP RESET DELIVERY STATE CHANGED 
+          CRP REPROG NOT CHANGED 
+          EXPECTED DELIVERY STATE NOT CHANGED 
+          EXPECTED RESET DELIVERY STATE NOT CHANGED 
+          EXPECTED REPROG NOT CHANGED 
+          DESIRED TYPE NOT CHANGED 
+          DESIRED DATA CHANGED 
+          COMMENT CHANGED 
+          RATING CHANGED 
+          RATED BY CHANGED 
+          COMMENTS CHANGED 
+          REFERENCE COMMENTS FROM GA CHANGED 
+      FROM TestData_11 
+          ID NUMBER NOT CHANGED 
+          CR - P CHANGED 
+          CRP DELIVERY STATE CHANGED 
+          CRP RESET DELIVERY STATE NOT CHANGED 
+          CRP REPROG CHANGED 
+          EXPECTED DELIVERY STATE NOT CHANGED 
+          EXPECTED RESET DELIVERY STATE NOT CHANGED 
+          EXPECTED REPROG NOT CHANGED 
+          DESIRED TYPE CHANGED 
+          DESIRED DATA CHANGED 
+          COMMENT CHANGED 
+          RATING CHANGED 
+          RATED BY CHANGED 
+          COMMENTS CHANGED 
+          REFERENCE COMMENTS FROM GA CHANGED 
+      FROM TestData_11 
+          ID NUMBER NOT CHANGED 
+          CR - P CHANGED 
+          CRP DELIVERY STATE CHANGED 
+          CRP RESET DELIVERY STATE NOT CHANGED 
+          CRP REPROG CHANGED 
+          EXPECTED DELIVERY STATE NOT CHANGED 
+          EXPECTED RESET DELIVERY STATE NOT CHANGED 
+          EXPECTED REPROG NOT CHANGED 
+          DESIRED TYPE CHANGED 
+          DESIRED DATA CHANGED 
+          COMMENT NOT CHANGED 
+          RATING CHANGED 
+          RATED BY CHANGED 
+          COMMENTS CHANGED 
+          REFERENCE COMMENTS FROM GA CHANGED 
+
+EXCEL FILE DATA POINTERS SORTED BY NVM ID NUMBER
+
+BBNumber -- BB95650 added to Excel file.
+
+Baseline -- BSS2007 added to Excel file.
+
+PROJECT MANAGER -- Oscar Gonzalez added to Excel file.
+
+PROJECT DESCRIPTION -- BB-No=0123456789 added to Excel file.
+
+END OF LOG FILE
