@@ -305,10 +305,9 @@ def fillExcel():
     #Crear archivo Excel.
     rutaArchivoCNT = os.path.dirname(rutaCNT)
     shutil.copy("EEPROM_Container_Review_Template.xlsx", rutaArchivoCNT + "/fillexcel.xlsx")
-    
-    #Open log file.
-    logProgram = open(rutaArchivoCNT + "/logProgram" + str(BBNumber) + ".txt","w+")
 
+    #Open log file y empezar a escribir.
+    logProgram = open(rutaArchivoCNT + "/logProgram" + str(BBNumber) + ".txt","w+")
     logProgram.write("Generating new Excel file\r\n\r\n")
 
     #Carga el archivo Excel anteriormente generado.
@@ -504,7 +503,6 @@ def fillExcel():
                         logProgram.write("       COMMENT -- " + str(DPN.text) + "\r\n")
                         #Se copia la descripcion a la columna comment.
                         ws['O' + str(i)] = DPN.text
-
 
     #Si un reporte previo es agregado y se tiene habilitada la opcion.
     if(archivoReportePrevioCargado == 1 and estadoCheckButton == 1):
