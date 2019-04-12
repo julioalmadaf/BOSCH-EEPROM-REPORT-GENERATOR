@@ -14,45 +14,45 @@ from tkinter import ttk
 from tkinter import *
 
 try:
-        import xlrd
+    import xlrd
 except ImportError:
-        os.system('python -m pip install xlrd')
+    os.system('python -m pip install xlrd')
 
 try:
-        import xlwt
+    import xlwt
 except ImportError:
-        os.system('python -m pip install xlwt')
+    os.system('python -m pip install xlwt')
 
 try:
-        from pathlib import Path
+    from pathlib import Path
 except ImportError:
-        os.system('python -m pip install pathlib')
+    os.system('python -m pip install pathlib')
 
 try:
-        import shutil
+    import shutil
 except ImportError:
-        os.system('python -m pip install pytest-shutil')
+    os.system('python -m pip install pytest-shutil')
 
 try:
-        from PIL import ImageTk, Image
+    from PIL import ImageTk, Image
 except ImportError:
-        os.system('python -m pip install pillow')
+    os.system('python -m pip install pillow')
 
 try:
-        from openpyxl import load_workbook
+    from openpyxl import load_workbook
 except ImportError:
-        os.system('python -m pip install openpyxl')
+    os.system('python -m pip install openpyxl')
 
 try:
-        import pandas as pd
+    import pandas as pd
 except ImportError:
-        os.system('python -m pip install pandas')
+    os.system('python -m pip install pandas')
 
 try:
-        import win32com.client
+    import win32com.client
 except ImportError:
-        os.system('python -m pip install pypiwin32')
-        os.system('python -m pip install pywin32')
+    os.system('python -m pip install pypiwin32')
+    os.system('python -m pip install pywin32')
 
 ###########################
 #### Variables globales ###
@@ -64,7 +64,6 @@ rutaReportePrevio = "0"
 archivoReportePrevioCargado = 0
 BBNumber = 0
 Baseline = 0
-
 estadoCheckButton = 0
 estadoEtiqueta = 1
 
@@ -73,95 +72,63 @@ estadoEtiqueta = 1
 ################
 def newProgram():
 
-        global rutaCNT
-        global rutaArchivoCNT
-        global archivoCNTCargado
-        global rutaReportePrevio
-        global archivoReportePrevioCargado
-        global estadoCheckButton
-        global estadoEtiqueta
-
-        #Ocultar botones innecesarios.
-        button_PreviousReport.grid_remove()
-        enable_button.grid_remove()
-        button_GenerateReport.grid_remove()
-
-        button_CNT.configure(style='button_style1.TButton')
-        enable_button.deselect()
-        button_PreviousReport.configure(style='button_style2.TButton')
-        button_GenerateReport.configure(style='button_style2.TButton')
-
-        #Comenzar con el boton de reporte previo deshabilitado.
-        estadoCheckButton = 0
-        button_PreviousReport.state(["disabled"])
-
-        label.configure(text="EEPROM report generator")
-        estadoEtiqueta = 1	#La etiqueta muestra el primer mensaje (EEPROM report generator)
-
-        rutaCNT = "0"
-        rutaArchivoCNT = "0"
-        archivoCNTCargado = 0
-        rutaReportePrevio = "0"
-        archivoReportePrevioCargado = 0
-        BBNumber = 0
-        Baseline = 0
-        estadoCheckButton = 0
-        estadoEtiqueta = 1
+    #Configuracion inicial
+    estadoAgregarArchivoCNT()
 
 def exitProgram():
         
-        global estadoEtiqueta
+    global estadoEtiqueta
 
-        label.configure(text="Closing program")
+    label.configure(text="Closing program")
 
-        #Preguntar al usuario si desea salir del programa.
-        salir = messagebox.askyesno(message="Do you want to close the program?", title="Close program")
+    #Preguntar al usuario si desea salir del programa.
+    salir = messagebox.askyesno(message="Do you want to close the program?", title="Close program")
 
-        if(salir == 1):
-                sys.exit(0)
-        
-        if(estadoEtiqueta == 1):
-        	label.configure(text="EEPROM report generator")
-        elif(estadoEtiqueta == 2):
-        	label.configure(text="CNT file loaded")
-        elif(estadoEtiqueta == 3):
-        	label.configure(text="CNT file loaded - Previous Report loaded")
-        else:	#Si entra aqui es porque algo grave paso
-        	label.configure(text="EEPROM report generator")
+    if(salir == 1):
+            sys.exit(0)
+    
+    if(estadoEtiqueta == 1):
+    	label.configure(text="EEPROM report generator")
+    elif(estadoEtiqueta == 2):
+    	label.configure(text="CNT file loaded")
+    elif(estadoEtiqueta == 3):
+    	label.configure(text="CNT file loaded - Previous Report loaded")
+    else:	#Si entra aqui es porque algo grave paso
+    	label.configure(text="EEPROM report generator")
 
 def aboutProgram():
         
-        global estadoEtiqueta
+    global estadoEtiqueta
 
-        label.configure(text="About the program")
+    label.configure(text="About the program")
 
-        messagebox.showinfo("About EEPROM report generator", "This software has been released by Julio Cesar Almada Fuerte and Ruben Barajas Curiel")
+    messagebox.showinfo("About EEPROM report generator", "This software has been released by Julio Cesar Almada Fuerte and Ruben Barajas Curiel")
 
-        if(estadoEtiqueta == 1):
-        	label.configure(text="EEPROM report generator")
-        elif(estadoEtiqueta == 2):
-        	label.configure(text="CNT file loaded")
-        elif(estadoEtiqueta == 3):
-        	label.configure(text="CNT file loaded - Previous Report loaded")
-        else:	#Si entra aqui es porque algo grave paso
-        	label.configure(text="EEPROM report generator")
+    if(estadoEtiqueta == 1):
+    	label.configure(text="EEPROM report generator")
+    elif(estadoEtiqueta == 2):
+    	label.configure(text="CNT file loaded")
+    elif(estadoEtiqueta == 3):
+    	label.configure(text="CNT file loaded - Previous Report loaded")
+    else:	#Si entra aqui es porque algo grave paso
+    	label.configure(text="EEPROM report generator")
 
 def helpProgram():
         
-        global estadoEtiqueta
+    global estadoEtiqueta
 
-        label.configure(text="Help")
+    label.configure(text="Help")
 
-        messagebox.showinfo("Help", "Visit the following link to get more information about this software")
+    messagebox.showinfo("Help", "Visit the following link to get more information about this software")
 
-        if(estadoEtiqueta == 1):
-        	label.configure(text="EEPROM report generator")
-        elif(estadoEtiqueta == 2):
-        	label.configure(text="CNT file loaded")
-        elif(estadoEtiqueta == 3):
-        	label.configure(text="CNT file loaded - Previous Report loaded")
-        else:	#Si entra aqui es porque algo grave paso
-        	label.configure(text="EEPROM report generator")
+    if(estadoEtiqueta == 1):
+    	label.configure(text="EEPROM report generator")
+    elif(estadoEtiqueta == 2):
+    	label.configure(text="CNT file loaded")
+    elif(estadoEtiqueta == 3):
+    	label.configure(text="CNT file loaded - Previous Report loaded")
+    else:	#Si entra aqui es porque algo grave paso
+    	label.configure(text="EEPROM report generator")
 
 def cntButton():
 
@@ -178,95 +145,39 @@ def cntButton():
 
     #Verificar que sea archivo CNT o que se haya agregado un archivo.
     if(rutaCNT.find(".cnt") == -1):         #No se selecciono un archivo CNT
-        
         messagebox.showerror("Error", "Not .cnt file selected")
-
-        #Ocultar botones innecesarios.
-        button_PreviousReport.grid_remove()
-        enable_button.grid_remove()
-        button_GenerateReport.grid_remove()
-
-        button_CNT.configure(style='button_style1.TButton')
-        enable_button.deselect()
-        button_PreviousReport.configure(style='button_style2.TButton')
-        button_GenerateReport.configure(style='button_style2.TButton')
-
-        #Comenzar con el boton de reporte previo deshabilitado.
-        estadoCheckButton = 0
-        button_PreviousReport.state(["disabled"])
-
-        label.configure(text="EEPROM report generator")
-        estadoEtiqueta = 1	#La etiqueta muestra el primer mensaje (EEPROM report generator)
-
-        rutaCNT = "0"
-        rutaArchivoCNT = "0"
-        archivoCNTCargado = 0
-        rutaReportePrevio = "0"
-        archivoReportePrevioCargado = 0
-        BBNumber = 0
-        Baseline = 0
-        estadoCheckButton = 0
-        estadoEtiqueta = 1
+        #Comenzar programa desde cero.
+        estadoAgregarArchivoCNT()
 
     elif(rutaCNT == ""):                    #Se dio al boton cancelar.
-		#Ocultar botones innecesarios.
-        button_PreviousReport.grid_remove()
-        enable_button.grid_remove()
-        button_GenerateReport.grid_remove()
-
-        button_CNT.configure(style='button_style1.TButton')
-        enable_button.deselect()
-        button_PreviousReport.configure(style='button_style2.TButton')
-        button_GenerateReport.configure(style='button_style2.TButton')
-
-        #Comenzar con el boton de reporte previo deshabilitado.
-        estadoCheckButton = 0
-        button_PreviousReport.state(["disabled"])
-
-        label.configure(text="EEPROM report generator")
-        estadoEtiqueta = 1	#La etiqueta muestra el primer mensaje (EEPROM report generator)
-
-        rutaCNT = "0"
-        rutaArchivoCNT = "0"
-        archivoCNTCargado = 0
-        rutaReportePrevio = "0"
-        archivoReportePrevioCargado = 0
-        BBNumber = 0
-        Baseline = 0
-        estadoCheckButton = 0
-        estadoEtiqueta = 1
+        messagebox.showerror("Error", "Not .cnt file selected")
+	#Comenzar programa desde cero.
+        estadoAgregarArchivoCNT()
 
     else:                                   #Se selecciono el archivo correctamente.
         archivoCNTCargado = 1
-        button_CNT.configure(style='button_style2.TButton')
-        enable_button.grid()            #Ahora se puede mostrar el checkbuton para habilitar el boton de reporte previo.
-        button_PreviousReport.state(["disabled"])
-        button_PreviousReport.grid()    #Ahora se puede mostrar el boton de reporte previo como opcional.
-        button_GenerateReport.grid()    #Ahora se puede mostrar el boton de generar reporte.
-        button_GenerateReport.configure(style='button_style1.TButton')
-        label.configure(text="CNT file loaded")
-        estadoEtiqueta = 2	#La etiqueta muestra el segundo mensaje (CNT file loaded)
+        estadoGenerarReporteSinPrevio()
 
 def enableButtonRP():
 
-        global estadoCheckButton
-        global archivoReportePrevioCargado
+    global estadoCheckButton
+    global archivoReportePrevioCargado
 
-        estadoCheckButton = estadoCheckButton ^ 1
+    estadoCheckButton = estadoCheckButton ^ 1
 
-        #Cambiar estado del boton de reporte previo dependiendo del CheckButton.
-        if(estadoCheckButton == 0):
-                button_PreviousReport.state(["disabled"])
-        else:
-                button_PreviousReport.state(["!disabled"])
+    #Cambiar estado del boton de reporte previo dependiendo del CheckButton.
+    if(estadoCheckButton == 0):
+            button_PreviousReport.state(["disabled"])
+    else:
+            button_PreviousReport.state(["!disabled"])
 
-        #Si ya existe un reporte cargado, esconder o mostrar el label actualizado con la accion a hacer.
-        if(archivoReportePrevioCargado == 1 and estadoCheckButton == 1):
-        	label.configure(text="CNT file loaded - Previous Report loaded")
-        	estadoEtiqueta = 3	#La etiqueta muestra el tercer mensaje (CNT file loaded - Previous Report loaded)
-        if(archivoReportePrevioCargado == 1 and estadoCheckButton == 0):
-        	label.configure(text="CNT file loaded")
-        	estadoEtiqueta = 2	#La etiqueta muestra el segundo mensaje (CNT file loaded)
+    #Si ya existe un reporte cargado, esconder o mostrar el label actualizado con la accion a hacer.
+    if(archivoReportePrevioCargado == 1 and estadoCheckButton == 1):
+    	label.configure(text="CNT file loaded - Previous Report loaded")
+    	estadoEtiqueta = 3	#La etiqueta muestra el tercer mensaje (CNT file loaded - Previous Report loaded)
+    if(archivoReportePrevioCargado == 1 and estadoCheckButton == 0):
+    	label.configure(text="CNT file loaded")
+    	estadoEtiqueta = 2	#La etiqueta muestra el segundo mensaje (CNT file loaded)
 
 def previousReport():
 
@@ -297,14 +208,10 @@ def previousReport():
 def createReport():
 
     global archivoCNTCargado
-    global archivoReportePrevioCargado
     global rutaCNT
     global rutaArchivoCNT
-    global rutaReportePrevio
     global BBNumber
     global Baseline
-    global estadoEtiqueta
-    global estadoCheckButton
 
     label.configure(text="Creating report")
 
@@ -328,32 +235,8 @@ def createReport():
     else:
         messagebox.showerror("Error", "Not .cnt file selected")
 
-    #Ocultar botones innecesarios.
-    button_PreviousReport.grid_remove()
-    enable_button.grid_remove()
-    button_GenerateReport.grid_remove()
-
-    button_CNT.configure(style='button_style1.TButton')
-    enable_button.deselect()
-    button_PreviousReport.configure(style='button_style2.TButton')
-    button_GenerateReport.configure(style='button_style2.TButton')
-
-    #Comenzar con el boton de reporte previo deshabilitado.
-    estadoCheckButton = 0
-    button_PreviousReport.state(["disabled"])
-
-    label.configure(text="EEPROM report generator")
-    estadoEtiqueta = 1	#La etiqueta muestra el primer mensaje (EEPROM report generator)
-
-    rutaCNT = "0"
-    rutaArchivoCNT = "0"
-    archivoCNTCargado = 0
-    rutaReportePrevio = "0"
-    archivoReportePrevioCargado = 0
-    BBNumber = 0
-    Baseline = 0
-    estadoCheckButton = 0
-    estadoEtiqueta = 1
+    #Como ya se termino la actividad, arrancar con una nueva.
+    estadoAgregarArchivoCNT()
 
 ################
 #### Objetos ###
@@ -534,6 +417,7 @@ def fillExcel():
                                 ws['H'+ str(CounterFilasExcel)] = "X"           #Marca que el use case de que es ReturnToDeliveryState.
 
     logProgram.write("Repeated Datapointers deleted " + str(DPID.text) + "\r\n")
+    
     ######################################################
     #Para checar si se repite algun NVM Item.
     for i in range(12,CounterFilasExcel):
@@ -584,7 +468,7 @@ def fillExcel():
                         ws['O' + str(i)] = DPN.text
 
 
-    #Si un reporte previo es agregado y se tiene habilitada la opcion 
+    #Si un reporte previo es agregado y se tiene habilitada la opcion.
     if(archivoReportePrevioCargado == 1 and estadoCheckButton == 1):
         logFile = open(rutaArchivoCNT + "/logFile" + str(BBNumber) + ".txt","w+")
         sheet1=wb.worksheets[0]
@@ -794,6 +678,63 @@ def fillExcel():
     #Close log.
     logProgram.write("END OF LOG FILE\r\n")
     logProgram.close()
+
+def estadoAgregarArchivoCNT():
+	
+    global rutaCNT
+    global rutaArchivoCNT
+    global archivoCNTCargado
+    global rutaReportePrevio
+    global archivoReportePrevioCargado
+    global estadoCheckButton
+    global estadoEtiqueta
+
+    #Ocultar botones innecesarios (reporte previo, checkButton y generar reporte)
+    button_PreviousReport.grid_remove()
+    enable_button.grid_remove()
+    button_GenerateReport.grid_remove()
+
+    #Dar enfoque al boton de agregar archivo CNT.
+    button_CNT.configure(style='button_style1.TButton')
+    button_PreviousReport.configure(style='button_style2.TButton')
+    button_GenerateReport.configure(style='button_style2.TButton')
+
+    #Comenzar con el boton de reporte previo deshabilitado y deseleccionado.
+    estadoCheckButton = 0
+    button_PreviousReport.state(["disabled"])
+    enable_button.deselect()
+
+    #Mostrar etiqueta de paso inicial.
+    label.configure(text="EEPROM report generator")
+    estadoEtiqueta = 1	#La etiqueta muestra el primer mensaje (EEPROM report generator)
+
+    rutaCNT = "0"
+    rutaArchivoCNT = "0"
+    archivoCNTCargado = 0
+    rutaReportePrevio = "0"
+    archivoReportePrevioCargado = 0
+    BBNumber = 0
+    Baseline = 0
+    estadoCheckButton = 0
+    estadoEtiqueta = 1
+
+def estadoGenerarReporteSinPrevio():
+	
+    global estadoEtiqueta
+
+    #Acomodar fuente de los botones. Resaltar boton de generar reporte.
+    button_CNT.configure(style='button_style2.TButton')
+    button_GenerateReport.configure(style='button_style1.TButton')
+
+    #Mostrar botones necesarios para la siguiente actividad (generar reporte, habilitar reporte previo y buscar reporte previo)
+    enable_button.grid()            #Ahora se puede mostrar el checkbuton para habilitar el boton de reporte previo.
+    button_PreviousReport.state(["disabled"])
+    button_PreviousReport.grid()    #Ahora se puede mostrar el boton de reporte previo como opcional.
+    button_GenerateReport.grid()    #Ahora se puede mostrar el boton de generar reporte.
+
+    #Mostrar etiqueta de segundo paso.
+    label.configure(text="CNT file loaded")
+    estadoEtiqueta = 2	#La etiqueta muestra el segundo mensaje (CNT file loaded)
 
 def main():
                 
