@@ -39,11 +39,6 @@ except ImportError:
         os.system('python -m pip install pillow')
 
 try:
-        from PIL import ImageTk, Image
-except ImportError:
-        os.system('python -m pip install pillow')
-
-try:
         from openpyxl import load_workbook
 except ImportError:
         os.system('python -m pip install openpyxl')
