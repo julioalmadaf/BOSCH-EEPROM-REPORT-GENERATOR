@@ -255,7 +255,7 @@ def fillExcel():
     global rutaArchivoCNT
     
     #Open log file.
-    logProgram = open(rutaArchivoCNT + "/logProgram"+str(BBNumber)+".txt","w+")
+    logProgram = open(rutaArchivoCNT + "/logProgram" + str(BBNumber) + ".txt","w+")
 
     logProgram.write("Generating new Excel file\r\n\r\n")
 
@@ -455,7 +455,7 @@ def fillExcel():
 
     #Si un reporte previo es agregado.
     if(archivoReportePrevioCargado):
-        logProgram.write("\r\nPREVIOUS REPORT ADDED\r\n\r\n")
+        logFile = open(rutaArchivoCNT + "/logFile" + str(BBNumber) + ".txt","w+")
         sheet1=wb.worksheets[0]
         #Cuenta las filas maximas que tiene el archivo original.
         newCounterFilasExcel=sheet1.max_row
@@ -467,126 +467,127 @@ def fillExcel():
         for i in range(12, newCounterFilasExcel):
             for j in range(12, row_count):
                 if(ws['A'+str(i)].value==ws2['A'+str(j)].value):
-                    logProgram.write("      FROM " + ws['A'+str(i)].value + " \r\n")
+                    logFile.write("      FROM " + ws['A'+str(i)].value + " \r\n")
                     #ID Number.
                     if(ws['B'+str(i)].value==ws2['B'+str(j)].value):
                         ws['B'+str(i)]=ws2['B'+str(j)].value
-                        logProgram.write("          ID NUMBER NOT CHANGED \r\n")
+                        logFile.write("          ID NUMBER NOT CHANGED \r\n")
                     else:
                         ws['B'+str(i)]=ws2['B'+str(j)].value
-                        logProgram.write("          ID NUMBER CHANGED \r\n")
+                        logFile.write("          ID NUMBER CHANGED \r\n")
 
                     #cr-p.
                     if(ws['C'+str(i)].value==ws2['C'+str(j)].value):
                         ws['C'+str(i)]=ws2['C'+str(j)].value
-                        logProgram.write("          CR - P NOT CHANGED \r\n")
+                        logFile.write("          CR - P NOT CHANGED \r\n")
                     else:
                         ws['C'+str(i)]=ws2['C'+str(j)].value
-                        logProgram.write("          CR - P CHANGED \r\n")
+                        logFile.write("          CR - P CHANGED \r\n")
                     
                     #CRP delivery state.
                     if(ws['D'+str(i)].value==ws2['D'+str(j)].value):
                         ws['D'+str(i)]=ws2['D'+str(j)].value
-                        logProgram.write("          CRP DELIVERY STATE NOT CHANGED \r\n")
+                        logFile.write("          CRP DELIVERY STATE NOT CHANGED \r\n")
                     else:
                         ws['D'+str(i)]=ws2['D'+str(j)].value
-                        logProgram.write("          CRP DELIVERY STATE CHANGED \r\n")
+                        logFile.write("          CRP DELIVERY STATE CHANGED \r\n")
 
                     #CRP reset delivery state.
                     if(ws['E'+str(i)].value==ws2['E'+str(j)].value):
                         ws['E'+str(i)]=ws2['E'+str(j)].value
-                        logProgram.write("          CRP RESET DELIVERY STATE NOT CHANGED \r\n")
+                        logFile.write("          CRP RESET DELIVERY STATE NOT CHANGED \r\n")
                     else:
                         ws['E'+str(i)]=ws2['E'+str(j)].value
-                        logProgram.write("          CRP RESET DELIVERY STATE CHANGED \r\n")
+                        logFile.write("          CRP RESET DELIVERY STATE CHANGED \r\n")
                     
                     #CRP reprog.
                     if(ws['F'+str(i)].value==ws2['F'+str(j)].value):
                         ws['F'+str(i)]=ws2['F'+str(j)].value
-                        logProgram.write("          CRP REPROG NOT CHANGED \r\n")
+                        logFile.write("          CRP REPROG NOT CHANGED \r\n")
                     else:
                         ws['F'+str(i)]=ws2['F'+str(j)].value
-                        logProgram.write("          CRP REPROG CHANGED \r\n")
+                        logFile.write("          CRP REPROG CHANGED \r\n")
                     
                     #Expected delivery state.
                     if(ws['J'+str(i)].value==ws2['J'+str(j)].value):
                         ws['J'+str(i)]=ws2['J'+str(j)].value
-                        logProgram.write("          EXPECTED DELIVERY STATE NOT CHANGED \r\n")
+                        logFile.write("          EXPECTED DELIVERY STATE NOT CHANGED \r\n")
                     else:
                         ws['J'+str(i)]=ws2['J'+str(j)].value
-                        logProgram.write("          EXPECTED DELIVERY STATE CHANGED \r\n")
+                        logFile.write("          EXPECTED DELIVERY STATE CHANGED \r\n")
                     
                     #Expected reset delivery state.
                     if(ws['K'+str(i)].value==ws2['K'+str(j)].value):
                         ws['K'+str(i)]=ws2['K'+str(j)].value
-                        logProgram.write("          EXPECTED RESET DELIVERY STATE NOT CHANGED \r\n")
+                        logFile.write("          EXPECTED RESET DELIVERY STATE NOT CHANGED \r\n")
                     else:
                         ws['K'+str(i)]=ws2['K'+str(j)].value
-                        logProgram.write("          EXPECTED RESET DELIVERY STATE CHANGED \r\n")
+                        logFile.write("          EXPECTED RESET DELIVERY STATE CHANGED \r\n")
                     
                     #Expected reprog.
                     if(ws['L'+str(i)].value==ws2['L'+str(j)].value):
                         ws['L'+str(i)]=ws2['L'+str(j)].value
-                        logProgram.write("          EXPECTED REPROG NOT CHANGED \r\n")
+                        logFile.write("          EXPECTED REPROG NOT CHANGED \r\n")
                     else:
                         ws['L'+str(i)]=ws2['L'+str(j)].value
-                        logProgram.write("          EXPECTED REPROG CHANGED \r\n")
+                        logFile.write("          EXPECTED REPROG CHANGED \r\n")
 
                     #Desired type.
                     if(ws['M'+str(i)].value==ws2['M'+str(j)].value):
                         ws['M'+str(i)]=ws2['M'+str(j)].value
-                        logProgram.write("          DESIRED TYPE NOT CHANGED \r\n")
+                        logFile.write("          DESIRED TYPE NOT CHANGED \r\n")
                     else:
                         ws['M'+str(i)]=ws2['M'+str(j)].value
-                        logProgram.write("          DESIRED TYPE CHANGED \r\n")
+                        logFile.write("          DESIRED TYPE CHANGED \r\n")
                     
                     #Desired data.
                     if(ws['N'+str(i)].value==ws2['N'+str(j)].value):
                         ws['N'+str(i)]=ws2['N'+str(j)].value
-                        logProgram.write("          DESIRED DATA NOT CHANGED \r\n")
+                        logFile.write("          DESIRED DATA NOT CHANGED \r\n")
                     else:
                         ws['N'+str(i)]=ws2['N'+str(j)].value
-                        logProgram.write("          DESIRED DATA CHANGED \r\n")
+                        logFile.write("          DESIRED DATA CHANGED \r\n")
                     
                     #Comment.
                     if(ws['O'+str(i)].value==ws2['O'+str(j)].value):
                         ws['O'+str(i)]=ws2['O'+str(j)].value
-                        logProgram.write("          COMMENT NOT CHANGED \r\n")
+                        logFile.write("          COMMENT NOT CHANGED \r\n")
                     else:
                         ws['O'+str(i)]=ws2['O'+str(j)].value
-                        logProgram.write("          COMMENT CHANGED \r\n")
+                        logFile.write("          COMMENT CHANGED \r\n")
                     
                     #Rating.
                     if(ws['P'+str(i)].value==ws2['P'+str(j)].value):
                         ws['P'+str(i)]=ws2['P'+str(j)].value
-                        logProgram.write("          RATING NOT CHANGED \r\n")
+                        logFile.write("          RATING NOT CHANGED \r\n")
                     else:
                         ws['P'+str(i)]=ws2['P'+str(j)].value
-                        logProgram.write("          RATING CHANGED \r\n")
+                        logFile.write("          RATING CHANGED \r\n")
                     
                     #Rated by.
                     if(ws['Q'+str(i)].value==ws2['Q'+str(j)].value):
                         ws['Q'+str(i)]=ws2['Q'+str(j)].value
-                        logProgram.write("          RATED BY NOT CHANGED \r\n")
+                        logFile.write("          RATED BY NOT CHANGED \r\n")
                     else:
                         ws['Q'+str(i)]=ws2['Q'+str(j)].value
-                        logProgram.write("          RATED BY CHANGED \r\n")
+                        logFile.write("          RATED BY CHANGED \r\n")
                     
                     #Comments.
                     if(ws['R'+str(i)].value==ws2['R'+str(j)].value):
                         ws['R'+str(i)]=ws2['R'+str(j)].value
-                        logProgram.write("          COMMENTS NOT CHANGED \r\n")
+                        logFile.write("          COMMENTS NOT CHANGED \r\n")
                     else:
                         ws['R'+str(i)]=ws2['R'+str(j)].value
-                        logProgram.write("          COMMENTS CHANGED \r\n")
+                        logFile.write("          COMMENTS CHANGED \r\n")
                     
                     #Reference comments from GA.
                     if(ws['S'+str(i)].value==ws2['S'+str(j)].value):
                         ws['S'+str(i)]=ws2['S'+str(j)].value
-                        logProgram.write("          REFERENCE COMMENTS FROM GA NOT CHANGED \r\n")
+                        logFile.write("          REFERENCE COMMENTS FROM GA NOT CHANGED \r\n")
                     else:
                         ws['S'+str(i)]=ws2['S'+str(j)].value
-                        logProgram.write("          REFERENCE COMMENTS FROM GA CHANGED \r\n")
+                        logFile.write("          REFERENCE COMMENTS FROM GA CHANGED \r\n")
+        logFile.close()
     
     #Guarda los cambios.
     wb.save(rutaArchivoCNT + "/fillexcel.xlsx")
