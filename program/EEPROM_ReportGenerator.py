@@ -246,24 +246,12 @@ def previousReport():
 def createReport():
 
     global archivoCNTCargado
-    global rutaCNT
-    global rutaArchivoCNT
-    global BBNumber
-    global Baseline
 
     label.configure(text="Creating report")
 
     #Garantizar que se haya seleccionado un archivo CNT.
     if(archivoCNTCargado == 1):                 
         archivoCNTCargado = 0
-
-        #Extraer BBNumber y Baseline.
-        BBNumber = rutaCNT.split('_')[3]
-        Baseline = rutaCNT.split('_')[4]
-
-        #Crear archivo Excel.
-        rutaArchivoCNT = os.path.dirname(rutaCNT)
-        shutil.copy("EEPROM_Container_Review_Template.xlsx", rutaArchivoCNT + "/fillexcel.xlsx")
 
         #Rellena Excel
         fillExcel()
@@ -305,6 +293,18 @@ def fillExcel():
 
     global rutaArchivoCNT
     global estadoCheckButton
+    global rutaCNT
+    global rutaArchivoCNT
+    global BBNumber
+    global Baseline
+
+    #Extraer BBNumber y Baseline.
+    BBNumber = rutaCNT.split('_')[3]
+    Baseline = rutaCNT.split('_')[4]
+
+    #Crear archivo Excel.
+    rutaArchivoCNT = os.path.dirname(rutaCNT)
+    shutil.copy("EEPROM_Container_Review_Template.xlsx", rutaArchivoCNT + "/fillexcel.xlsx")
     
     #Open log file.
     logProgram = open(rutaArchivoCNT + "/logProgram" + str(BBNumber) + ".txt","w+")
