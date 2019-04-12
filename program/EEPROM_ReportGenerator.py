@@ -184,6 +184,7 @@ def previousReport():
     global rutaReportePrevio
     global archivoReportePrevioCargado
     global estadoEtiqueta
+    global rutaReportePrevio
 
     #Abrir Dialog Box para buscar el archivo.
     label.configure(text="Opening previous report file")
@@ -195,15 +196,43 @@ def previousReport():
         archivoReportePrevioCargado = 0
         label.configure(text="CNT file loaded")
         estadoEtiqueta = 2	#La etiqueta muestra el segundo mensaje (CNT file loaded)
-    elif(rutaReportePrevio== ""):                    #Se dio al boton cancelar.
+
+    #Se dio al boton cancelar.
+    elif(rutaReportePrevio== ""):
         messagebox.showerror("Error", "Not .xlsx file selected")
         archivoReportePrevioCargado = 0
         label.configure(text="CNT file loaded")
         estadoEtiqueta = 2	#La etiqueta muestra el segundo mensaje (CNT file loaded)
-    else:                                   #Se selecciono el archivo correctamente.
-        archivoReportePrevioCargado = 1
-        label.configure(text="CNT file loaded - Previous Report loaded")
-        estadoEtiqueta = 3	#La etiqueta muestra el tercer mensaje (CNT file loaded - Previous Report loaded)
+
+    #El archivo seleccionado no corresponde al nombre de formato de reporte previo
+    elif(rutaReportePrevio.find("EEPROM_Container_Review_Checkist") == -1):
+        messagebox.showerror("Error", "Not previous report name format file")
+        archivoReportePrevioCargado = 0
+        label.configure(text="CNT file loaded")
+        estadoEtiqueta = 2	#La etiqueta muestra el segundo mensaje (CNT file loaded)
+
+    #Se selecciono el archivo correctamente.
+    else:
+    	#Para evitar archivos excel con un nombre valido, verificar que las celdas internas correspondan a un archivo del formato deseado.
+    	file_plantilla = xlrd.open_workbook(filename = "EEPROM_Container_Review_Template.xlsx")
+    	sheet_plantilla = file_plantilla.sheet_by_index(0)
+    	file_intento = xlrd.open_workbook(filename = rutaReportePrevio)
+    	sheet_intento = file_intento.sheet_by_index(0)
+
+    	file_revision = 0
+    	for column in range (0, 17):
+    		if(sheet_plantilla.cell_value(10, column) != sheet_intento.cell_value(10, column)):
+    			file_revision = 1
+    			break
+    	if(file_revision == 0):
+    		archivoReportePrevioCargado = 1
+    		label.configure(text="CNT file loaded - Previous Report loaded")
+    		estadoEtiqueta = 3	#La etiqueta muestra el tercer mensaje (CNT file loaded - Previous Report loaded)
+    	else:
+    		messagebox.showerror("Error", "This file is not a previous report")
+    		archivoReportePrevioCargado = 0
+    		label.configure(text="CNT file loaded")
+    		estadoEtiqueta = 2	#La etiqueta muestra el segundo mensaje (CNT file loaded)
 
 def createReport():
 
