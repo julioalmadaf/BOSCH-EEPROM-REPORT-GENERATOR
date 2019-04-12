@@ -144,17 +144,26 @@ def cntButton():
     rutaCNT = filedialog.askopenfilename(filetypes = (("All CNT files","*.cnt"),("All files","*.*")))
 
     #Verificar que sea archivo CNT o que se haya agregado un archivo.
-    if(rutaCNT.find(".cnt") == -1):         #No se selecciono un archivo CNT
+    #No se selecciono un archivo CNT
+    if(rutaCNT.find(".cnt") == -1):
         messagebox.showerror("Error", "Not .cnt file selected")
         #Comenzar programa desde cero.
         estadoAgregarArchivoCNT()
 
-    elif(rutaCNT == ""):                    #Se dio al boton cancelar.
+    #Se dio al boton cancelar.
+    elif(rutaCNT == ""):
         messagebox.showerror("Error", "Not .cnt file selected")
-	#Comenzar programa desde cero.
+		#Comenzar programa desde cero.
         estadoAgregarArchivoCNT()
 
-    else:                                   #Se selecciono el archivo correctamente.
+    #El archivo seleccionado no corresponde al nombre de formato de CNT
+    elif(rutaCNT.find("EEPROM_Container") == -1):
+    	messagebox.showerror("Error", "Not CNT name format file")
+    	#Comenzar programa desde cero.
+    	estadoAgregarArchivoCNT()
+
+    #Se selecciono el archivo correctamente.
+    else:
         archivoCNTCargado = 1
         estadoGenerarReporteSinPrevio()
 
