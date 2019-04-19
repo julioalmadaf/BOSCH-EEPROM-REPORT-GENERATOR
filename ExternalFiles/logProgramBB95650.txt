@@ -1,11 +1,13 @@
 Generating new Excel file
-
 CNT file read.
 
 PROJECT-INFO
       PROJECT-DESC -- BB-No=0123456789
 RESPONSIBLE 
       PERSON-NAME -- Oscar Gonzalez
+
+Adding datapointers to Excel file according to session.
+
 SESSIONS
       SESSION-NAME -- __ALL__
                       DATAPOINTER-NAME -- Id_Config
@@ -21,32 +23,32 @@ SESSIONS
                       DATAPOINTER-NAME -- TestData_09
                       DATAPOINTER-NAME -- TestData_10
                       DATAPOINTER-NAME -- TestData_11
-                      DATAPOINTER-ID -- 1
-                      DATAPOINTER-ID -- 31416
-                      DATAPOINTER-ID -- 111255
-                      DATAPOINTER-ID -- 1710
-                      DATAPOINTER-ID -- 1711
-                      DATAPOINTER-ID -- 1712
-                      DATAPOINTER-ID -- 1713
-                      DATAPOINTER-ID -- 1714
-                      DATAPOINTER-ID -- 12345
-                      DATAPOINTER-ID -- 12346
-                      DATAPOINTER-ID -- 12347
-                      DATAPOINTER-ID -- 12348
-                      DATAPOINTER-ID -- 12349
-                      DATAPOINTER-DESIRED TYPE -- ee_datablock
-                      DATAPOINTER-DESIRED TYPE -- ee_erase
-                      DATAPOINTER-DESIRED TYPE -- ee_datablock
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      Id_Config -- ID -- 1
+                      DUMMY_TestModuleCnt -- ID -- 31416
+                      ASDFClockTower -- ID -- 111255
+                      SampleData_01 -- ID -- 1710
+                      SampleData_02 -- ID -- 1711
+                      SampleData_03 -- ID -- 1712
+                      SampleData_04 -- ID -- 1713
+                      SampleData_05 -- ID -- 1714
+                      TestData_07 -- ID -- 12345
+                      TestData_08 -- ID -- 12346
+                      TestData_09 -- ID -- 12347
+                      TestData_10 -- ID -- 12348
+                      TestData_11 -- ID -- 12349
+                      Id_Config -- DESIRED TYPE -- ee_datablock
+                      DUMMY_TestModuleCnt -- DESIRED TYPE -- ee_erase
+                      ASDFClockTower -- DESIRED TYPE -- ee_datablock
+                      SampleData_01 -- DESIRED TYPE -- ee_range
+                      SampleData_02 -- DESIRED TYPE -- ee_range
+                      SampleData_03 -- DESIRED TYPE -- ee_range
+                      SampleData_04 -- DESIRED TYPE -- ee_range
+                      SampleData_05 -- DESIRED TYPE -- ee_range
+                      TestData_07 -- DESIRED TYPE -- ee_range
+                      TestData_08 -- DESIRED TYPE -- ee_range
+                      TestData_09 -- DESIRED TYPE -- ee_range
+                      TestData_10 -- DESIRED TYPE -- ee_range
+                      TestData_11 -- DESIRED TYPE -- ee_range
       SESSION-NAME -- Reprog
                       DATAPOINTER-NAME -- DUMMY_TestModuleCnt
                       DATAPOINTER-NAME -- SampleData_03
@@ -54,18 +56,18 @@ SESSIONS
                       DATAPOINTER-NAME -- TestData_08
                       DATAPOINTER-NAME -- TestData_10
                       DATAPOINTER-NAME -- TestData_11
-                      DATAPOINTER-ID -- 31416
-                      DATAPOINTER-ID -- 1712
-                      DATAPOINTER-ID -- 1714
-                      DATAPOINTER-ID -- 12346
-                      DATAPOINTER-ID -- 12348
-                      DATAPOINTER-ID -- 12349
-                      DATAPOINTER-DESIRED TYPE -- ee_erase
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      DUMMY_TestModuleCnt -- ID -- 31416
+                      SampleData_03 -- ID -- 1712
+                      SampleData_05 -- ID -- 1714
+                      TestData_08 -- ID -- 12346
+                      TestData_10 -- ID -- 12348
+                      TestData_11 -- ID -- 12349
+                      DUMMY_TestModuleCnt -- DESIRED TYPE -- ee_erase
+                      SampleData_03 -- DESIRED TYPE -- ee_range
+                      SampleData_05 -- DESIRED TYPE -- ee_range
+                      TestData_08 -- DESIRED TYPE -- ee_range
+                      TestData_10 -- DESIRED TYPE -- ee_range
+                      TestData_11 -- DESIRED TYPE -- ee_range
       SESSION-NAME -- DeliveryState
                       DATAPOINTER-NAME -- ASDFClockTower
                       DATAPOINTER-NAME -- SampleData_02
@@ -73,35 +75,36 @@ SESSIONS
                       DATAPOINTER-NAME -- TestData_07
                       DATAPOINTER-NAME -- TestData_09
                       DATAPOINTER-NAME -- TestData_11
-                      DATAPOINTER-ID -- 111255
-                      DATAPOINTER-ID -- 1711
-                      DATAPOINTER-ID -- 1713
-                      DATAPOINTER-ID -- 12345
-                      DATAPOINTER-ID -- 12347
-                      DATAPOINTER-ID -- 12349
-                      DATAPOINTER-DESIRED TYPE -- ee_datablock
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
+                      ASDFClockTower -- ID -- 111255
+                      SampleData_02 -- ID -- 1711
+                      SampleData_04 -- ID -- 1713
+                      TestData_07 -- ID -- 12345
+                      TestData_09 -- ID -- 12347
+                      TestData_11 -- ID -- 12349
+                      ASDFClockTower -- DESIRED TYPE -- ee_datablock
+                      SampleData_02 -- DESIRED TYPE -- ee_range
+                      SampleData_04 -- DESIRED TYPE -- ee_range
+                      TestData_07 -- DESIRED TYPE -- ee_range
+                      TestData_09 -- DESIRED TYPE -- ee_range
+                      TestData_11 -- DESIRED TYPE -- ee_range
       SESSION-NAME -- ResetToDeliveryState
                       DATAPOINTER-NAME -- SampleData_02
                       DATAPOINTER-NAME -- SampleData_05
                       DATAPOINTER-NAME -- TestData_07
                       DATAPOINTER-NAME -- TestData_10
                       DATAPOINTER-NAME -- TestData_11
-                      DATAPOINTER-ID -- 1711
-                      DATAPOINTER-ID -- 1714
-                      DATAPOINTER-ID -- 12345
-                      DATAPOINTER-ID -- 12348
-                      DATAPOINTER-ID -- 12349
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-                      DATAPOINTER-DESIRED TYPE -- ee_range
-Repeated Datapointers deleted 12349
+                      SampleData_02 -- ID -- 1711
+                      SampleData_05 -- ID -- 1714
+                      TestData_07 -- ID -- 12345
+                      TestData_10 -- ID -- 12348
+                      TestData_11 -- ID -- 12349
+                      SampleData_02 -- DESIRED TYPE -- ee_range
+                      SampleData_05 -- DESIRED TYPE -- ee_range
+                      TestData_07 -- DESIRED TYPE -- ee_range
+                      TestData_10 -- DESIRED TYPE -- ee_range
+                      TestData_11 -- DESIRED TYPE -- ee_range
+
+Repeated Datapointers deleted.
 DATAPOINTER-NAME -- Id_Config__Metadata
        COMMENT -- description=Predefined data item for storing the configuration ID
 DATAPOINTER-NAME -- DUMMY_TestModuleCnt
@@ -148,7 +151,11 @@ DATAPOINTER-NAME -- TestData_11__Metadata
        COMMENT -- description=- Component: TST
 - REPROG info: use case REPROG must be set
 
-EXCEL FILE DATA POINTERS SORTED BY NVM ID NUMBER
+Comments added to their corresponding data pointer.
+
+Previous report added.
+
+Excel file Data Pointers sorted by NVM ID number.
 
 BBNumber -- BB95650 added to Excel file.
 

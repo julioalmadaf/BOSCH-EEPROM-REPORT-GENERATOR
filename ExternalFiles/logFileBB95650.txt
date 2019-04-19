@@ -1,80 +1,86 @@
-      FROM TestData_07 
-          ID NUMBER CHANGED 
-          CR - P CHANGED 
-          CRP DELIVERY STATE NOT CHANGED 
-          CRP RESET DELIVERY STATE NOT CHANGED 
-          CRP REPROG CHANGED 
-          EXPECTED DELIVERY STATE NOT CHANGED 
-          EXPECTED RESET DELIVERY STATE NOT CHANGED 
-          EXPECTED REPROG CHANGED 
-          DESIRED TYPE NOT CHANGED 
-          DESIRED DATA NOT CHANGED 
-          COMMENT CHANGED 
-          RATING NOT CHANGED 
-          RATED BY NOT CHANGED 
-          COMMENTS NOT CHANGED 
-          REFERENCE COMMENTS FROM GA CHANGED 
-      FROM TestData_08 
-          ID NUMBER NOT CHANGED 
-          CR - P CHANGED 
-          CRP DELIVERY STATE NOT CHANGED 
-          CRP RESET DELIVERY STATE CHANGED 
-          CRP REPROG NOT CHANGED 
-          EXPECTED DELIVERY STATE NOT CHANGED 
-          EXPECTED RESET DELIVERY STATE NOT CHANGED 
-          EXPECTED REPROG NOT CHANGED 
-          DESIRED TYPE NOT CHANGED 
-          DESIRED DATA NOT CHANGED 
-          COMMENT CHANGED 
-          RATING CHANGED 
-          RATED BY CHANGED 
-          COMMENTS CHANGED 
-          REFERENCE COMMENTS FROM GA CHANGED 
-      FROM TestData_09 
-          ID NUMBER NOT CHANGED 
-          CR - P CHANGED 
-          CRP DELIVERY STATE NOT CHANGED 
-          CRP RESET DELIVERY STATE CHANGED 
-          CRP REPROG CHANGED 
-          EXPECTED DELIVERY STATE NOT CHANGED 
-          EXPECTED RESET DELIVERY STATE NOT CHANGED 
-          EXPECTED REPROG NOT CHANGED 
-          DESIRED TYPE NOT CHANGED 
-          DESIRED DATA CHANGED 
-          COMMENT CHANGED 
-          RATING CHANGED 
-          RATED BY CHANGED 
-          COMMENTS CHANGED 
-          REFERENCE COMMENTS FROM GA CHANGED 
-      FROM TestData_10 
-          ID NUMBER NOT CHANGED 
-          CR - P CHANGED 
-          CRP DELIVERY STATE CHANGED 
-          CRP RESET DELIVERY STATE CHANGED 
-          CRP REPROG NOT CHANGED 
-          EXPECTED DELIVERY STATE NOT CHANGED 
-          EXPECTED RESET DELIVERY STATE NOT CHANGED 
-          EXPECTED REPROG NOT CHANGED 
-          DESIRED TYPE NOT CHANGED 
-          DESIRED DATA CHANGED 
-          COMMENT CHANGED 
-          RATING CHANGED 
-          RATED BY CHANGED 
-          COMMENTS CHANGED 
-          REFERENCE COMMENTS FROM GA CHANGED 
-      FROM TestData_11 
-          ID NUMBER NOT CHANGED 
-          CR - P CHANGED 
-          CRP DELIVERY STATE CHANGED 
-          CRP RESET DELIVERY STATE NOT CHANGED 
-          CRP REPROG CHANGED 
-          EXPECTED DELIVERY STATE NOT CHANGED 
-          EXPECTED RESET DELIVERY STATE NOT CHANGED 
-          EXPECTED REPROG NOT CHANGED 
-          DESIRED TYPE CHANGED 
-          DESIRED DATA CHANGED 
-          COMMENT CHANGED 
-          RATING CHANGED 
-          RATED BY CHANGED 
-          COMMENTS CHANGED 
-          REFERENCE COMMENTS FROM GA CHANGED 
+FROM                     	TestData_07              	NOT CHANGED               	CHANGED
+ID NUMBER                	12345             	                                       	123456
+CR-P                     	None                	                                       	91
+CRP DELIVERY STATE NOT CHANGED 
+CRP RESET DELIVERY STATE NOT CHANGED 
+CRP REPROG CHANGED 
+EXPECTED DELIVERY STATE NOT CHANGED 
+EXPECTED RESET DELIVERY STATE NOT CHANGED 
+EXPECTED REPROG CHANGED 
+DESIRED TYPE                 	ee_range                    	ee_range
+DESIRED DATA                 	None                     	None
+COMMENT                      	description=- Component: Test
+- REPROG info: To be evaluated.                             	description=- Component: Test
+- REPROG info: To be evaluated.
+RATING                       	None                         	None
+RATED BY                     	None                         	None
+COMMENTS                     	None                      	None
+REFERENCE COMMENTS FROM GA   	None                	                                      	9
+FROM                     	TestData_08              	NOT CHANGED               	CHANGED
+ID NUMBER                	12346                      	12346
+CR-P                     	None                	                                       	87
+CRP DELIVERY STATE NOT CHANGED 
+CRP RESET DELIVERY STATE CHANGED 
+CRP REPROG NOT CHANGED 
+EXPECTED DELIVERY STATE NOT CHANGED 
+EXPECTED RESET DELIVERY STATE NOT CHANGED 
+EXPECTED REPROG NOT CHANGED 
+DESIRED TYPE                 	ee_range                    	ee_range
+DESIRED DATA                 	None                     	None
+COMMENT                      	description=- Component: TST Data
+- REPROG info: undefined             	                                            	HOLA
+RATING                       	None             	                                       	7
+RATED BY                     	None             	                                      	JULIO
+COMMENTS                     	None                      	None
+REFERENCE COMMENTS FROM GA   	None                	                                      	5
+FROM                     	TestData_09              	NOT CHANGED               	CHANGED
+ID NUMBER                	12347                      	12347
+CR-P                     	None                	                                       	4
+CRP DELIVERY STATE NOT CHANGED 
+CRP RESET DELIVERY STATE CHANGED 
+CRP REPROG CHANGED 
+EXPECTED DELIVERY STATE NOT CHANGED 
+EXPECTED RESET DELIVERY STATE NOT CHANGED 
+EXPECTED REPROG NOT CHANGED 
+DESIRED TYPE                 	ee_range                    	ee_range
+DESIRED DATA                 	None              	                                      	BB96
+COMMENT                      	description=- Component: TST Data
+- REPROG info: tbd             	                                            	ADIOS
+RATING                       	None             	                                       	6
+RATED BY                     	None                         	None
+COMMENTS                     	None              	                                      	7
+REFERENCE COMMENTS FROM GA   	None                	                                      	3
+FROM                     	TestData_10              	NOT CHANGED               	CHANGED
+ID NUMBER                	12348                      	12348
+CR-P                     	None                	                                       	9
+CRP DELIVERY STATE CHANGED 
+CRP RESET DELIVERY STATE CHANGED 
+CRP REPROG NOT CHANGED 
+EXPECTED DELIVERY STATE NOT CHANGED 
+EXPECTED RESET DELIVERY STATE NOT CHANGED 
+EXPECTED REPROG NOT CHANGED 
+DESIRED TYPE                 	ee_range                    	ee_range
+DESIRED DATA                 	None              	                                      	BB75
+COMMENT                      	description=- Component: TST
+- REPROG info: t.b.d             	                                            	:(
+RATING                       	None                         	None
+RATED BY                     	None             	                                      	JULIO Y RUBEN
+COMMENTS                     	None              	                                      	6
+REFERENCE COMMENTS FROM GA   	None                	                                      	6
+FROM                     	TestData_11              	NOT CHANGED               	CHANGED
+ID NUMBER                	12349                      	12349
+CR-P                     	None                     	None
+CRP DELIVERY STATE CHANGED 
+CRP RESET DELIVERY STATE NOT CHANGED 
+CRP REPROG CHANGED 
+EXPECTED DELIVERY STATE NOT CHANGED 
+EXPECTED RESET DELIVERY STATE NOT CHANGED 
+EXPECTED REPROG NOT CHANGED 
+DESIRED TYPE                 	ee_range              	                                    	datablock
+DESIRED DATA                 	None              	                                      	BB89
+COMMENT                      	description=- Component: TST
+- REPROG info: use case REPROG must be set             	                                            	None
+RATING                       	None             	                                       	10
+RATED BY                     	None             	                                      	JEJ
+COMMENTS                     	None              	                                      	5
+REFERENCE COMMENTS FROM GA   	None                	                                      	9
