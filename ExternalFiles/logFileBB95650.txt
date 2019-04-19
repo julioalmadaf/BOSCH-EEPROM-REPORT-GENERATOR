@@ -1,12 +1,12 @@
 FROM                     	TestData_07              	NOT CHANGED               	CHANGED
 ID NUMBER                	12345             	                                       	123456
 CR-P                     	None                	                                       	91
-CRP DELIVERY STATE NOT CHANGED 
-CRP RESET DELIVERY STATE NOT CHANGED 
-CRP REPROG CHANGED 
-EXPECTED DELIVERY STATE NOT CHANGED 
-EXPECTED RESET DELIVERY STATE NOT CHANGED 
-EXPECTED REPROG CHANGED 
+CRP DELIVERY STATE       	X                           	X
+CRP RESET DELIVERY STATE       	X                           	X
+CRP REPROG               	X                     	                                       	X
+EXPECTED DELIVERY STATE       	X                           	X
+EXPECTED RESET DELIVERY STATE	X                           	X
+EXPECTED REPROG              	X                     	                                       	X
 DESIRED TYPE                 	ee_range                    	ee_range
 DESIRED DATA                 	None                     	None
 COMMENT                      	description=- Component: Test
@@ -19,12 +19,12 @@ REFERENCE COMMENTS FROM GA   	None                	                             
 FROM                     	TestData_08              	NOT CHANGED               	CHANGED
 ID NUMBER                	12346                      	12346
 CR-P                     	None                	                                       	87
-CRP DELIVERY STATE NOT CHANGED 
-CRP RESET DELIVERY STATE CHANGED 
-CRP REPROG NOT CHANGED 
-EXPECTED DELIVERY STATE NOT CHANGED 
-EXPECTED RESET DELIVERY STATE NOT CHANGED 
-EXPECTED REPROG NOT CHANGED 
+CRP DELIVERY STATE       	X                           	X
+CRP RESET DELIVERY STATE       	X                     	                                       	X
+CRP REPROG               	X                           	X
+EXPECTED DELIVERY STATE       	X                           	X
+EXPECTED RESET DELIVERY STATE	X                           	X
+EXPECTED REPROG              	X                           	X
 DESIRED TYPE                 	ee_range                    	ee_range
 DESIRED DATA                 	None                     	None
 COMMENT                      	description=- Component: TST Data
@@ -36,12 +36,12 @@ REFERENCE COMMENTS FROM GA   	None                	                             
 FROM                     	TestData_09              	NOT CHANGED               	CHANGED
 ID NUMBER                	12347                      	12347
 CR-P                     	None                	                                       	4
-CRP DELIVERY STATE NOT CHANGED 
-CRP RESET DELIVERY STATE CHANGED 
-CRP REPROG CHANGED 
-EXPECTED DELIVERY STATE NOT CHANGED 
-EXPECTED RESET DELIVERY STATE NOT CHANGED 
-EXPECTED REPROG NOT CHANGED 
+CRP DELIVERY STATE       	X                           	X
+CRP RESET DELIVERY STATE       	X                     	                                       	X
+CRP REPROG               	X                     	                                       	X
+EXPECTED DELIVERY STATE       	X                           	X
+EXPECTED RESET DELIVERY STATE	X                           	X
+EXPECTED REPROG              	X                           	X
 DESIRED TYPE                 	ee_range                    	ee_range
 DESIRED DATA                 	None              	                                      	BB96
 COMMENT                      	description=- Component: TST Data
@@ -53,12 +53,12 @@ REFERENCE COMMENTS FROM GA   	None                	                             
 FROM                     	TestData_10              	NOT CHANGED               	CHANGED
 ID NUMBER                	12348                      	12348
 CR-P                     	None                	                                       	9
-CRP DELIVERY STATE CHANGED 
-CRP RESET DELIVERY STATE CHANGED 
-CRP REPROG NOT CHANGED 
-EXPECTED DELIVERY STATE NOT CHANGED 
-EXPECTED RESET DELIVERY STATE NOT CHANGED 
-EXPECTED REPROG NOT CHANGED 
+CRP DELIVERY STATE       	X                     	                                       	X
+CRP RESET DELIVERY STATE       	X                     	                                       	X
+CRP REPROG               	X                           	X
+EXPECTED DELIVERY STATE       	X                           	X
+EXPECTED RESET DELIVERY STATE	X                           	X
+EXPECTED REPROG              	X                           	X
 DESIRED TYPE                 	ee_range                    	ee_range
 DESIRED DATA                 	None              	                                      	BB75
 COMMENT                      	description=- Component: TST
@@ -70,12 +70,12 @@ REFERENCE COMMENTS FROM GA   	None                	                             
 FROM                     	TestData_11              	NOT CHANGED               	CHANGED
 ID NUMBER                	12349                      	12349
 CR-P                     	None                     	None
-CRP DELIVERY STATE CHANGED 
-CRP RESET DELIVERY STATE NOT CHANGED 
-CRP REPROG CHANGED 
-EXPECTED DELIVERY STATE NOT CHANGED 
-EXPECTED RESET DELIVERY STATE NOT CHANGED 
-EXPECTED REPROG NOT CHANGED 
+CRP DELIVERY STATE       	X                     	                                       	X
+CRP RESET DELIVERY STATE       	X                           	X
+CRP REPROG               	X                     	                                       	X
+EXPECTED DELIVERY STATE       	X                           	X
+EXPECTED RESET DELIVERY STATE	X                           	X
+EXPECTED REPROG              	X                           	X
 DESIRED TYPE                 	ee_range              	                                    	datablock
 DESIRED DATA                 	None              	                                      	BB89
 COMMENT                      	description=- Component: TST

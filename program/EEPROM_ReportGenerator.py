@@ -606,6 +606,7 @@ def fillExcel():
             for j in range(12, row_count+1):
                 if(ws['A'+str(i)].value==ws2['A'+str(j)].value):
                     logFile.write("FROM                     \t" + ws['A'+str(i)].value + "              \tNOT CHANGED               \tCHANGED\r\n")
+                    
                     #ID Number.
                     if(ws['B'+str(i)].value==ws2['B'+str(j)].value):
                         ws['B'+str(i)]=ws2['B'+str(j)].value
@@ -625,50 +626,50 @@ def fillExcel():
                     #CRP delivery state.
                     if(ws['D'+str(i)].value==ws2['D'+str(j)].value):
                         ws['D'+str(i)]=ws2['D'+str(j)].value
-                        logFile.write("CRP DELIVERY STATE NOT CHANGED \r\n")
+                        logFile.write("CRP DELIVERY STATE       \tX                           \tX\r\n")
                     else:
                         ws['D'+str(i)]=ws2['D'+str(j)].value
-                        logFile.write("CRP DELIVERY STATE CHANGED \r\n")
+                        logFile.write("CRP DELIVERY STATE       \tX                     \t                                       \tX\r\n")
 
                     #CRP reset delivery state.
                     if(ws['E'+str(i)].value==ws2['E'+str(j)].value):
                         ws['E'+str(i)]=ws2['E'+str(j)].value
-                        logFile.write("CRP RESET DELIVERY STATE NOT CHANGED \r\n")
+                        logFile.write("CRP RESET DELIVERY STATE       \tX                           \tX\r\n")
                     else:
                         ws['E'+str(i)]=ws2['E'+str(j)].value
-                        logFile.write("CRP RESET DELIVERY STATE CHANGED \r\n")
+                        logFile.write("CRP RESET DELIVERY STATE       \tX                     \t                                       \tX\r\n")
                     
                     #CRP reprog.
                     if(ws['F'+str(i)].value==ws2['F'+str(j)].value):
                         ws['F'+str(i)]=ws2['F'+str(j)].value
-                        logFile.write("CRP REPROG NOT CHANGED \r\n")
+                        logFile.write("CRP REPROG               \tX                           \tX\r\n")
                     else:
                         ws['F'+str(i)]=ws2['F'+str(j)].value
-                        logFile.write("CRP REPROG CHANGED \r\n")
+                        logFile.write("CRP REPROG               \tX                     \t                                       \tX\r\n")
                     
                     #Expected delivery state.
                     if(ws['J'+str(i)].value==ws2['J'+str(j)].value):
                         ws['J'+str(i)]=ws2['J'+str(j)].value
-                        logFile.write("EXPECTED DELIVERY STATE NOT CHANGED \r\n")
+                        logFile.write("EXPECTED DELIVERY STATE       \tX                           \tX\r\n")
                     else:
                         ws['J'+str(i)]=ws2['J'+str(j)].value
-                        logFile.write("EXPECTED DELIVERY STATE CHANGED \r\n")
+                        logFile.write("EXPECTED DELIVERY STATE       \tX                     \t                                       \tX\r\n")
                     
                     #Expected reset delivery state.
                     if(ws['K'+str(i)].value==ws2['K'+str(j)].value):
                         ws['K'+str(i)]=ws2['K'+str(j)].value
-                        logFile.write("EXPECTED RESET DELIVERY STATE NOT CHANGED \r\n")
+                        logFile.write("EXPECTED RESET DELIVERY STATE\tX                           \tX\r\n")
                     else:
                         ws['K'+str(i)]=ws2['K'+str(j)].value
-                        logFile.write("EXPECTED RESET DELIVERY STATE CHANGED \r\n")
+                        logFile.write("EXPECTED RESET DELIVERY STATE\tX                     \t                                       \tX\r\n")
                     
                     #Expected reprog.
                     if(ws['L'+str(i)].value==ws2['L'+str(j)].value):
                         ws['L'+str(i)]=ws2['L'+str(j)].value
-                        logFile.write("EXPECTED REPROG NOT CHANGED \r\n")
+                        logFile.write("EXPECTED REPROG              \tX                           \tX\r\n")
                     else:
                         ws['L'+str(i)]=ws2['L'+str(j)].value
-                        logFile.write("EXPECTED REPROG CHANGED \r\n")
+                        logFile.write("EXPECTED REPROG              \tX                     \t                                       \tX\r\n")
 
                     #Desired type.
                     if(ws['M'+str(i)].value==ws2['M'+str(j)].value):
