@@ -403,6 +403,8 @@ def fillExcel():
     
     #Counter para ir agregando elementos en excel.
     CounterFilasExcel = 11
+    CounterAll=0
+    DeleteRepeat=0
     
     ######################################################
     #Guarda el nombre del proyecto.
@@ -441,6 +443,7 @@ def fillExcel():
                                 logProgram.write("                      DATAPOINTER-NAME -- " + str(DPN.text) + "\r\n")
                                 tempCounter += 1
                                 ws['A'+ str(tempCounter)] = DPN.text    #Guarda el valor en el excel.
+                                CounterAll+=1
                         
                         tempCounter = CounterFilasExcel
                         
@@ -534,13 +537,15 @@ def fillExcel():
                                 ws['H'+ str(CounterFilasExcel)] = "X"           #Marca que el use case de que es ReturnToDeliveryState.
 
     logProgram.write("Repeated Datapointers deleted " + str(DPID.text) + "\r\n")
-    ######################################################
+    
+    wb.save(rutaArchivoCNT + "/fillexcel.xlsx")
+    
+    #####################################################
     #Para checar si se repite algun NVM Item.
-    for i in range(12,CounterFilasExcel):
+    for i in range(12,CounterAll+12):
         #Agarra cada fila y las compara con las demas.
         temp = ws['A' + str(i)]
-        k = i + 1
-        for j in range(k, CounterFilasExcel):
+        for j in range(CounterAll+12, CounterFilasExcel+1):
             #Aqui se toma el siguiente en la fila y se checa cada elemento siguiente.
             temp2 = ws['A' + str(j)]
             #Si son iguales.
@@ -550,19 +555,22 @@ def fillExcel():
                 if(temp3.value == "X"):
                     #Marca el use case del que se repite .
                     ws['G'+str(i)]="X"
-                    #Borra la fila que se repite.
-                    ws.delete_rows(j,1)
-                    CounterFilasExcel-=1
                 temp3 = ws['H'+str(j)]
                 if(temp3.value=="X"): 
                     ws['H'+str(i)]="X"
-                    ws.delete_rows(j,1)
-                    CounterFilasExcel-=1
                 temp3 = ws['I'+str(j)]
                 if(temp3.value=="X"): 
                     ws['I'+str(i)]="X"
-                    ws.delete_rows(j,1)
-                    CounterFilasExcel-=1
+                DeleteRepeat+=1
+
+    wb.save(rutaArchivoCNT + "/fillexcel.xlsx")
+
+    for k in range(CounterAll+12,CounterFilasExcel+1):
+        #Borra la fila que se repite.
+        ws.delete_rows( CounterAll+12,1)
+
+    wb.save(rutaArchivoCNT + "/fillexcel.xlsx")
+    CounterFilasExcel-=DeleteRepeat   
 
     ######################################################
     #Agrega comments.
@@ -570,14 +578,14 @@ def fillExcel():
         #Busca en los datablock que nombre tiene.
         DBN = datablock.find('DATABLOCK-NAME')
         #Para recorrer el excel.
-        for i in range(12, CounterFilasExcel):
+        for i in range(12, CounterFilasExcel+1):
             #Compara el valor que tiene la celda de excel con el datablock name.
-            if(DBN.text == ((ws['A' + str(i)].value) + '__Metadata')):
-                j = 0
+            if((DBN.text == ((ws['A' + str(i)].value) + '__Metadata')) or (DBN.text==(ws['A' + str(i)].value))):
                 #Hay varios DATA por datablock, pero el que se ocupa es el 6to.
                 for DPN in datablock.iter('DATA'):
-                    j += 1
-                    if(j == 6):
+                    temp=DPN.text
+                    temp=temp[:11]
+                    if(temp=="description"):
                         logProgram.write("DATAPOINTER-NAME -- " + DBN.text + "\r\n")
                         logProgram.write("       COMMENT -- " + str(DPN.text) + "\r\n")
                         #Se copia la descripcion a la columna comment.
@@ -589,14 +597,14 @@ def fillExcel():
         logFile = open(rutaArchivoCNT + "/logFile" + str(BBNumber) + ".txt","w+")
         sheet1=wb.worksheets[0]
         #Cuenta las filas maximas que tiene el archivo original.
-        newCounterFilasExcel=sheet1.max_row
+        newCounterFilasExcel=sheet1.max_row+1
         wb2=load_workbook(rutaReportePrevio)
         sheet2=wb2.worksheets[0]
         ws2=wb2.active
         #Cuenta cuantos elementos tiene el archivo previo seleccionado.
         row_count = sheet2.max_row
         for i in range(12, newCounterFilasExcel):
-            for j in range(12, row_count):
+            for j in range(12, row_count+1):
                 if(ws['A'+str(i)].value==ws2['A'+str(j)].value):
                     logFile.write("      FROM " + ws['A'+str(i)].value + " \r\n")
                     #ID Number.
@@ -748,7 +756,7 @@ def fillExcel():
     row_count = sheet.max_row
     ws=wb.active
 
-    #Desde aqui toma los datos.
+    #Desde aqui toma los datos del fill excel creado
     j=2
 
     #Los datos los pega ordenados en el archivo excel que es copia del template.

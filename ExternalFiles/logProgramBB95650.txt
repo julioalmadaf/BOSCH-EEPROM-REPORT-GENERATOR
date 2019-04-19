@@ -103,7 +103,13 @@ SESSIONS
                       DATAPOINTER-DESIRED TYPE -- ee_range
 Repeated Datapointers deleted 12349
 DATAPOINTER-NAME -- Id_Config__Metadata
-       COMMENT -- data_size=41
+       COMMENT -- description=Predefined data item for storing the configuration ID
+DATAPOINTER-NAME -- DUMMY_TestModuleCnt
+       COMMENT -- description=- Component: DUMMY
+- REPROG info: use case REPROG must not be set (data must not be changed after reprogramming)!
+Sometimes the description is longer than two rows.
+Other times, there are more than three.
+In this case, it is one more than four. And could be more.
 DATAPOINTER-NAME -- ASDFClockTower__Metadata
        COMMENT -- description=- Component: ASDF
 - REPROG info: use case REPROG must not be set.
