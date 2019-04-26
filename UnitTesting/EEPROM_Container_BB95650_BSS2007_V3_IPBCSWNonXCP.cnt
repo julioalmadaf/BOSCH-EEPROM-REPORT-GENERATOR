@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shortened for script testing purposes :3 -->
+<ECU-MEM>
+	<INFO>
+		<REVISION>08</REVISION>
+		<HISTORY>created by EEEdit 2.19.1 </HISTORY>
+		<DATE>11/11/2018 2:32:50 PM</DATE>
+		<PROJECT>
+			<PROJECT-INFO>
+				<COMMENT></COMMENT>
+				<PROJ-DOMAIN>Bosch</PROJ-DOMAIN>
+				<ECU-FAMILY-DESC>ESP System 9</ECU-FAMILY-DESC>
+				<PROJECT-DESC>BB-No=0123456789</PROJECT-DESC>
+				<ECU-IDENT>0123456789</ECU-IDENT>
+				<SW-IDENT>0123456789_P_SC_01</SW-IDENT>
+				<SW-REVISION></SW-REVISION>
+				<RESPONSIBLES>
+					<RESPONSIBLE>
+						<COMPANY>RBEI</COMPANY>
+						<DEPARTMENT>RBEI/ESN4.3-MX</DEPARTMENT>
+						<ROLE>project_responsible</ROLE>
+						<PERSON-NAME>Oscar Gonzalezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz</PERSON-NAME>
+						<PHONE>>-¡?!"123°°||</PHONE>
+						<EMAIL>oscar.gonzalez2@mx.bosch.com11111111111111111111111111111111111111111111111111111111111111</EMAIL>
+					</RESPONSIBLE>
+				</RESPONSIBLES>
+			</PROJECT-INFO>
+		</PROJECT>
+	</INFO>
+	<MEM>
+		<SESSIONS>
+			<SESSION>
+				<SESSION-NAME>__ALL__</SESSION-NAME>									
+				<IMPLIED></IMPLIED>
+				<DATAPOINTERS>
+					<DATAPOINTER>														
+						<DATAPOINTER-NAME>Id_Config</DATAPOINTER-NAME> 					
+						<DATAPOINTER-IDENT>1</DATAPOINTER-IDENT>						
+						<DATABLOCK-NAME>Id_Config</DATABLOCK-NAME>						
+						<DATAFORMAT-IDENTIFIER>ee_datablock</DATAFORMAT-IDENTIFIER>		
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>DUMMY_TestModuleCnt</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>31416</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>DUMMY_TestModuleCnt</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_erase</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>ASDFClockTower</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>111255</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>ASDFClockTower</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_datablock</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>SampleData_01</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>1710</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>SampleData_01</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>SampleData_02</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>1711</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>SampleData_02</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>SampleData_03</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>1712</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>SampleData_03</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>SampleData_04</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>1713</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>SampleData_04</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>SampleData_05</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>1714</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>SampleData_05</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>TestData_07</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>12345</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>TestData_07</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>TestData_08</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>12346</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>TestData_08</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>TestData_09</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>12347</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>TestData_09</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>TestData_10</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>12348</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>TestData_10</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>TestData_11</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>12349</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>TestData_11</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+				</DATAPOINTERS>
+			</SESSION>
+			<SESSION>
+				<SESSION-NAME>Reprog</SESSION-NAME>										<!--PONER A LOS QUE ESTEN AQUI QUE SON REPROG-->
+				<IMPLIED></IMPLIED>
+				<DATAPOINTERS>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>DUMMY_TestModuleCnt</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>31416</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>DUMMY_TestModuleCnt</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_erase</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>SampleData_03</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>1712</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>SampleData_03</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>SampleData_05</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>1714</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>SampleData_05</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>TestData_08</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>12346</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>TestData_08</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>TestData_10</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>12348</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>TestData_10</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>TestData_11</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>12349</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>TestData_11</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+				</DATAPOINTERS>
+			</SESSION>
+			<SESSION>
+				<SESSION-NAME>DeliveryState</SESSION-NAME>										<!--PONER A LOS QUE ESTEN AQUI QUE SON DELIVERY STATE-->
+				<IMPLIED></IMPLIED>
+				<DATAPOINTERS>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>ASDFClockTower</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>111255</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>ASDFClockTower</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_datablock</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>SampleData_02</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>1711</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>SampleData_02</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>SampleData_04</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>1713</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>SampleData_04</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>TestData_07</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>12345</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>TestData_07</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>TestData_09</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>12347</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>TestData_09</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>TestData_11</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>12349</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>TestData_11</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+				</DATAPOINTERS>
+			</SESSION>
+			<SESSION>
+				<SESSION-NAME>ResetToDeliveryState</SESSION-NAME>									<!--PONER A LOS QUE ESTEN AQUI QUE SON RESET TO DELIVERY STATE-->
+				<IMPLIED></IMPLIED>
+				<DATAPOINTERS>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>SampleData_02</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>1711</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>SampleData_02</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>SampleData_05</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>1714</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>SampleData_05</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>TestData_07</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>12345</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>TestData_07</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>TestData_10</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>12348</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>TestData_10</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+					<DATAPOINTER>
+						<DATAPOINTER-NAME>TestData_11</DATAPOINTER-NAME>
+						<DATAPOINTER-IDENT>12349</DATAPOINTER-IDENT>
+						<DATABLOCK-NAME>TestData_11</DATABLOCK-NAME>
+						<DATAFORMAT-IDENTIFIER>ee_range</DATAFORMAT-IDENTIFIER>
+					</DATAPOINTER>
+				</DATAPOINTERS>
+			</SESSION>
+		</SESSIONS>
+		<DATABLOCK>
+			<DATABLOCK-NAME>__EEPROM_METADATA__</DATABLOCK-NAME>
+			<DATAFORMAT>keyword_definition</DATAFORMAT>
+			<DATABLOCK-CLASS>eeprom_metadata</DATABLOCK-CLASS>
+			<DATA>HwDescriptor=Fee 1.0</DATA>
+			<DATA>EPK=314167u716_SfGT6uNsVvr3Zf-Tjk_5XJ_2019-02-07_10:04:00</DATA>
+		</DATABLOCK>
+		<DATABLOCK>
+			<DATABLOCK-NAME>Id_Config__Org</DATABLOCK-NAME>
+			<DATAFORMAT>decimal</DATAFORMAT>
+			<DATABLOCK-CLASS>eeprom_data_original</DATABLOCK-CLASS>
+			<DATA>0</DATA>
+			<DATA>13</DATA>
+		</DATABLOCK>
+		<DATABLOCK>
+			<DATABLOCK-NAME>Id_Config__Metadata</DATABLOCK-NAME>
+			<DATAFORMAT>keyword_definition</DATAFORMAT>
+			<DATABLOCK-CLASS>eeprom_datablock_metadata</DATABLOCK-CLASS>
+			<DATA>id=1</DATA>
+			<DATA>customer=</DATA>
+			<DATA>title=ID configuration</DATA>
+			<DATA>description=Predefined data item for storing the configuration ID</DATA>
+			<DATA>usage_description=Internally used</DATA>
+			<DATA>data_size=41</DATA>
+			<DATA>format=TYPE_ONE</DATA>
+			<DATA>writecycles=1</DATA>
+			<DATA>startup_read=no</DATA>
+			<DATA>shutdown_write=no</DATA>
+			<DATA>delete_protected=no</DATA>
+			<DATA>serialized_data=no</DATA>
+		</DATABLOCK>
+		<DATABLOCK>
+			<DATABLOCK-NAME>DUMMY_TestModuleCnt</DATABLOCK-NAME>
+			<DATAFORMAT>keyword_definition</DATAFORMAT>
+			<DATABLOCK-CLASS>eeprom_datablock_metadata</DATABLOCK-CLASS>
+			<DATA>alias=</DATA>
+			<DATA>id=31416</DATA>
+			<DATA>customer=</DATA>
+			<DATA>array_size=</DATA>
+			<DATA>title=DUMMY Test Module value</DATA>
+			<DATA>description=- Component: DUMMY
+- REPROG info: use case REPROG must not be set (data must not be changed after reprogramming)!
+Sometimes the description is longer than two rows.
+Other times, there are more than three.
+In this case, it is one more than four. And could be more.</DATA>
+			<DATA>usage_description=</DATA>
+			<DATA>data_size=1</DATA>
+			<DATA>format=TYPE_TWO</DATA>
+			<DATA>writecycles=10</DATA>
+			<DATA>startup_read=no</DATA>
+			<DATA>shutdown_write=no</DATA>
+			<DATA>delete_protected=no</DATA>
+			<DATA>serialized_data=yes</DATA>
+		</DATABLOCK>
+		<DATABLOCK>
+			<DATABLOCK-NAME>ASDFClockTower__Metadata</DATABLOCK-NAME>
+			<DATAFORMAT>keyword_definition</DATAFORMAT>
+			<DATABLOCK-CLASS>eeprom_datablock_metadata</DATABLOCK-CLASS>
+			<DATA>alias=</DATA>
+			<DATA>id=111255</DATA>
+			<DATA>customer=</DATA>
+			<DATA>array_size=</DATA>
+			<DATA>title=Hill Valley Clock Tower</DATA>
+			<DATA>description=- Component: ASDF
+- REPROG info: use case REPROG must not be set.
+- REPROG info: In certain cases there are two comments of this type.
+There are also strings up to 160 characters per row, only on description fields and usually is not only one row. Like this example but a little bit longer. </DATA>
+			<DATA>usage_description=</DATA>
+			<DATA>data_size=1</DATA>
+			<DATA>format=TYPE_ONE</DATA>
+			<DATA>writecycles=50</DATA>
+			<DATA>startup_read=no</DATA>
+			<DATA>shutdown_write=no</DATA>
+			<DATA>delete_protected=yes</DATA>
+			<DATA>serialized_data=no</DATA>
+		</DATABLOCK>
+		<DATABLOCK>
+			<DATABLOCK-NAME>SampleData_01__Metadata</DATABLOCK-NAME>
+			<DATAFORMAT>keyword_definition</DATAFORMAT>
+			<DATABLOCK-CLASS>eeprom_datablock_metadata</DATABLOCK-CLASS>
+			<DATA>alias=</DATA>
+			<DATA>id=1710</DATA>
+			<DATA>customer=</DATA>
+			<DATA>array_size=</DATA>
+			<DATA>title=Sample Data 01</DATA>
+			<DATA>description=- Component: Sample
+- This comment is different from the REPROG info.
+- REPROG info: To be evaluated based on the reprogramming scenario.
+The quick brown fox jumps over the lazy dog. </DATA>
+			<DATA>usage_description=</DATA>
+			<DATA>data_size=2</DATA>
+			<DATA>format=TYPE_TWO</DATA>
+			<DATA>writecycles=100</DATA>
+			<DATA>startup_read=no</DATA>
+			<DATA>shutdown_write=no</DATA>
+			<DATA>delete_protected=yes</DATA>
+			<DATA>serialized_data=yes</DATA>
+		</DATABLOCK>
+		<DATABLOCK>
+			<DATABLOCK-NAME>SampleData_02__Metadata</DATABLOCK-NAME>
+			<DATAFORMAT>keyword_definition</DATAFORMAT>
+			<DATABLOCK-CLASS>eeprom_datablock_metadata</DATABLOCK-CLASS>
+			<DATA>alias=</DATA>
+			<DATA>id=1711</DATA>
+			<DATA>customer=RB</DATA>
+			<DATA>array_size=</DATA>
+			<DATA>title=Sample Data 02</DATA>
+			<DATA>description=- Component: SP Data
+- REPROG info: undefined</DATA>
+			<DATA>usage_description=</DATA>
+			<DATA>data_size=3</DATA>
+			<DATA>format=TYPE_ONE</DATA>
+			<DATA>writecycles=500</DATA>
+			<DATA>startup_read=no</DATA>
+			<DATA>shutdown_write=yes</DATA>
+			<DATA>delete_protected=no</DATA>
+			<DATA>serialized_data=no</DATA>
+		</DATABLOCK>
+		<DATABLOCK>
+			<DATABLOCK-NAME>SampleData_03__Metadata</DATABLOCK-NAME>
+			<DATAFORMAT>keyword_definition</DATAFORMAT>
+			<DATABLOCK-CLASS>eeprom_datablock_metadata</DATABLOCK-CLASS>
+			<DATA>alias=</DATA>
+			<DATA>id=1712</DATA>
+			<DATA>customer=RB</DATA>
+			<DATA>array_size=</DATA>
+			<DATA>title=Sample Data 03</DATA>
+			<DATA>description=- Component: SP Data
+- REPROG info: tbd</DATA>
+			<DATA>usage_description=</DATA>
+			<DATA>data_size=5</DATA>
+			<DATA>format=TYPE_TWO</DATA>
+			<DATA>writecycles=1000</DATA>
+			<DATA>startup_read=no</DATA>
+			<DATA>shutdown_write=yes</DATA>
+			<DATA>delete_protected=no</DATA>
+			<DATA>serialized_data=yes</DATA>
+		</DATABLOCK>
+		<DATABLOCK>
+			<DATABLOCK-NAME>SampleData_04__Metadata</DATABLOCK-NAME>
+			<DATAFORMAT>keyword_definition</DATAFORMAT>
+			<DATABLOCK-CLASS>eeprom_datablock_metadata</DATABLOCK-CLASS>
+			<DATA>alias=</DATA>
+			<DATA>id=1713</DATA>
+			<DATA>customer=RB</DATA>
+			<DATA>array_size=</DATA>
+			<DATA>title=Sample Data 04</DATA>
+			<DATA>description=- Component: SPD
+- REPROG info: t.b.d</DATA>
+			<DATA>usage_description=</DATA>
+			<DATA>data_size=8</DATA>
+			<DATA>format=TYPE_ONE</DATA>
+			<DATA>writecycles=5000</DATA>
+			<DATA>startup_read=no</DATA>
+			<DATA>shutdown_write=yes</DATA>
+			<DATA>delete_protected=yes</DATA>
+			<DATA>serialized_data=no</DATA>
+		</DATABLOCK>
+		<DATABLOCK>
+			<DATABLOCK-NAME>SampleData_05__Metadata</DATABLOCK-NAME>
+			<DATAFORMAT>keyword_definition</DATAFORMAT>
+			<DATABLOCK-CLASS>eeprom_datablock_metadata</DATABLOCK-CLASS>
+			<DATA>alias=</DATA>
+			<DATA>id=1714</DATA>
+			<DATA>customer=RB</DATA>
+			<DATA>array_size=</DATA>
+			<DATA>title=Sample Data 05</DATA>
+			<DATA>description=- Component: SPD
+- REPROG info: use case REPROG must be set</DATA>
+			<DATA>usage_description=</DATA>
+			<DATA>data_size=13</DATA>
+			<DATA>format=TYPE_TWO</DATA>
+			<DATA>writecycles=10000</DATA>
+			<DATA>startup_read=no</DATA>
+			<DATA>shutdown_write=yes</DATA>
+			<DATA>delete_protected=yes</DATA>
+			<DATA>serialized_data=yes</DATA>
+		</DATABLOCK>
+		<DATABLOCK>
+			<DATABLOCK-NAME>TestData_07__Metadata</DATABLOCK-NAME>
+			<DATAFORMAT>keyword_definition</DATAFORMAT>
+			<DATABLOCK-CLASS>eeprom_datablock_metadata</DATABLOCK-CLASS>
+			<DATA>alias=</DATA>
+			<DATA>id=12345</DATA>
+			<DATA>customer=RB</DATA>
+			<DATA>array_size=</DATA>
+			<DATA>title=TestData_07</DATA>
+			<DATA>description=- Component: Test
+- REPROG info: To be evaluated.</DATA>
+			<DATA>usage_description=</DATA>
+			<DATA>data_size=21</DATA>
+			<DATA>format=TYPE_ONE</DATA>
+			<DATA>writecycles=50000</DATA>
+			<DATA>startup_read=yes</DATA>
+			<DATA>shutdown_write=no</DATA>
+			<DATA>delete_protected=no</DATA>
+			<DATA>serialized_data=no</DATA>
+		</DATABLOCK>
+		<DATABLOCK>
+			<DATABLOCK-NAME>TestData_08__Metadata</DATABLOCK-NAME>
+			<DATAFORMAT>keyword_definition</DATAFORMAT>
+			<DATABLOCK-CLASS>eeprom_datablock_metadata</DATABLOCK-CLASS>
+			<DATA>alias=</DATA>
+			<DATA>id=12346</DATA>
+			<DATA>customer=RB</DATA>
+			<DATA>array_size=</DATA>
+			<DATA>title=TestData_08</DATA>
+			<DATA>description=- Component: TST Data
+- REPROG info: undefined</DATA>
+			<DATA>usage_description=</DATA>
+			<DATA>data_size=34</DATA>
+			<DATA>format=TYPE_TWO</DATA>
+			<DATA>writecycles=100000</DATA>
+			<DATA>startup_read=yes</DATA>
+			<DATA>shutdown_write=no</DATA>
+			<DATA>delete_protected=no</DATA>
+			<DATA>serialized_data=yes</DATA>
+		</DATABLOCK>
+		<DATABLOCK>
+			<DATABLOCK-NAME>TestData_09__Metadata</DATABLOCK-NAME>
+			<DATAFORMAT>keyword_definition</DATAFORMAT>
+			<DATABLOCK-CLASS>eeprom_datablock_metadata</DATABLOCK-CLASS>
+			<DATA>alias=</DATA>
+			<DATA>id=12347</DATA>
+			<DATA>customer=RB</DATA>
+			<DATA>array_size=</DATA>
+			<DATA>title=TestData_09</DATA>
+			<DATA>description=- Component: TST Data
+- REPROG info: tbd</DATA>
+			<DATA>usage_description=</DATA>
+			<DATA>data_size=55</DATA>
+			<DATA>format=TYPE_ONE</DATA>
+			<DATA>writecycles=500000</DATA>
+			<DATA>startup_read=yes</DATA>
+			<DATA>shutdown_write=no</DATA>
+			<DATA>delete_protected=yes</DATA>
+			<DATA>serialized_data=no</DATA>
+		</DATABLOCK>
+		<DATABLOCK>
+			<DATABLOCK-NAME>TestData_10__Metadata</DATABLOCK-NAME>
+			<DATAFORMAT>keyword_definition</DATAFORMAT>
+			<DATABLOCK-CLASS>eeprom_datablock_metadata</DATABLOCK-CLASS>
+			<DATA>alias=</DATA>
+			<DATA>id=12348</DATA>
+			<DATA>customer=RB</DATA>
+			<DATA>array_size=</DATA>
+			<DATA>title=TestData_10</DATA>
+			<DATA>description=- Component: TST
+- REPROG info: t.b.d</DATA>
+			<DATA>usage_description=</DATA>
+			<DATA>data_size=89</DATA>
+			<DATA>format=TYPE_TWO</DATA>
+			<DATA>writecycles=1000000</DATA>
+			<DATA>startup_read=yes</DATA>
+			<DATA>shutdown_write=no</DATA>
+			<DATA>delete_protected=yes</DATA>
+			<DATA>serialized_data=yes</DATA>
+		</DATABLOCK>
+		<DATABLOCK>
+			<DATABLOCK-NAME>TestData_11__Metadata</DATABLOCK-NAME>
+			<DATAFORMAT>keyword_definition</DATAFORMAT>
+			<DATABLOCK-CLASS>eeprom_datablock_metadata</DATABLOCK-CLASS>
+			<DATA>alias=</DATA>
+			<DATA>id=12349</DATA>
+			<DATA>customer=RB</DATA>
+			<DATA>array_size=</DATA>
+			<DATA>title=TestData_11</DATA>
+			<DATA>description=- Component: TST
+- REPROG info: use case REPROG must be set</DATA>
+			<DATA>usage_description=</DATA>
+			<DATA>data_size=144</DATA>
+			<DATA>format=TYPE_ONE</DATA>
+			<DATA>writecycles=5000000</DATA>
+			<DATA>startup_read=yes</DATA>
+			<DATA>shutdown_write=yes</DATA>
+			<DATA>delete_protected=no</DATA>
+			<DATA>serialized_data=no</DATA>
+		</DATABLOCK>
+	</MEM>
+</ECU-MEM>
