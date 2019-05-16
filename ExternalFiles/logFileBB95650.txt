@@ -1,4 +1,4 @@
-Changes between elements from reports loaded:
+Changes between elements from previous reports loaded and the one generated:
 
 FROM                     	TestData_07              	NOT CHANGED               	CHANGED
 ID NUMBER                	12345             	                                       	123456
@@ -98,7 +98,7 @@ SampleData_03
 SampleData_04
 SampleData_05
 
-Elements erased from previous report:
+Elements erased on the new report from a previous report:
 
 guapo
 feo

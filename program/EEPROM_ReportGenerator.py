@@ -630,7 +630,8 @@ def fillExcel():
         ws2=wb2.active
         #Cuenta cuantos elementos tiene el archivo previo seleccionado./Count how many elements the previous file has
         row_count = sheet2.max_row
-        logFile.write("Changes between elements from reports loaded:\r\n\r\n")
+        #Changes between elements from a previous report loaded and the one generated
+        logFile.write("Changes between elements from previous reports loaded and the one generated:\r\n\r\n")
         for i in range(12, newCounterFilasExcel):
             for j in range(12, row_count+1):
                 if(ws['A'+str(i)].value==ws2['A'+str(j)].value):
@@ -760,6 +761,7 @@ def fillExcel():
         
         logFile.write("\r\nNew Elements added to the report:\r\n\r\n")
 
+        #New elements added to the report being generated
         for i in range(12, newCounterFilasExcel):
             for j in range(12, row_count+1):
                 if(ws['A'+str(i)].value==ws2['A'+str(j)].value):
@@ -768,8 +770,9 @@ def fillExcel():
                 logFile.write(str(ws['A'+str(i)].value) + "\r\n")
             NoRepeat=0
 
-        logFile.write("\r\nElements erased from previous report:\r\n\r\n")
-
+        logFile.write("\r\nElements erased on the new report from a previous report:\r\n\r\n")
+        
+        #Elements erased on the new report from a previous report
         for i in range(12, newCounterFilasExcel):
             for j in range(12, row_count+1):
                 if(ws2['A'+str(i)].value==ws['A'+str(j)].value):
