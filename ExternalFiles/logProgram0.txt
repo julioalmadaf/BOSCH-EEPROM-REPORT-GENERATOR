@@ -1,10 +1,6 @@
 Generating new Excel file
 CNT file read.
 
-PROJECT-INFO
-      PROJECT-DESC -- BB-No=0123456789
-RESPONSIBLE 
-      PERSON-NAME -- Oscar Gonzalez
 
 Adding datapointers to Excel file according to session.
 
@@ -154,13 +150,5 @@ DATAPOINTER-NAME -- TestData_11__Metadata
 Comments added to their corresponding data pointer.
 
 Excel file Data Pointers sorted by NVM ID number.
-
-BBNumber -- BB95650 added to Excel file.
-
-Baseline -- BSS2007 added to Excel file.
-
-PROJECT MANAGER -- Oscar Gonzalez added to Excel file.
-
-PROJECT DESCRIPTION -- BB-No=0123456789 added to Excel file.
 
 END OF LOG FILE
