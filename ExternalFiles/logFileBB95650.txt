@@ -1,3 +1,5 @@
+Changes between elements from reports loaded:
+
 FROM                     	TestData_07              	NOT CHANGED               	CHANGED
 ID NUMBER                	12345             	                                       	123456
 CR-P                     	None                	                                       	91
@@ -84,3 +86,25 @@ RATING                       	None             	                                
 RATED BY                     	None             	                                      	JEJ
 COMMENTS                     	None              	                                      	5
 REFERENCE COMMENTS FROM GA   	None                	                                      	9
+
+New Elements added to the report:
+
+Id_Config
+DUMMY_TestModuleCnt
+ASDFClockTower
+SampleData_01
+SampleData_02
+SampleData_03
+SampleData_04
+SampleData_05
+
+Elements erased from previous report:
+
+guapo
+feo
+julio
+ruben
+oscar
+maria
+ana
+sofia

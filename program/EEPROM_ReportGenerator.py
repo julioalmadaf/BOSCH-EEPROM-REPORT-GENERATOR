@@ -427,6 +427,7 @@ def fillExcel():
     CounterFilasExcel = 11
     CounterAll=0
     DeleteRepeat=0
+    NoRepeat=0
     
     ######################################################
     #Guarda el nombre del proyecto.
@@ -629,11 +630,12 @@ def fillExcel():
         ws2=wb2.active
         #Cuenta cuantos elementos tiene el archivo previo seleccionado./Count how many elements the previous file has
         row_count = sheet2.max_row
+        logFile.write("Changes between elements from reports loaded:\r\n\r\n")
         for i in range(12, newCounterFilasExcel):
             for j in range(12, row_count+1):
                 if(ws['A'+str(i)].value==ws2['A'+str(j)].value):
-                    logFile.write("FROM                     \t" + ws['A'+str(i)].value + "              \tNOT CHANGED               \tCHANGED\r\n")
-                    
+                    logFile.write("FROM                     \t" + str(ws['A'+str(i)].value) + "              \tNOT CHANGED               \tCHANGED\r\n")
+
                     #ID Number./ID Number
                     if(ws['B'+str(i)].value==ws2['B'+str(j)].value):
                         ws['B'+str(i)]=ws2['B'+str(j)].value
@@ -755,6 +757,27 @@ def fillExcel():
                     else:
                         logFile.write("REFERENCE COMMENTS FROM GA   \t"+str(ws['S'+str(i)].value)+"                \t                                      \t"+str(ws2['S'+str(j)].value)+"\r\n")
                         ws['S'+str(i)]=ws2['S'+str(j)].value
+        
+        logFile.write("\r\nNew Elements added to the report:\r\n\r\n")
+
+        for i in range(12, newCounterFilasExcel):
+            for j in range(12, row_count+1):
+                if(ws['A'+str(i)].value==ws2['A'+str(j)].value):
+                    NoRepeat=1
+            if(NoRepeat==0):
+                logFile.write(str(ws['A'+str(i)].value) + "\r\n")
+            NoRepeat=0
+
+        logFile.write("\r\nElements erased from previous report:\r\n\r\n")
+
+        for i in range(12, newCounterFilasExcel):
+            for j in range(12, row_count+1):
+                if(ws2['A'+str(i)].value==ws['A'+str(j)].value):
+                    NoRepeat=1
+            if(NoRepeat==0):
+                logFile.write(str(ws2['A'+str(i)].value) + "\r\n")
+            NoRepeat=0
+
         logFile.close()
     
     #Guarda los cambios./Save changes

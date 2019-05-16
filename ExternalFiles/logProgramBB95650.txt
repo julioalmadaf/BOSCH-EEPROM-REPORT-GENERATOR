@@ -153,6 +153,8 @@ DATAPOINTER-NAME -- TestData_11__Metadata
 
 Comments added to their corresponding data pointer.
 
+Previous report added.
+
 Excel file Data Pointers sorted by NVM ID number.
 
 BBNumber -- BB95650 added to Excel file.
