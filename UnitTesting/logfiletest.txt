@@ -1,0 +1,26 @@
+
+Excel file being processed
+
+root: <Element 'ECU-MEM' at 0x046C6420> added to logtestfile.txt.
+
+session: <Element 'SESSION' at 0x046C6A80> added to logtestfile.txt.
+
+session: <Element 'SESSION' at 0x046CA8A0> added to logtestfile.txt.
+
+Datapointer name: <Element 'DATAPOINTER-NAME' at 0x046CA990> added to logtestfile.txt.
+
+Datapointer name: <Element 'DATAPOINTER-NAME' at 0x046CAAE0> added to logtestfile.txt.
+
+Datapointer name: <Element 'DATAPOINTER-NAME' at 0x046CABD0> added to logtestfile.txt.
+
+Datapointer name: <Element 'DATAPOINTER-NAME' at 0x046CACC0> added to logtestfile.txt.
+
+Datapointer name: <Element 'DATAPOINTER-NAME' at 0x046CADB0> added to logtestfile.txt.
+
+Datapointer name: <Element 'DATAPOINTER-NAME' at 0x046CAEA0> added to logtestfile.txt.
+
+session: <Element 'SESSION' at 0x046CAF60> added to logtestfile.txt.
+
+session: <Element 'SESSION' at 0x046CD600> added to logtestfile.txt.
+
+END OF LOG FILE
