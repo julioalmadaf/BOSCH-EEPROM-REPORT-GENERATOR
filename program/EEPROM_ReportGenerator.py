@@ -66,6 +66,8 @@ rutaReportePrevio = "0"
 archivoReportePrevioCargado = 0
 BBNumber = 0
 Baseline = 0
+BBFlag=0
+BSSFlag=0
 
 estadoCheckButton = 0
 estadoEtiqueta = 1
@@ -321,6 +323,8 @@ def createReport():
     global Baseline
     global estadoEtiqueta
     global estadoCheckButton
+    global BBFlag
+    global BSSFlag
 
     label.configure(text="Creating report")
 
@@ -329,8 +333,18 @@ def createReport():
         archivoCNTCargado = 0
 
         #Extraer BBNumber y Baseline./Obtain BBNumber and Baseline
-        BBNumber = rutaCNT.split('_')[3]
-        Baseline = rutaCNT.split('_')[4]
+        if(rutaCNT.find('BB')!=-1):
+            x = rutaCNT.split('BB')[1]
+            BBNumber = x[:x.find("_")]
+            BBFlag=1
+        else:
+            BBFlag=0
+        if(rutaCNT.find('BSS')!=-1):
+            x = rutaCNT.split('BSS')[1]
+            Baseline = x[:x.find("_")]
+            BSSFlag=1
+        else:
+            BSSFlag=0
 
 
         #Crear archivo Excel./ Create Excel file
@@ -405,7 +419,10 @@ def fillExcel():
     global estadoCheckButton
     
     #Open log file.
-    logProgram = open(rutaArchivoCNT + "/logProgram" + str(BBNumber) + ".txt","w+")
+    if(BBFlag):
+        logProgram = open(rutaArchivoCNT + "/logProgram" + str(BBNumber) + ".txt","w+")
+    else:
+        logProgram = open(rutaArchivoCNT + "/logProgram" + ".txt","w+")
 
     logProgram.write("Generating new Excel file\r\n")
 
@@ -438,7 +455,7 @@ def fillExcel():
         logProgram.write("PROJECT-INFO\r\n")
         PD = project.find('PROJECT-DESC')
         if PD is not None:
-                logProgram.write("      PROJECT-DESC -- " + PD.text + "\r\n")
+                logProgram.write("      PROJECT-DESC -- " + str(PD.text) + "\r\n")
                 proinfo=1
 
     ######################################################
@@ -449,7 +466,7 @@ def fillExcel():
         logProgram.write("RESPONSIBLE \r\n")
         PN = info.find('PERSON-NAME')
         if PN is not None:
-            logProgram.write("      PERSON-NAME -- " + PN.text + "\r\n")
+            logProgram.write("      PERSON-NAME -- " + str(PN.text) + "\r\n")
             pername=1
             
 
@@ -463,7 +480,7 @@ def fillExcel():
         #Busca en los tipos de sesiones que nombre tiene.
         sessionN = session.find('SESSION-NAME')
         if sessionN is not None:
-                logProgram.write("      SESSION-NAME -- " + sessionN.text + "\r\n")
+                logProgram.write("      SESSION-NAME -- " + str(sessionN.text) + "\r\n")
                 #ALL session
                 #Cuando la sesion es ALL.
                 if(sessionN.text == '__ALL__'):
@@ -626,7 +643,10 @@ def fillExcel():
 
     #Si un reporte previo es agregado y se tiene habilitada la opcion /If a previous report is loaded 
     if(archivoReportePrevioCargado == 1 and estadoCheckButton == 1):
-        logFile = open(rutaArchivoCNT + "/logFile" + str(BBNumber) + ".txt","w+")
+        if(BBFlag):
+            logFile = open(rutaArchivoCNT + "/logFile" + str(BBNumber) + ".txt","w+")
+        else:
+            logFile = open(rutaArchivoCNT + "/logFile" + ".txt","w+") 
         logProgram.write("\r\nPrevious report added.\r\n")
         sheet1=wb.worksheets[0]
         #Cuenta las filas maximas que tiene el archivo original./ counts the max number of lines that the original file has
@@ -802,10 +822,17 @@ def fillExcel():
     sorted_by_number.to_excel(excel_file,index=False)
 
     #Se crea una copia del Template para poder copiar los datos ordenados al archivo que se generara al final./Creates a copy from the template to copy the ordered elements to the final file
-    shutil.copy("EEPROM_Container_Review_Template.xlsx", rutaArchivoCNT + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")
+    if(BBFlag):
+        shutil.copy("EEPROM_Container_Review_Template.xlsx", rutaArchivoCNT + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")
+    else:
+        shutil.copy("EEPROM_Container_Review_Template.xlsx", rutaArchivoCNT + "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + ".xlsx")
+
     
     #Carga el archivo Excel anteriormente generado./Loads Previously generated excel file
-    wb1 = load_workbook(filename = rutaArchivoCNT +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")
+    if(BBFlag):
+        wb1 = load_workbook(filename = rutaArchivoCNT +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")
+    else:
+        wb1 = load_workbook(filename = rutaArchivoCNT +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + ".xlsx")
     ws1=wb1.active
 
     #Carga el archivo con los datos ordenados./Loads the ordered elements
@@ -846,21 +873,28 @@ def fillExcel():
     logProgram.write("\r\nExcel file Data Pointers sorted by NVM ID number.\r\n\r\n")
     #Assigns values of BBNumber, baseline, manager and project name tu their respective cells
     #Asigna los valores de BBNumber, Baseline, Encargado y nombre del proyecto a sus respectivas celdas.
-    logProgram.write("BBNumber -- " + str(BBNumber) + " added to Excel file.\r\n\r\n")
-    logProgram.write("Baseline -- " + str(Baseline) + " added to Excel file.\r\n\r\n")
+    if(BBFlag):
+        logProgram.write("BBNumber -- " + str(BBNumber) + " added to Excel file.\r\n\r\n")
+    if(BSSFlag):
+        logProgram.write("Baseline -- " + str(Baseline) + " added to Excel file.\r\n\r\n")
     if(pername):
         logProgram.write("PROJECT MANAGER -- " + str(PN.text) + " added to Excel file.\r\n\r\n")
     if(proinfo):
         logProgram.write("PROJECT DESCRIPTION -- " + str(PD.text) + " added to Excel file.\r\n\r\n")
-    ws1['B3']=BBNumber
-    ws1['B4']=Baseline
+    if(BBFlag):
+        ws1['B3']=BBNumber
+    if(BSSFlag):
+        ws1['B4']=Baseline
     if(pername):
         ws1['B5']=PN.text
     if(proinfo):
         ws1['B2']=PD.text
 
     #Guarda el archivo./Saves file
-    wb1.save(rutaArchivoCNT +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")
+    if(BBFlag):
+        wb1.save(rutaArchivoCNT +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + str(BBNumber) + ".xlsx")
+    else:
+        wb1.save(rutaArchivoCNT +  "/EEPROM_Container_Review_Checkist_GM_iPB_GlobalB_" + ".xlsx")
     
     #Borra el archivo que tiene los datos ordenados./Erase fillexcel file
     os.remove(rutaArchivoCNT + "/fillexcel.xlsx")
