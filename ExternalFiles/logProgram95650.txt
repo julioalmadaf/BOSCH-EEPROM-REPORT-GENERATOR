@@ -155,9 +155,9 @@ Comments added to their corresponding data pointer.
 
 Excel file Data Pointers sorted by NVM ID number.
 
-BBNumber -- BB95650 added to Excel file.
+BBNumber -- 95650 added to Excel file.
 
-Baseline -- BSS2007 added to Excel file.
+Baseline -- 2007 added to Excel file.
 
 PROJECT MANAGER -- Oscar Gonzalez added to Excel file.
 
