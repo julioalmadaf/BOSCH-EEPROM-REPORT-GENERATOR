@@ -184,12 +184,13 @@ def cntButton():
 
     #Open Dialog box to search for a file
     #Abrir Dialog Box para buscar el archivo.
+    cnt_file_extensions = ['*.cnt','*.CNT']
     label.configure(text="Opening CNT file")
-    rutaCNT = filedialog.askopenfilename(filetypes = (("All CNT files","*.cnt"),("All files","*.*")))
+    rutaCNT = filedialog.askopenfilename(filetypes = (("All CNT files",cnt_file_extensions),("All files","*.*")))
 
     #Verify that the file selected is a CNT file or that a file was selected
     #Verificar que sea archivo CNT o que se haya agregado un archivo.
-    if(rutaCNT.find(".cnt") == -1):         #No se selecciono un archivo CNT/No CNT file selected
+    if((rutaCNT.find(".cnt") == -1) and (rutaCNT.find(".CNT") == -1)):         #No se selecciono un archivo CNT/No CNT file selected
         
         messagebox.showerror("Error", "Not .cnt file selected")
 
